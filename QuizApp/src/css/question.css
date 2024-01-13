@@ -1,0 +1,113 @@
+main{
+    margin: 10px;
+    height: 85vh;
+    position: relative;
+}
+
+#question-number{
+    text-align: center;
+    margin: 20px 0;
+}
+
+#timer{
+    font-weight: bold;
+    position: absolute;
+    top: 40px;
+    display: flex;  
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#timer svg{
+    width: 90px;
+    height: 90px;
+    transform: rotate(270deg);
+}
+#time-circle{
+    fill: none;
+    stroke: var(--primary);
+    stroke-dasharray: 440;
+    stroke-dashoffset: 190;
+    stroke-linecap: round;
+    fill: none;
+}
+#time-circle-bg{
+    stroke: var(--secondary);
+    fill: var(--bg-secondary);
+}
+.svg-circle{
+    transform: translate(5px, 5px);
+    stroke-width: 5;
+}
+#time{
+    position: absolute;
+    font-size: xx-large;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#question{
+    text-align: center;
+    background-color: var(--bg-secondary);
+    margin: 60px 15px 40px 15px;
+    padding: 20px;
+    padding-top: 60px;
+    border-radius: 1.5em;
+    -webkit-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+}
+
+.answer{
+    font-weight: bold;
+    background-color: var(--bg-secondary);
+    margin: 15px;
+    padding: 10px 0 10px 15px;
+    border-radius: 1em;
+    -webkit-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    position: relative;
+    cursor: pointer;
+}
+.answer::after{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 0.10em solid var(--primary);
+}
+.chosen{
+    background-color: var(--secondary);
+    cursor: auto;
+}
+.chosen::after{
+    background-color: var(--primary);
+    color: var(--bg-secondary);
+    text-align: center;
+    font-size: 9px;
+    content: '✔';
+}
+
+#next{
+    margin: 0 25px;
+    color: var(--bg);
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 1em;
+    background-color: var(--primary);
+    -webkit-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    cursor: pointer;
+}
+.next-disable{
+    background-color: #474747 !important;
+}
