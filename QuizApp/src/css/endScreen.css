@@ -1,0 +1,43 @@
+body{
+    background-color: var(--bg);
+}
+
+main{
+    height: 88vh;
+}
+
+#checkmark{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#checkmark svg{
+    fill: var(--secondary);
+}
+
+#info{
+    margin: 0;
+    text-align: center;
+    width: 300px;
+    font-weight: bold;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#logout{
+    margin: 0 25px;
+    color: var(--bg);
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 1em;
+    background-color: var(--primary);
+    -webkit-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    cursor: pointer;
+}
