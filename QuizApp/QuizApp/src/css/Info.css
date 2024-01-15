@@ -63,7 +63,6 @@ div {
     }
 }
 
-
 button {
     height: 2.5rem;
     background-color: var(--primary);
@@ -76,16 +75,26 @@ button {
     max-width: 300px; 
     display: block; 
     margin: 5% auto; 
+    margin-top: 4rem;
+}
+.button-link {
+    height: 2.5rem;
+    background-color: var(--primary);
+    color: var(--bg-secondary);
+    width: 100%;
+    max-width: 300px; 
+    border-radius: 15px;
+    display: block; 
+    margin: 5% auto; 
     margin-top: 5rem;
+
 }
 
-
-button:hover {
-    background-color: lighten(var(--primary), 10%); 
+.button-link a:hover {
+    background-color: darken(var(--primary), 10%);
 }
-
-
-
-button:hover {
-    background-color: lighten(var(--primary), 10%); 
+a{
+    font-weight: bold;
+    color: var(--bg); 
+    text-decoration: none;
 }
