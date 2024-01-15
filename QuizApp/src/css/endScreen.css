@@ -1,8 +1,9 @@
-body{
-    background-color: var(--bg);
+main{
+    max-width: 500px;
+    margin: auto;
 }
 
-main{
+#main{
     height: 88vh;
 }
 
