@@ -1,0 +1,91 @@
+body {
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    font-weight: bolder;
+}
+
+main {
+    text-align: center;
+}
+
+div {
+    background-color: var(--bg-secondary);
+    max-width: 80%;
+    margin: 5%; 
+    padding: 20px;
+    position: relative;
+    border-radius: 15px;
+    min-height: 25rem; 
+}
+@media (min-height: 800px) {
+    div {
+        min-height: 32rem; 
+    }
+}
+
+@media (max-height: 650px) {
+    div {
+        min-height: 20rem;
+    }
+}
+
+
+body {
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+main {
+    text-align: center;
+}
+
+div {
+    background-color: var(--bg-secondary);
+    max-width: 80%;
+    margin: 5%; 
+    padding: 20px;
+    position: relative;
+    border-radius: 15px;
+    min-height: 25rem; 
+}
+@media (min-height: 800px) {
+    div {
+        min-height: 32rem; 
+    }
+}
+
+@media (max-height: 650px) {
+    div {
+        min-height: 20rem;
+    }
+}
+
+
+button {
+    height: 2.5rem;
+    background-color: var(--primary);
+    color: var(--bg-secondary);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px; 
+    display: block; 
+    margin: 5% auto; 
+    margin-top: 5rem;
+}
+
+
+button:hover {
+    background-color: lighten(var(--primary), 10%); 
+}
+
+
+
+button:hover {
+    background-color: lighten(var(--primary), 10%); 
+}
