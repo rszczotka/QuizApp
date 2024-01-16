@@ -1,0 +1,37 @@
+#timer{
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    display: flex;  
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#timer svg{
+    width: 150px;
+    height: 150px;
+    transform: rotate(270deg);
+}
+#time-circle{
+    fill: none;
+    stroke: var(--primary);
+    stroke-dasharray: 440;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    fill: none;
+}
+#time-circle-bg{
+    stroke: var(--secondary);
+    fill: var(--bg-secondary);
+}
+.svg-circle{
+    transform: translate(5px, 5px);
+    stroke-width: 10;
+}
+#time{
+    position: absolute;
+    font-size: 70px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
