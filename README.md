@@ -191,6 +191,8 @@ Informację o sukcesie lub porażce
 }
 ```
 
+</details>
+
 > Remove
 
 Nie można usunąć statusu systemu
