@@ -168,6 +168,14 @@ Status systemu
 
 ### Co przyjmuje:
 
+API key admina
+
+```json
+{
+    "api_key": "some-api-key"
+}
+```
+
 Cyfrę reprezentującą status systemu:
 
 - 0 - wyłączony
