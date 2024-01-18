@@ -22,79 +22,85 @@ Wykonanie: @FilipMadzia @qWojtpl
 
 <details><summary>GetAllUsers</summary>
     
-### Url: `localhost/api/users/GetAllUsers/`
+### Url:
+
+`localhost/api/users/GetAllUsers/`
 
 ### Co przyjmuje:
 
 API key użytkownika
 
-        {
-            "api_key": "some-api-key"
-        }
+```json
+{
+    "api_key": "some-api-key"
+}
+```
 
 ### Co zwraca:
 
 Wszystkich użytkowników z account_type = 0
 
-        [
-            {
-                "user_id": 0,
-                "name": "John",
-                "surname": "Smith",
-                "login": "john.smith",
-                "password": 123,
-                "api_key": "some-api-key",
-                "status": 0
-            },
-            {
-                "user_id": 1,
-                "name": "Will",
-                "surname": "Hutcherson",
-                "login": "will.hutcherson",
-                "password": 234,
-                "api_key": "some-api-key",
-                "status": 0
-            },
-            {
-                "user_id": 2,
-                "name": "Kamil",
-                "surname": "Zdun",
-                "login": "kamil.zdun",
-                "password": 345,
-                "api_key": "some-api-key",
-                "status": 0
-            },
-            ...
-        ]
+```json
+[
+    {
+        "user_id": 0,
+        "name": "John",
+        "surname": "Smith",
+        "login": "john.smith",
+        "password": 123,
+        "api_key": "some-api-key",
+        "status": 0
+    },
+    {
+        "user_id": 1,
+        "name": "Will",
+        "surname": "Hutcherson",
+        "login": "will.hutcherson",
+        "password": 234,
+        "api_key": "some-api-key",
+        "status": 0
+    },
+    {
+        "user_id": 2,
+        "name": "Kamil",
+        "surname": "Zdun",
+        "login": "kamil.zdun",
+        "password": 345,
+        "api_key": "some-api-key",
+        "status": 0
+    },
+    ...
+]
+```
 
 </details>
 
-<details><summary>GetUser</summary>
+<details><summary>LogIn</summary>
     
-### Url: `localhost/api/users/GetUser/`
+### Url:
+
+`localhost/api/users/LogIn/`
 
 ### Co przyjmuje:
 
-Login i hasło użytkownika
-
-        {
-            "login": "john.smith",
-            "password": "123"
-        }
+Login i hasło użytkownika z użyciem POST
 
 ### Co zwraca:
 
-Pojedynczego użytkownika
+Dane użytkownika
 
-        {
-            "user_id": 0,
-            "name": "John",
-            "surname": "Smith",
-            "login": "john.smith",
-            "password": 123,
-            "api_key": "some-api-key",
-            "status": 0
-        }
+```json
+{
+    "logged_in": true,
+    "user_id": 0,
+    "name": "John",
+    "surname": "Smith",
+    "login": "john.smith",
+    "password": 123,
+    "api_key": "some-api-key",
+    "status": 0
+}
+```
 
 </details>
 
@@ -126,8 +132,65 @@ Pojedynczego użytkownika
 
 > Create
 
+Nie ma możliwości tworzenia nowego statusu
+
 > Read
+
+<details><summary>GetSystemStatus</summary>
+    
+### Url:
+
+`localhost/api/users/GetSystemStatus/`
+
+### Co przyjmuje:
+
+Nic
+
+### Co zwraca:
+
+Status systemu
+
+```json
+{
+    "status": 0
+}
+```
+
+</details>
 
 > Update
 
+<details><summary>UpdateSystemStatus</summary>
+    
+### Url:
+
+`localhost/api/users/UpdateSystemStatus/`
+
+### Co przyjmuje:
+
+Cyfrę reprezentującą status systemu:
+
+- 0 - wyłączony
+- 1 - poczekalnia
+- 2 - quiz
+- 3 - wyniki
+
+```json
+{
+    "system_status": 1
+}
+```
+
+### Co zwraca:
+
+Informację o sukcesie lub porażce
+
+```json
+{
+    "succeeded": true
+}
+```
+
 > Remove
+
+Nie można usunąć statusu systemu
