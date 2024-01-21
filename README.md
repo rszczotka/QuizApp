@@ -184,7 +184,7 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/users/UpdateUser/`
+`localhost/api/users/UpdateUserStatus/`
 
 ### Co przyjmuje:
 
@@ -338,7 +338,7 @@ ID pytania, API key
 ```json
 {
     "question_id": 0,
-    "api_key": "administrator-api-key"
+    "api_key": "some-api-key"
 } 
 ```
 
