@@ -1,5 +1,5 @@
 # QuizApp - API documentation
-Wykonanie: @FilipMadzia @qWojtpl
+Wykonanie: @FilipMadzia
 
 ### [Diagram bazy danych](https://dbdiagram.io/d/Festiwal_nauki_quiz_elim-65943ee2ac844320ae1cfdb2)
 
