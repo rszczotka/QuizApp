@@ -13,7 +13,7 @@ Wykonanie: @FilipMadzia
 
 > **Url jeszcze może się drastycznie zmienić!**
 
-`localhost/api/{tabela}/{metoda}`
+`localhost/api/{kontroler}/{metoda}`
 
 ## Users
 > Create
@@ -36,9 +36,7 @@ JSON nowego użytkownika i API key (administrator)
         "name": "John",
         "surname": "Smith",
         "login": "john.smith",
-        "password": 123,
-        "api_key": "some-api-key",
-        "status": 0
+        "password": 123
     }
 }
 ```
@@ -49,7 +47,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
+    "success": true
 }
 ```
 
@@ -65,45 +63,42 @@ Informację o sukcesie
 
 ### Co przyjmuje:
 
-API key użytkownika
+API key (administrator)
 
 ```json
 {
-    "api_key": "some-api-key"
+    "api_key": "administrator-api-key"
 }
 ```
 
 ### Co zwraca:
 
-Wszystkich użytkowników z account_type = 0
+Wszystkich użytkowników
 
 ```json
 [
     {
         "user_id": 0,
+        "account_type": 0,
         "name": "John",
         "surname": "Smith",
         "login": "john.smith",
-        "password": 123,
-        "api_key": "some-api-key",
         "status": 0
     },
     {
         "user_id": 1,
+        "account_type": 1,
         "name": "Will",
         "surname": "Hutcherson",
         "login": "will.hutcherson",
-        "password": 234,
-        "api_key": "some-api-key",
         "status": 0
     },
     {
         "user_id": 2,
+        "account_type": 0,
         "name": "Kamil",
         "surname": "Zdun",
         "login": "kamil.zdun",
-        "password": 345,
-        "api_key": "some-api-key",
         "status": 0
     },
     ...
@@ -112,28 +107,35 @@ Wszystkich użytkowników z account_type = 0
 
 </details>
 
-<details><summary>LogIn</summary>
-    
+<details><summary>Login</summary>
+
 ### Url:
 
-`localhost/api/users/LogIn/`
+`localhost/api/users/Login/`
 
 ### Co przyjmuje:
 
 Login i hasło użytkownika z użyciem POST
 
+```json
+{
+    "login": "john.smith",
+    "password": "somepassword"
+}
+```
+
 ### Co zwraca:
 
-Dane użytkownika
+Informację o sukcesie, dane użytkownika
 
 ```json
 {
-    "logged_in": true,
+    "success": true,
     "user_id": 0,
+    "account_type": 0,
     "name": "John",
     "surname": "Smith",
     "login": "john.smith",
-    "password": 123,
     "api_key": "some-api-key",
     "status": 0
 }
@@ -162,7 +164,6 @@ ID użytkownika, dane użytkownika, API key (administrator)
         "surname": "new-surname",
         "login": "new-login",
         "password": "new-password",
-        "api_key": "some-api-key",
         "status": 0
     }
 } 
@@ -174,37 +175,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
-}
-```
-
-</details>
-
-<details><summary>UpdateUserStatus</summary>
-    
-### Url:
-
-`localhost/api/users/UpdateUserStatus/`
-
-### Co przyjmuje:
-
-ID użytkownika, status użytkownika, API key
-
-```json
-{
-    "user_id": 0,
-    "api_key": "api-key",
-    "status": 0
-} 
-```
-
-### Co zwraca:
-
-Informację o sukcesie
-
-```json
-{
-    "succeeded": true
+    "success": true
 }
 ```
 
@@ -235,7 +206,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
+    "success": true
 }
 ```
 
@@ -274,7 +245,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
+    "success": true
 }
 ```
 
@@ -317,7 +288,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
+    "success": true
 }
 ```
 
@@ -355,7 +326,6 @@ Pytanie
         "Opcja 3",
         "Opcja 4"
     ],
-    "correct_answer": 0,
     "available_time": 0
 }
 ```
@@ -398,7 +368,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
+    "success": true
 }
 ```
 
@@ -429,7 +399,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
+    "success": true
 }
 ```
 
@@ -475,11 +445,11 @@ Status systemu
 
 ### Co przyjmuje:
 
-API key admina
+API key (administrator)
 
 ```json
 {
-    "api_key": "some-api-key"
+    "api_key": "administrator-api-key"
 }
 ```
 
@@ -489,6 +459,11 @@ Cyfrę reprezentującą status systemu:
 - 1 - poczekalnia
 - 2 - quiz
 - 3 - wyniki
+
+Jeżeli status systemu wynosi 2, a użytkownik jest w poczekalni,
+to musi zostać przeniesiony na osobną podstronę lub wylogowany.
+Nie może być sytuacji, żeby podczas quizu użytkownik wszedł na niego
+z poczekalni.
 
 ```json
 {
@@ -502,7 +477,7 @@ Informację o sukcesie
 
 ```json
 {
-    "succeeded": true
+    "success": true
 }
 ```
 
