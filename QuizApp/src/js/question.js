@@ -21,7 +21,7 @@ const countdownTime = setInterval(() => {
         sendAnswer();
     }
 }, 10);
-// TEST!
+
 answers.forEach((e, i) => {
     e.addEventListener('click', () => {
         if(typeof chosenIndex !== 'undefined'){
