@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data.Entities;
+using quiz_app_api.Data.Seeds;
 
 namespace quiz_app_api.Data;
 
@@ -17,7 +18,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		// seeds
 		base.OnModelCreating(modelBuilder);
+
+		UserSeeder.Seed(modelBuilder).ConfigureAwait(true);
 	}
 }
