@@ -112,20 +112,17 @@ Wszystkich użytkowników
 
 Login i hasło użytkownika z użyciem POST
 
-```json
-{
-    "login": "john.smith",
-    "password": "somepassword"
-}
+```js
+login = "john.smith";
+password = "182";
 ```
 
 ### Co zwraca:
 
-Informację o sukcesie, dane użytkownika
+Dane użytkownika
 
 ```json
 {
-    "success": true,
     "user_id": 0,
     "account_type": 0,
     "name": "John",
@@ -157,7 +154,6 @@ ID użytkownika, dane użytkownika, API key (administrator)
     "user": {
         "name": "new-name",
         "surname": "new-surname",
-        "login": "new-login",
         "password": "new-password",
         "status": 0
     }
