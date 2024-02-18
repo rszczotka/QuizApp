@@ -32,7 +32,6 @@ JSON nowego użytkownika i API key (administrator)
 {
     "api_key": "administrator-api-key",
     "user": {
-        "account_type": 0,
         "name": "John",
         "surname": "Smith",
         "password": 123
