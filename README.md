@@ -77,7 +77,6 @@ Wszystkich użytkowników
 [
     {
         "user_id": 0,
-        "account_type": 0,
         "name": "John",
         "surname": "Smith",
         "login": "john.smith",
@@ -85,7 +84,6 @@ Wszystkich użytkowników
     },
     {
         "user_id": 1,
-        "account_type": 1,
         "name": "Will",
         "surname": "Hutcherson",
         "login": "will.hutcherson",
@@ -93,7 +91,6 @@ Wszystkich użytkowników
     },
     {
         "user_id": 2,
-        "account_type": 0,
         "name": "Kamil",
         "surname": "Zdun",
         "login": "kamil.zdun",
