@@ -1,28 +1,34 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using quiz_app_api.Data;
 using quiz_app_api.Data.Entities;
 
 namespace quiz_app_api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
-    public class UserEntitiesController : ControllerBase
+    public class UserEntitiesController(AppDbContext _context) : ControllerBase
     {
-        private readonly AppDbContext _context;
 
-        public UserEntitiesController(AppDbContext context)
+		// GET: api/users/GetAllUsers/{"api_key": "administrator_api_key"}
+		[HttpGet]
+        [Route("GetAllUsers/{jsonData}")]
+        public async Task<ActionResult<IEnumerable<UserEntity>>> GetAllUsers(string jsonData)
         {
-            _context = context;
-        }
+            var userEntity = JsonConvert.DeserializeObject<UserEntity>(jsonData);
 
-        // GET: api/UserEntities
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserEntity>>> GetUserEntities()
-        {
+            if(userEntity == null) return new List<UserEntity>();
+
+            // if returns false it means there's no admin with such API key
+            if(!_context.UserEntities
+				.Where(x => x.AccountType == 0)
+				.Select(x => x.ApiKey == userEntity.ApiKey)
+				.FirstOrDefault()) return new List<UserEntity>();
+            
             return await _context.UserEntities.ToListAsync();
-        }
+		}
 
         // GET: api/UserEntities/5
         [HttpGet("{id}")]

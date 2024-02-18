@@ -20,6 +20,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 	{
 		base.OnModelCreating(modelBuilder);
 
-		UserSeeder.Seed(modelBuilder).ConfigureAwait(true);
+		UserSeeder.Seed(modelBuilder);
 	}
 }

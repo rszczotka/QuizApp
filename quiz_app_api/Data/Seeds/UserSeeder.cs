@@ -5,12 +5,12 @@ namespace quiz_app_api.Data.Seeds;
 
 public class UserSeeder
 {
-	public static async Task Seed(ModelBuilder modelBuilder)
+	public static void Seed(ModelBuilder modelBuilder)
 	{
 		modelBuilder.Entity<UserEntity>().HasData(new List<UserEntity>
 		{
 			// admin
-			new UserEntity
+			new()
 			{
 				Id = 1,
 				AccountType = 0,
@@ -22,7 +22,7 @@ public class UserSeeder
 				Status = 0
 			},
 			// normal user
-			new UserEntity
+			new()
 			{
 				Id = 2,
 				AccountType = 1,
