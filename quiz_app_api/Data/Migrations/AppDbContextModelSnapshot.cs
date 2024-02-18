@@ -8,7 +8,7 @@ using quiz_app_api.Data;
 
 #nullable disable
 
-namespace quiz_app_api.Data.Migrations
+namespace quiz_app_api.data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -141,7 +141,7 @@ namespace quiz_app_api.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AccountType = 0,
+                            AccountType = 1,
                             ApiKey = "admin111",
                             Login = "admin",
                             Name = "Admin",
@@ -152,13 +152,35 @@ namespace quiz_app_api.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AccountType = 1,
-                            ApiKey = "Imię222",
-                            Login = "imięnazwisko",
-                            Name = "Imię",
+                            AccountType = 0,
+                            ApiKey = "user1222",
+                            Login = "user1a",
+                            Name = "user1",
                             Password = 222,
                             Status = 0,
-                            Surname = "Nazwisko"
+                            Surname = "a"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountType = 0,
+                            ApiKey = "user2222",
+                            Login = "user2a",
+                            Name = "user2",
+                            Password = 333,
+                            Status = 0,
+                            Surname = "a"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccountType = 0,
+                            ApiKey = "user3222",
+                            Login = "user3a",
+                            Name = "user3",
+                            Password = 333,
+                            Status = 0,
+                            Surname = "a"
                         });
                 });
 

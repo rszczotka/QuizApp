@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace quiz_app_api.Data.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace quiz_app_api.data.Migrations
 {
     /// <inheritdoc />
     public partial class init : Migration
@@ -87,6 +89,17 @@ namespace quiz_app_api.Data.Migrations
                         principalTable: "UserEntities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserEntities",
+                columns: new[] { "Id", "AccountType", "ApiKey", "Login", "Name", "Password", "Status", "Surname" },
+                values: new object[,]
+                {
+                    { 1, 1, "admin111", "admin", "Admin", 111, 0, "Admin" },
+                    { 2, 0, "user1222", "user1a", "user1", 222, 0, "a" },
+                    { 3, 0, "user2222", "user2a", "user2", 333, 0, "a" },
+                    { 4, 0, "user3222", "user3a", "user3", 333, 0, "a" }
                 });
 
             migrationBuilder.CreateIndex(

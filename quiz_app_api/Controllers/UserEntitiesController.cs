@@ -1,110 +1,122 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using quiz_app_api.Data;
 using quiz_app_api.Data.Entities;
+using quiz_app_api.Data.JsonModels;
+using quiz_app_api.Data.JsonModels.Users;
 
 namespace quiz_app_api.Controllers
 {
-    [Route("api/users")]
-    [ApiController]
-    public class UserEntitiesController(AppDbContext _context) : ControllerBase
-    {
+	[Route("api/users")]
+	[ApiController]
+	public class UserEntitiesController(AppDbContext _context) : Controller
+	{
+		// GET: api/users/CreateUser/{"api_key": "administrator-api-key", "user": {}}
+		/*[HttpGet]
+		[Route("CreateUser/{jsonData}")]*/
 
-		// GET: api/users/GetAllUsers/{"api_key": "administrator_api_key"}
+		// GET: api/users/GetAllUsers/{"api_key": "administrator-api-key"}
 		[HttpGet]
-        [Route("GetAllUsers/{jsonData}")]
-        public async Task<ActionResult<IEnumerable<UserEntity>>> GetAllUsers(string jsonData)
-        {
-            var userEntity = JsonConvert.DeserializeObject<UserEntity>(jsonData);
+		[Route("GetAllUsers/{jsonData}")]
+		public async Task<ActionResult> GetAllUsers(string jsonData)
+		{
+			var data = JsonConvert.DeserializeObject<GetAllUsersJson>(jsonData);
 
-            if(userEntity == null) return new List<UserEntity>();
+			if(data == null || data.ApiKey == null)
+			{
+				return Json(new List<UserEntity>());
+			}
 
-            // if returns false it means there's no admin with such API key
-            if(!_context.UserEntities
-				.Where(x => x.AccountType == 0)
-				.Select(x => x.ApiKey == userEntity.ApiKey)
-				.FirstOrDefault()) return new List<UserEntity>();
-            
-            return await _context.UserEntities.ToListAsync();
+			if(!IsAdmin(data.ApiKey))
+			{
+				return Json(new List<UserEntity>());
+			}
+
+			return Json(await _context.UserEntities.ToListAsync());
 		}
 
-        // GET: api/UserEntities/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserEntity>> GetUserEntity(int id)
-        {
-            var userEntity = await _context.UserEntities.FindAsync(id);
+		// PUT: api/UserEntities/5
+		[HttpPut("{id}")]
+		public async Task<IActionResult> PutUserEntity(int id, UserEntity userEntity)
+		{
+			if(id != userEntity.Id)
+			{
+				return BadRequest();
+			}
 
-            if (userEntity == null)
-            {
-                return NotFound();
-            }
+			_context.Entry(userEntity).State = EntityState.Modified;
 
-            return userEntity;
-        }
+			try
+			{
+				await _context.SaveChangesAsync();
+			}
+			catch(DbUpdateConcurrencyException)
+			{
+				if(!UserEntityExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-        // PUT: api/UserEntities/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserEntity(int id, UserEntity userEntity)
-        {
-            if (id != userEntity.Id)
-            {
-                return BadRequest();
-            }
+			return NoContent();
+		}
 
-            _context.Entry(userEntity).State = EntityState.Modified;
+		// POST: api/UserEntities
+		[HttpPost]
+		public async Task<ActionResult<UserEntity>> PostUserEntity(UserEntity userEntity)
+		{
+			_context.UserEntities.Add(userEntity);
+			await _context.SaveChangesAsync();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserEntityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			return CreatedAtAction("GetUserEntity", new { id = userEntity.Id }, userEntity);
+		}
 
-            return NoContent();
-        }
+		// DELETE: api/users/RemoveUser/{"user_id": 0, "api_key": "administrator-api-key"}
+		[HttpGet]
+		[Route("RemoveUser/{jsonData}")]
+		public async Task<ActionResult<SuccessJson>> DeleteUserEntity(string jsonData)
+		{
+			var data = JsonConvert.DeserializeObject<RemoveUserJson>(jsonData);
+			var status = new SuccessJson();
 
-        // POST: api/UserEntities
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UserEntity>> PostUserEntity(UserEntity userEntity)
-        {
-            _context.UserEntities.Add(userEntity);
-            await _context.SaveChangesAsync();
+			if(data == null || data.ApiKey == null)
+			{
+				status.Success = false;
+				return status;
+			}
 
-            return CreatedAtAction("GetUserEntity", new { id = userEntity.Id }, userEntity);
-        }
+			var userEntity = await _context.UserEntities.FindAsync(data.UserId);
+			if(userEntity == null || !IsAdmin(data.ApiKey))
+			{
+				status.Success = false;
+				return status;
+			}
 
-        // DELETE: api/UserEntities/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserEntity(int id)
-        {
-            var userEntity = await _context.UserEntities.FindAsync(id);
-            if (userEntity == null)
-            {
-                return NotFound();
-            }
+			_context.UserEntities.Remove(userEntity);
+			await _context.SaveChangesAsync();
 
-            _context.UserEntities.Remove(userEntity);
-            await _context.SaveChangesAsync();
+			status.Success = true;
 
-            return NoContent();
-        }
+			return status;
+		}
 
-        private bool UserEntityExists(int id)
-        {
-            return _context.UserEntities.Any(e => e.Id == id);
-        }
-    }
+		private bool IsAdmin(string apiKey)
+		{
+			// looks for users with admin account type with passed API key, if there are none return false, otherwise true
+			return _context.UserEntities
+				.Where(x => x.AccountType == 1)
+				.Select(x => x.ApiKey == apiKey)
+				.FirstOrDefault();
+		}
+
+		private bool UserEntityExists(int id)
+		{
+			return _context.UserEntities.Any(e => e.Id == id);
+		}
+	}
 }

@@ -9,10 +9,10 @@ using quiz_app_api.Data;
 
 #nullable disable
 
-namespace quiz_app_api.Data.Migrations
+namespace quiz_app_api.data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240211194238_init")]
+    [Migration("20240218133344_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -139,6 +139,52 @@ namespace quiz_app_api.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserEntities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccountType = 1,
+                            ApiKey = "admin111",
+                            Login = "admin",
+                            Name = "Admin",
+                            Password = 111,
+                            Status = 0,
+                            Surname = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccountType = 0,
+                            ApiKey = "user1222",
+                            Login = "user1a",
+                            Name = "user1",
+                            Password = 222,
+                            Status = 0,
+                            Surname = "a"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountType = 0,
+                            ApiKey = "user2222",
+                            Login = "user2a",
+                            Name = "user2",
+                            Password = 333,
+                            Status = 0,
+                            Surname = "a"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccountType = 0,
+                            ApiKey = "user3222",
+                            Login = "user3a",
+                            Name = "user3",
+                            Password = 333,
+                            Status = 0,
+                            Surname = "a"
+                        });
                 });
 
             modelBuilder.Entity("quiz_app_api.Data.Entities.UserAnswerEntity", b =>
