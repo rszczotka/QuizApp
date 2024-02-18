@@ -15,7 +15,7 @@ public class UserEntity
     [JsonProperty("login")]
     public required string Login { get; set; }
     [JsonProperty("password")]
-    public int Password { get; set; }
+    public required string Password { get; set; }
     [JsonProperty("api_key")]
     public required string ApiKey { get; set; }
     [JsonProperty("status")]

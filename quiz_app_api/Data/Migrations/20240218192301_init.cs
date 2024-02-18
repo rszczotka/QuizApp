@@ -53,7 +53,7 @@ namespace quiz_app_api.data.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<int>(type: "int", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApiKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
@@ -96,10 +96,10 @@ namespace quiz_app_api.data.Migrations
                 columns: new[] { "Id", "AccountType", "ApiKey", "Login", "Name", "Password", "Status", "Surname" },
                 values: new object[,]
                 {
-                    { 1, 1, "admin111", "admin", "Admin", 111, 0, "Admin" },
-                    { 2, 0, "user1222", "user1a", "user1", 222, 0, "a" },
-                    { 3, 0, "user2222", "user2a", "user2", 333, 0, "a" },
-                    { 4, 0, "user3222", "user3a", "user3", 333, 0, "a" }
+                    { 1, 1, "system", "admin.admin", "admin", "0", 0, "admin" },
+                    { 2, 0, "zdun111", "kamil.zdun", "Kamil", "111", 0, "Zdun" },
+                    { 3, 0, "zdunowski222", "michał.zdun", "Michał", "222", 0, "Zdunowski" },
+                    { 4, 0, "zdunski333", "wojtek.zduński", "Wojtek", "333", 0, "Zduński" }
                 });
 
             migrationBuilder.CreateIndex(

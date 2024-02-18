@@ -13,8 +13,55 @@ namespace quiz_app_api.Controllers
 	public class UserEntitiesController(AppDbContext _context) : Controller
 	{
 		// GET: api/users/CreateUser/{"api_key": "administrator-api-key", "user": {}}
-		/*[HttpGet]
-		[Route("CreateUser/{jsonData}")]*/
+		[HttpGet]
+		[Route("CreateUser/{jsonData}")]
+		public async Task<ActionResult> CreateUser(string jsonData)
+		{
+			var data = JsonConvert.DeserializeObject<CreateUserJson>(jsonData);
+			var status = new SuccessJson();
+
+			// checks for any null value
+			if(data == null || data.ApiKey == null || data.User == null)
+			{
+				status.Success = false;
+				return Json(status);
+			}
+
+			if(!IsAdmin(data.ApiKey))
+			{
+				status.Success = false;
+				return Json(status);
+			}
+
+			try
+			{
+				var userEntity = new UserEntity
+				{
+					// id generated automatically
+					AccountType = 0,
+					Name = data.User.Name,
+					Surname = data.User.Surname,
+					// login is name.surname, so if name is Jan and surname is Kowalski, then login is jan.kowalski
+					Login = $"{data.User.Name.ToLower()}.{data.User.Surname.ToLower()}",
+					Password = data.User.Password,
+					// API key is surname + password e.g. kowalski396
+					ApiKey = $"{data.User.Surname.ToLower()}{data.User.Password}",
+					Status = 0
+				};
+
+				await _context.SaveChangesAsync();
+				_context.UserEntities.Add(userEntity);
+			}
+			catch(Exception e)
+			{
+				await Console.Out.WriteLineAsync(e.Message);
+				status.Success = false;
+				return Json(status);
+			}
+
+			status.Success = true;
+			return Json(status);
+		}
 
 		// GET: api/users/GetAllUsers/{"api_key": "administrator-api-key"}
 		[HttpGet]
@@ -33,7 +80,8 @@ namespace quiz_app_api.Controllers
 				return Json(new List<UserEntity>());
 			}
 
-			return Json(await _context.UserEntities.ToListAsync());
+			// returns all users except admins
+			return Json(await _context.UserEntities.Where(x => x.AccountType == 0).ToListAsync());
 		}
 
 		// PUT: api/UserEntities/5
@@ -79,7 +127,7 @@ namespace quiz_app_api.Controllers
 		// DELETE: api/users/RemoveUser/{"user_id": 0, "api_key": "administrator-api-key"}
 		[HttpGet]
 		[Route("RemoveUser/{jsonData}")]
-		public async Task<ActionResult<SuccessJson>> DeleteUserEntity(string jsonData)
+		public async Task<ActionResult> DeleteUserEntity(string jsonData)
 		{
 			var data = JsonConvert.DeserializeObject<RemoveUserJson>(jsonData);
 			var status = new SuccessJson();
@@ -87,14 +135,14 @@ namespace quiz_app_api.Controllers
 			if(data == null || data.ApiKey == null)
 			{
 				status.Success = false;
-				return status;
+				return Json(status);
 			}
 
 			var userEntity = await _context.UserEntities.FindAsync(data.UserId);
 			if(userEntity == null || !IsAdmin(data.ApiKey))
 			{
 				status.Success = false;
-				return status;
+				return Json(status);
 			}
 
 			_context.UserEntities.Remove(userEntity);
@@ -102,7 +150,7 @@ namespace quiz_app_api.Controllers
 
 			status.Success = true;
 
-			return status;
+			return Json(status);
 		}
 
 		private bool IsAdmin(string apiKey)

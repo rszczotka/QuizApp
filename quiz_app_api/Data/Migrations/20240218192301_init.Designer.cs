@@ -12,7 +12,7 @@ using quiz_app_api.Data;
 namespace quiz_app_api.data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240218133344_init")]
+    [Migration("20240218192301_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -126,8 +126,9 @@ namespace quiz_app_api.data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Password")
-                        .HasColumnType("int");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -145,45 +146,45 @@ namespace quiz_app_api.data.Migrations
                         {
                             Id = 1,
                             AccountType = 1,
-                            ApiKey = "admin111",
-                            Login = "admin",
-                            Name = "Admin",
-                            Password = 111,
+                            ApiKey = "system",
+                            Login = "admin.admin",
+                            Name = "admin",
+                            Password = "0",
                             Status = 0,
-                            Surname = "Admin"
+                            Surname = "admin"
                         },
                         new
                         {
                             Id = 2,
                             AccountType = 0,
-                            ApiKey = "user1222",
-                            Login = "user1a",
-                            Name = "user1",
-                            Password = 222,
+                            ApiKey = "zdun111",
+                            Login = "kamil.zdun",
+                            Name = "Kamil",
+                            Password = "111",
                             Status = 0,
-                            Surname = "a"
+                            Surname = "Zdun"
                         },
                         new
                         {
                             Id = 3,
                             AccountType = 0,
-                            ApiKey = "user2222",
-                            Login = "user2a",
-                            Name = "user2",
-                            Password = 333,
+                            ApiKey = "zdunowski222",
+                            Login = "michał.zdun",
+                            Name = "Michał",
+                            Password = "222",
                             Status = 0,
-                            Surname = "a"
+                            Surname = "Zdunowski"
                         },
                         new
                         {
                             Id = 4,
                             AccountType = 0,
-                            ApiKey = "user3222",
-                            Login = "user3a",
-                            Name = "user3",
-                            Password = 333,
+                            ApiKey = "zdunski333",
+                            Login = "wojtek.zduński",
+                            Name = "Wojtek",
+                            Password = "333",
                             Status = 0,
-                            Surname = "a"
+                            Surname = "Zduński"
                         });
                 });
 

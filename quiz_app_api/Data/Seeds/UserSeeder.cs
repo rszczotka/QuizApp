@@ -14,11 +14,11 @@ public class UserSeeder
 			{
 				Id = 1,
 				AccountType = 1,
-				Name = "Admin",
-				Surname = "Admin",
-				Login = "admin",
-				Password = 111,
-				ApiKey = "admin111",
+				Name = "admin",
+				Surname = "admin",
+				Login = "admin.admin",
+				Password = "0",
+				ApiKey = "system",
 				Status = 0
 			},
 			// normal users
@@ -26,35 +26,33 @@ public class UserSeeder
 			{
 				Id = 2,
 				AccountType = 0,
-				Name = "user1",
-				Surname = "a",
-				Login = "user1a",
-				Password = 222,
-				ApiKey = "user1222",
+				Name = "Kamil",
+				Surname = "Zdun",
+				Login = "kamil.zdun",
+				Password = "111",
+				ApiKey = "zdun111",
 				Status = 0
 			},
-
-
 			new()
 			{
 				Id = 3,
 				AccountType = 0,
-				Name = "user2",
-				Surname = "a",
-				Login = "user2a",
-				Password = 333,
-				ApiKey = "user2222",
+				Name = "Michał",
+				Surname = "Zdunowski",
+				Login = "michał.zdun",
+				Password = "222",
+				ApiKey = "zdunowski222",
 				Status = 0
 			},
 			new()
 			{
 				Id = 4,
 				AccountType = 0,
-				Name = "user3",
-				Surname = "a",
-				Login = "user3a",
-				Password = 333,
-				ApiKey = "user3222",
+				Name = "Wojtek",
+				Surname = "Zduński",
+				Login = "wojtek.zduński",
+				Password = "333",
+				ApiKey = "zdunski333",
 				Status = 0
 			}
 		});
