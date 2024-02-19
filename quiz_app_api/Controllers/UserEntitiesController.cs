@@ -12,8 +12,8 @@ namespace quiz_app_api.Controllers
 	[ApiController]
 	public class UserEntitiesController(AppDbContext _context) : Controller
 	{
-		// GET: api/users/CreateUser/{"api_key": "administrator-api-key", "user": {}}
-		[HttpGet]
+		// POST: api/users/CreateUser/{"api_key": "administrator-api-key", "user": {}}
+		[HttpPost]
 		[Route("CreateUser/{jsonData}")]
 		public async Task<ActionResult> CreateUser(string jsonData)
 		{
@@ -80,8 +80,8 @@ namespace quiz_app_api.Controllers
 				return Json(new List<UserEntity>());
 			}
 
-			// returns all users except admins
-			return Json(await _context.UserEntities.Where(x => x.AccountType == 0).ToListAsync());
+			// returns all users
+			return Json(await _context.UserEntities.ToListAsync());
 		}
 
 		// PUT: api/UserEntities/5
@@ -125,7 +125,7 @@ namespace quiz_app_api.Controllers
 		}
 
 		// DELETE: api/users/RemoveUser/{"user_id": 0, "api_key": "administrator-api-key"}
-		[HttpGet]
+		[HttpDelete]
 		[Route("RemoveUser/{jsonData}")]
 		public async Task<ActionResult> DeleteUserEntity(string jsonData)
 		{
