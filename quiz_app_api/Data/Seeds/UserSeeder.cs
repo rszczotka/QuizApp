@@ -18,7 +18,6 @@ public class UserSeeder
 				Surname = "admin",
 				Login = "admin.admin",
 				Password = "0",
-				ApiKey = "system",
 				Status = 0
 			},
 			// normal users
@@ -30,7 +29,6 @@ public class UserSeeder
 				Surname = "Zdun",
 				Login = "kamil.zdun",
 				Password = "111",
-				ApiKey = "zdun111",
 				Status = 0
 			},
 			new()
@@ -41,7 +39,6 @@ public class UserSeeder
 				Surname = "Zdunowski",
 				Login = "michał.zdun",
 				Password = "222",
-				ApiKey = "zdunowski222",
 				Status = 0
 			},
 			new()
@@ -52,7 +49,6 @@ public class UserSeeder
 				Surname = "Zduński",
 				Login = "wojtek.zduński",
 				Password = "333",
-				ApiKey = "zdunski333",
 				Status = 0
 			}
 		});
