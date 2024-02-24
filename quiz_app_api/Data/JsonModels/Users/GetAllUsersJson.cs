@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace quiz_app_api.Data.JsonModels.Users;
 
 public class GetAllUsersJson
 {
-    [JsonProperty("api_key")]
-    public string? ApiKey { get; set; }
+    [JsonPropertyName("api_key")]
+    public string ApiKey { get; set; }
 }

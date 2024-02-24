@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using quiz_app_api.Data;
 using quiz_app_api.Data.Entities;
 using quiz_app_api.Data.JsonModels;
@@ -62,14 +61,12 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 		return Json(status);
 	}
 
-	// GET: api/users/GetAllUsers/{"api_key": "administrator-api-key"}
+	// GET: api/users/GetAllUsers/
 	[HttpGet]
-	[Route("GetAllUsers/{jsonData}")]
-	public async Task<ActionResult> GetAllUsers(string jsonData)
+	[Route("GetAllUsers")]
+	public async Task<ActionResult> GetAllUsers([FromBody] GetAllUsersJson data)
 	{
-		var data = JsonConvert.DeserializeObject<GetAllUsersJson>(jsonData);
-
-		if(data == null || data.ApiKey == null)
+		if(data.ApiKey == null)
 		{
 			return Json(new List<UserEntity>());
 		}
@@ -79,18 +76,54 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 			return Json(new List<UserEntity>());
 		}
 
-		// returns all users
 		return Json(await _context.UserEntities.ToListAsync());
 	}
 
-	// PUT: api/UserEntities/5
-	[HttpPut("{id}")]
-	public async Task<IActionResult> PutUserEntity(int id, UserEntity userEntity)
+	// POST: api/users/Login
+	[HttpPost]
+	[Route("Login")]
+	public async Task<ActionResult> Login([FromBody] LoginJson data)
 	{
-		if(id != userEntity.Id)
+		var user = await _context.UserEntities.Where(x => x.Login == data.Login && x.Password == data.Password).FirstOrDefaultAsync();
+
+		if(user == null)
 		{
-			return BadRequest();
+			return Json("");
 		}
+
+		var response = new LoginReturnJson
+		{
+			Id = user.Id,
+			AccountType = user.AccountType,
+			Name = user.Name,
+			Surname = user.Surname,
+			Login = user.Login,
+			ApiKey = APIKeyGenerator.GetOrGenerateAPIKey(user.AccountType, user.Login, user.Password),
+			Status = user.Status
+		};
+
+		return Json(response);
+	}
+
+	// PUT: api/users/UpdateUser
+	[HttpPut]
+	[Route("UpdateUser")]
+	public async Task<ActionResult> UpdateUser([FromBody] UpdateUserJson data)
+	{
+		var status = new SuccessJson();
+		var userEntity = await _context.UserEntities.Where(x => x.Id == data.Id).FirstOrDefaultAsync();
+
+		if(userEntity == null || !IsAdmin(data.ApiKey))
+		{
+			status.Success = false;
+			return Json(status);
+		}
+
+		userEntity.Name = data.User.Name;
+		userEntity.Surname = data.User.Surname;
+		userEntity.Password = data.User.Password;
+		userEntity.Status = data.User.Status;
+		userEntity.Login = $"{data.User.Name.ToLower()}.{data.User.Surname.ToLower()}";
 
 		_context.Entry(userEntity).State = EntityState.Modified;
 
@@ -100,35 +133,19 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 		}
 		catch(DbUpdateConcurrencyException)
 		{
-			if(!UserEntityExists(id))
-			{
-				return NotFound();
-			}
-			else
-			{
-				throw;
-			}
+			status.Success = false;
+			return Json(status);
 		}
 
-		return NoContent();
+		status.Success = true;
+		return Json(status);
 	}
-
-	// POST: api/UserEntities
-	[HttpPost]
-	public async Task<ActionResult<UserEntity>> PostUserEntity(UserEntity userEntity)
-	{
-		_context.UserEntities.Add(userEntity);
-		await _context.SaveChangesAsync();
-
-		return CreatedAtAction("GetUserEntity", new { id = userEntity.Id }, userEntity);
-	}
-
-	// DELETE: api/users/RemoveUser/{"user_id": 0, "api_key": "administrator-api-key"}
+	
+	// DELETE: api/users/RemoveUser/
 	[HttpDelete]
-	[Route("RemoveUser/{jsonData}")]
-	public async Task<ActionResult> DeleteUserEntity(string jsonData)
+	[Route("RemoveUser")]
+	public async Task<ActionResult> DeleteUser([FromBody] RemoveUserJson data)
 	{
-		var data = JsonConvert.DeserializeObject<RemoveUserJson>(jsonData);
 		var status = new SuccessJson();
 
 		if(data == null || data.ApiKey == null)
@@ -152,13 +169,8 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 		return Json(status);
 	}
 
-	private bool IsAdmin(string apiKey)
+	private static bool IsAdmin(string apiKey)
 	{
 		return apiKey.EndsWith((char) 98) && APIKeyGenerator.ContainsAPIKey(apiKey);
-	}
-
-	private bool UserEntityExists(int id)
-	{
-		return _context.UserEntities.Any(e => e.Id == id);
 	}
 }

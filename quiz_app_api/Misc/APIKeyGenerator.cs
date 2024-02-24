@@ -8,13 +8,13 @@ public class APIKeyGenerator
 
     private static readonly Dictionary<string, string> apiKeys = new Dictionary<string, string>();
 
-    public static string GetOrGenerateAPIKey(int accountType, string user, string password)
+    public static string GetOrGenerateAPIKey(int accountType, string login, string password)
     {
-        if(apiKeys.Keys.Contains(user))
+        if(apiKeys.Keys.Contains(login))
         {
-            return apiKeys[user];
+            return apiKeys[login];
         }
-        return GenerateAPIKey(accountType, user, password);
+        return GenerateAPIKey(accountType, login, password);
     }
 
     public static bool ContainsAPIKey(string apiKey)
@@ -22,11 +22,11 @@ public class APIKeyGenerator
         return apiKeys.Values.Contains(apiKey);
     }
 
-    public static string GenerateAPIKey(int accountType, string user, string password)
+    public static string GenerateAPIKey(int accountType, string login, string password)
     {
-        string apiKey = GetHash(user + password);
+        string apiKey = GetHash(login + password);
         apiKey += (char) (accountType + 97);
-        apiKeys.Add(user, apiKey);
+        apiKeys.Add(login, apiKey);
         return apiKey;
     }
 

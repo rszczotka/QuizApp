@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace quiz_app_api.Data.JsonModels.Users;
 
 public class RemoveUserJson
 {
-    [JsonProperty("user_id")]
+    [JsonPropertyName("user_id")]
     public int UserId { get; set; }
-    [JsonProperty("api_key")]
-    public string? ApiKey { get; set; }
+    [JsonPropertyName("api_key")]
+    public required string ApiKey { get; set; }
 }
