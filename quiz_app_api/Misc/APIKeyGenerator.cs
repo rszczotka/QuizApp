@@ -44,4 +44,8 @@ public class APIKeyGenerator
         }
     }
 
+    public static void FlushApiKeys()
+    {
+        apiKeys.Clear();
+    }
 }

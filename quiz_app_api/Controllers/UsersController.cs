@@ -10,7 +10,7 @@ namespace quiz_app_api.Controllers;
 
 [Route("api/users")]
 [ApiController]
-public class UserEntitiesController(AppDbContext _context) : Controller
+public class UsersController(AppDbContext _context) : Controller
 {
 	// POST: api/users/CreateUser
 	[HttpPost]
@@ -26,7 +26,7 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 			return Json(status);
 		}
 
-		if(!IsAdmin(data.ApiKey))
+		if(!AdminTools.IsAdmin(data.ApiKey))
 		{
 			status.Success = false;
 			return Json(status);
@@ -71,7 +71,7 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 			return Json(new List<UserEntity>());
 		}
 
-		if(!IsAdmin(data.ApiKey))
+		if(!AdminTools.IsAdmin(data.ApiKey))
 		{
 			return Json(new List<UserEntity>());
 		}
@@ -113,7 +113,7 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 		var status = new SuccessJson();
 		var userEntity = await _context.UserEntities.Where(x => x.Id == data.Id).FirstOrDefaultAsync();
 
-		if(userEntity == null || !IsAdmin(data.ApiKey))
+		if(userEntity == null || !AdminTools.IsAdmin(data.ApiKey))
 		{
 			status.Success = false;
 			return Json(status);
@@ -155,7 +155,8 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 		}
 
 		var userEntity = await _context.UserEntities.FindAsync(data.UserId);
-		if(userEntity == null || !IsAdmin(data.ApiKey))
+
+		if(userEntity == null || !AdminTools.IsAdmin(data.ApiKey))
 		{
 			status.Success = false;
 			return Json(status);
@@ -167,10 +168,5 @@ public class UserEntitiesController(AppDbContext _context) : Controller
 		status.Success = true;
 
 		return Json(status);
-	}
-
-	private static bool IsAdmin(string apiKey)
-	{
-		return apiKey.EndsWith((char) 98) && APIKeyGenerator.ContainsAPIKey(apiKey);
 	}
 }

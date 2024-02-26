@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace quiz_app_api.data.Migrations
+namespace quiz_app_api.Data.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -54,7 +54,6 @@ namespace quiz_app_api.data.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApiKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -92,14 +91,19 @@ namespace quiz_app_api.data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "SystemStatusEntities",
+                columns: new[] { "Id", "Status", "UpdatedAt" },
+                values: new object[] { 1, 0, new DateTime(2024, 2, 24, 18, 2, 42, 885, DateTimeKind.Utc).AddTicks(4657) });
+
+            migrationBuilder.InsertData(
                 table: "UserEntities",
-                columns: new[] { "Id", "AccountType", "ApiKey", "Login", "Name", "Password", "Status", "Surname" },
+                columns: new[] { "Id", "AccountType", "Login", "Name", "Password", "Status", "Surname" },
                 values: new object[,]
                 {
-                    { 1, 1, "system", "admin.admin", "admin", "0", 0, "admin" },
-                    { 2, 0, "zdun111", "kamil.zdun", "Kamil", "111", 0, "Zdun" },
-                    { 3, 0, "zdunowski222", "michał.zdun", "Michał", "222", 0, "Zdunowski" },
-                    { 4, 0, "zdunski333", "wojtek.zduński", "Wojtek", "333", 0, "Zduński" }
+                    { 1, 1, "admin.admin", "admin", "0", 0, "admin" },
+                    { 2, 0, "kamil.zdun", "Kamil", "111", 0, "Zdun" },
+                    { 3, 0, "michał.zdun", "Michał", "222", 0, "Zdunowski" },
+                    { 4, 0, "wojtek.zduński", "Wojtek", "333", 0, "Zduński" }
                 });
 
             migrationBuilder.CreateIndex(

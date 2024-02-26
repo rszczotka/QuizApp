@@ -9,10 +9,10 @@ using quiz_app_api.Data;
 
 #nullable disable
 
-namespace quiz_app_api.data.Migrations
+namespace quiz_app_api.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240218205835_Init")]
+    [Migration("20240224180243_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace quiz_app_api.data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -69,6 +69,14 @@ namespace quiz_app_api.data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SystemStatusEntities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Status = 0,
+                            UpdatedAt = new DateTime(2024, 2, 24, 18, 2, 42, 885, DateTimeKind.Utc).AddTicks(4657)
+                        });
                 });
 
             modelBuilder.Entity("quiz_app_api.Data.Entities.UserAnswerEntity", b =>
@@ -114,10 +122,6 @@ namespace quiz_app_api.data.Migrations
                     b.Property<int>("AccountType")
                         .HasColumnType("int");
 
-                    b.Property<string>("ApiKey")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -146,7 +150,6 @@ namespace quiz_app_api.data.Migrations
                         {
                             Id = 1,
                             AccountType = 1,
-                            ApiKey = "system",
                             Login = "admin.admin",
                             Name = "admin",
                             Password = "0",
@@ -157,7 +160,6 @@ namespace quiz_app_api.data.Migrations
                         {
                             Id = 2,
                             AccountType = 0,
-                            ApiKey = "zdun111",
                             Login = "kamil.zdun",
                             Name = "Kamil",
                             Password = "111",
@@ -168,7 +170,6 @@ namespace quiz_app_api.data.Migrations
                         {
                             Id = 3,
                             AccountType = 0,
-                            ApiKey = "zdunowski222",
                             Login = "michał.zdun",
                             Name = "Michał",
                             Password = "222",
@@ -179,7 +180,6 @@ namespace quiz_app_api.data.Migrations
                         {
                             Id = 4,
                             AccountType = 0,
-                            ApiKey = "zdunski333",
                             Login = "wojtek.zduński",
                             Name = "Wojtek",
                             Password = "333",
