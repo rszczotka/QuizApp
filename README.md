@@ -61,11 +61,11 @@ Informację o sukcesie
 
 ### Co przyjmuje:
 
-API key (administrator)
+API key
 
 ```json
 {
-    "api_key": "administrator-api-key"
+    "api_key": "api-key"
 }
 ```
 
