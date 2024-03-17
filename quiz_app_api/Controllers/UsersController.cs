@@ -48,8 +48,8 @@ public class UsersController(AppDbContext _context) : Controller
 				Status = 0
 			};
 
-			await _context.SaveChangesAsync();
-			_context.UserEntities.Add(userEntity);
+            _context.UserEntities.Add(userEntity);
+            await _context.SaveChangesAsync();
 		}
 		catch(Exception e)
 		{
@@ -95,7 +95,10 @@ public class UsersController(AppDbContext _context) : Controller
 
 		if(user == null)
 		{
-			return Json("");
+			return Json(new SuccessJson()
+			{
+				Success = false
+			});
 		}
 
 		var response = new LoginReturnJson

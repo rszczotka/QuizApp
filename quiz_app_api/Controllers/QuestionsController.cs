@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data;
+using quiz_app_api.Data.Entities;
+using quiz_app_api.Data.JsonModels;
 using quiz_app_api.Data.JsonModels.Questions.Input;
 using quiz_app_api.Data.JsonModels.Questions.Output;
 using quiz_app_api.Misc;
@@ -14,10 +16,46 @@ public class QuestionsController(AppDbContext _context) : Controller
 	// POST: api/questions/CreateQuestion
 	[HttpPost]
 	[Route("CreateQuestion")]
-	public async Task<ActionResult> CreateQuestion()
+	public async Task<ActionResult> CreateQuestion([FromBody] CreateQuestionJson data)
 	{
-		throw new NotImplementedException();
-	}
+        var status = new SuccessJson();
+
+        // checks for any null value
+        if (data == null || data.ApiKey == null || data.Question == null)
+        {
+            status.Success = false;
+            return Json(status);
+        }
+
+        if (!AdminTools.IsAdmin(data.ApiKey))
+        {
+            status.Success = false;
+            return Json(status);
+        }
+
+        try
+        {
+            var questionEntity = new QuestionEntity
+            {
+                Text = data.Question.Text,
+				Options = data.Question.Options,
+				CorrectAnswer = data.Question.CorrectAnswer,
+				AvailableTime = data.Question.AvailableTime
+            };
+
+            _context.QuestionEntities.Add(questionEntity);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            await Console.Out.WriteLineAsync(e.Message);
+            status.Success = false;
+            return Json(status);
+        }
+
+        status.Success = true;
+        return Json(status);
+    }
 
 	// GET: api/questions/GetAllQuestions/
 	[HttpGet]
