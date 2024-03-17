@@ -340,6 +340,54 @@ Informację o sukcesie
 
 > Read
 
+<details><summary>GetAllQuestions</summary>
+    
+### Url:
+
+`localhost/api/questions/GetAllQuestions/`
+
+### Co przyjmuje:
+
+API key administratora
+
+```json
+{
+    "api_key": "administrator-api-key"
+} 
+```
+
+### Co zwraca:
+
+Wszystkie pytania
+
+```json
+[
+    {
+        "text": "Pytanie",
+        "options": [
+            "Opcja 1",
+            "Opcja 2",
+            "Opcja 3",
+            "Opcja 4"
+        ],
+        "available_time": 0
+    },
+    {
+    "text": "Pytanie2",
+    "options": [
+        "Opcja 1",
+        "Opcja 2",
+        "Opcja 3",
+        "Opcja 4"
+    ],
+        "available_time": 0
+    },
+    ...
+]
+```
+
+</details>
+
 <details><summary>GetNextQuestion</summary>
     
 ### Url:
