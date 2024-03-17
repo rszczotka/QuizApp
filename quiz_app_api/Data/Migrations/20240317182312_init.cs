@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace quiz_app_api.Data.Migrations
+namespace quiz_app_api.data.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace quiz_app_api.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Opions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Options = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CorrectAnswer = table.Column<int>(type: "int", nullable: false),
                     AvailableTime = table.Column<int>(type: "int", nullable: false)
                 },
@@ -91,9 +91,19 @@ namespace quiz_app_api.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "QuestionEntities",
+                columns: new[] { "Id", "AvailableTime", "CorrectAnswer", "Options", "Text" },
+                values: new object[,]
+                {
+                    { 1, 60, 2, "[\"1945\",\"1918\",\"1939\",\"1980\"]", "W którym roku wybuchła II Wojna Światowa?" },
+                    { 2, 30, 0, "[\"30\",\"5\",\"10\",\"27\"]", "Ile lat żyją bobry" },
+                    { 3, 10, 3, "[\"1939\",\"2006\",\"1989\",\"Nie by\\u0142o \\u017Cadnej masakry\"]", "W którym roku doszło do masakry na Placu Niebiańskiego Spokoju?" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "SystemStatusEntities",
                 columns: new[] { "Id", "Status", "UpdatedAt" },
-                values: new object[] { 1, 0, new DateTime(2024, 2, 24, 18, 2, 42, 885, DateTimeKind.Utc).AddTicks(4657) });
+                values: new object[] { 1, 0, new DateTime(2024, 3, 17, 18, 23, 12, 158, DateTimeKind.Utc).AddTicks(1049) });
 
             migrationBuilder.InsertData(
                 table: "UserEntities",

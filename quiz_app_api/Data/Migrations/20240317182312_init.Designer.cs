@@ -9,11 +9,11 @@ using quiz_app_api.Data;
 
 #nullable disable
 
-namespace quiz_app_api.Data.Migrations
+namespace quiz_app_api.data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240224180243_Init")]
-    partial class Init
+    [Migration("20240317182312_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace quiz_app_api.Data.Migrations
                     b.Property<int>("CorrectAnswer")
                         .HasColumnType("int");
 
-                    b.Property<string>("Opions")
+                    b.Property<string>("Options")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -50,6 +50,32 @@ namespace quiz_app_api.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("QuestionEntities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailableTime = 60,
+                            CorrectAnswer = 2,
+                            Options = "[\"1945\",\"1918\",\"1939\",\"1980\"]",
+                            Text = "W którym roku wybuchła II Wojna Światowa?"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvailableTime = 30,
+                            CorrectAnswer = 0,
+                            Options = "[\"30\",\"5\",\"10\",\"27\"]",
+                            Text = "Ile lat żyją bobry"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AvailableTime = 10,
+                            CorrectAnswer = 3,
+                            Options = "[\"1939\",\"2006\",\"1989\",\"Nie by\\u0142o \\u017Cadnej masakry\"]",
+                            Text = "W którym roku doszło do masakry na Placu Niebiańskiego Spokoju?"
+                        });
                 });
 
             modelBuilder.Entity("quiz_app_api.Data.Entities.SystemStatusEntity", b =>
@@ -75,7 +101,7 @@ namespace quiz_app_api.Data.Migrations
                         {
                             Id = 1,
                             Status = 0,
-                            UpdatedAt = new DateTime(2024, 2, 24, 18, 2, 42, 885, DateTimeKind.Utc).AddTicks(4657)
+                            UpdatedAt = new DateTime(2024, 3, 17, 18, 23, 12, 158, DateTimeKind.Utc).AddTicks(1049)
                         });
                 });
 

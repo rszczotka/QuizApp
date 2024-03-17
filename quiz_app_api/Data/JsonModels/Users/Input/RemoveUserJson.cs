@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace quiz_app_api.Data.JsonModels.Users;
+namespace quiz_app_api.Data.JsonModels.Users.Input;
 
 public class RemoveUserJson
 {

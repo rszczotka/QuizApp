@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data;
 using quiz_app_api.Data.JsonModels;
-using quiz_app_api.Data.JsonModels.SystemStatus;
+using quiz_app_api.Data.JsonModels.SystemStatus.Input;
+using quiz_app_api.Data.JsonModels.SystemStatus.Output;
 using quiz_app_api.Misc;
 
 namespace quiz_app_api.Controllers;

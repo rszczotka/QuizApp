@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data;
 using quiz_app_api.Data.Entities;
 using quiz_app_api.Data.JsonModels;
-using quiz_app_api.Data.JsonModels.Users;
+using quiz_app_api.Data.JsonModels.Users.Input;
+using quiz_app_api.Data.JsonModels.Users.Output;
 using quiz_app_api.Misc;
 
 namespace quiz_app_api.Controllers;
@@ -66,17 +67,23 @@ public class UsersController(AppDbContext _context) : Controller
 	[Route("GetAllUsers")]
 	public async Task<ActionResult> GetAllUsers([FromBody] GetAllUsersJson data)
 	{
-		if(data.ApiKey == null)
+		if(data.ApiKey == null || !APIKeyGenerator.ContainsAPIKey(data.ApiKey))
 		{
-			return Json(new List<UserEntity>());
+			return Json(new List<GetAllUsersReturnJson>());
 		}
 
-		if(!AdminTools.IsAdmin(data.ApiKey))
-		{
-			return Json(new List<UserEntity>());
-		}
+		var allUsers = await _context.UserEntities
+			.Select(x => new GetAllUsersReturnJson
+			{
+				Id = x.Id,
+				Name = x.Name,
+				Surname = x.Surname,
+				Login = x.Login,
+				Status = x.Status
+			})
+			.ToListAsync();
 
-		return Json(await _context.UserEntities.ToListAsync());
+		return Json(allUsers);
 	}
 
 	// POST: api/users/Login

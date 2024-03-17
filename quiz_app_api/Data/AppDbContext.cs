@@ -22,5 +22,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
 		UserSeeder.Seed(modelBuilder);
 		SystemStatusSeeder.Seed(modelBuilder);
+		QuestionsSeeder.Seed(modelBuilder);
 	}
 }
