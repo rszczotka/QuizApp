@@ -363,6 +363,7 @@ Wszystkie pytania
 ```json
 [
     {
+        "question_id": 1,
         "text": "Pytanie",
         "options": [
             "Opcja 1",
@@ -370,16 +371,19 @@ Wszystkie pytania
             "Opcja 3",
             "Opcja 4"
         ],
+        "correct_answer": 2,
         "available_time": 0
     },
     {
-    "text": "Pytanie2",
-    "options": [
-        "Opcja 1",
-        "Opcja 2",
-        "Opcja 3",
-        "Opcja 4"
-    ],
+        "question_id": 2,
+        "text": "Pytanie2",
+        "options": [
+            "Opcja 1",
+            "Opcja 2",
+            "Opcja 3",
+            "Opcja 4"
+        ],
+        "correct_answer": 0,
         "available_time": 0
     },
     ...
