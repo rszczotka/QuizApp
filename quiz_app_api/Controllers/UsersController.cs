@@ -164,9 +164,15 @@ public class UsersController(AppDbContext _context) : Controller
 			return Json(status);
 		}
 
+		if(!AdminTools.IsAdmin(data.ApiKey))
+		{
+			status.Success = false;
+			return Json(status);
+		}
+
 		var userEntity = await _context.UserEntities.FindAsync(data.UserId);
 
-		if(userEntity == null || !AdminTools.IsAdmin(data.ApiKey))
+		if(userEntity == null)
 		{
 			status.Success = false;
 			return Json(status);

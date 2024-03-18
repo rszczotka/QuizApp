@@ -100,8 +100,35 @@ public class QuestionsController(AppDbContext _context) : Controller
 	// DELETE: api/questions/RemoveQuestion/
 	[HttpDelete]
 	[Route("RemoveQuestion")]
-	public async Task<ActionResult> DeleteQuestion()
+	public async Task<ActionResult> DeleteQuestion([FromBody] RemoveQuestionJson data)
 	{
-		throw new NotImplementedException();
-	}
+        var status = new SuccessJson();
+
+        if (data == null || data.ApiKey == null)
+        {
+            status.Success = false;
+            return Json(status);
+        }
+
+		if(!AdminTools.IsAdmin(data.ApiKey))
+		{
+			status.Success = false;
+			return Json(status);
+		}
+
+        var questionEntity = await _context.QuestionEntities.FindAsync(data.QuestionId);
+
+        if (questionEntity == null)
+        {
+            status.Success = false;
+            return Json(status);
+        }
+
+        _context.QuestionEntities.Remove(questionEntity);
+        await _context.SaveChangesAsync();
+
+        status.Success = true;
+
+        return Json(status);
+    }
 }
