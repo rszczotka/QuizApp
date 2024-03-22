@@ -8,7 +8,7 @@ using quiz_app_api.Data;
 
 #nullable disable
 
-namespace quiz_app_api.data.Migrations
+namespace quiz_app_api.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -52,26 +52,50 @@ namespace quiz_app_api.data.Migrations
                         new
                         {
                             Id = 1,
-                            AvailableTime = 60,
-                            CorrectAnswer = 2,
-                            Options = "[\"1945\",\"1918\",\"1939\",\"1980\"]",
-                            Text = "W którym roku wybuchła II Wojna Światowa?"
+                            AvailableTime = 25,
+                            CorrectAnswer = 0,
+                            Options = "[\"\\u017Celaza\",\"magnezu\",\"witaminy D\",\"witaminy B\"]",
+                            Text = "Anemię powoduje niedobór:"
                         },
                         new
                         {
                             Id = 2,
-                            AvailableTime = 30,
+                            AvailableTime = 25,
                             CorrectAnswer = 0,
-                            Options = "[\"30\",\"5\",\"10\",\"27\"]",
-                            Text = "Ile lat żyją bobry"
+                            Options = "[\"w Bieszczadach\",\"w G\\u00F3rach Sto\\u0142owych\",\"w Sudetach\",\"w Tatrach\"]",
+                            Text = "W których górach znajduje się Jezioro Solińskie?"
                         },
                         new
                         {
                             Id = 3,
-                            AvailableTime = 10,
-                            CorrectAnswer = 3,
-                            Options = "[\"1939\",\"2006\",\"1989\",\"Nie by\\u0142o \\u017Cadnej masakry\"]",
-                            Text = "W którym roku doszło do masakry na Placu Niebiańskiego Spokoju?"
+                            AvailableTime = 25,
+                            CorrectAnswer = 0,
+                            Options = "[\"Stefan \\u017Beromski\",\"Adam Mickiewicz\",\"W\\u0142adys\\u0142aw Reymont\",\"Henryk Sienkiewicz\"]",
+                            Text = "Kto jest autorem \"Syzyfowych prac\"?"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AvailableTime = 25,
+                            CorrectAnswer = 0,
+                            Options = "[\"Poznaniu\",\"Warszawie\",\"Lublinie\",\"Wroc\\u0142awiu\"]",
+                            Text = "Uniwersytet im. Adama Mickiewicza mieści się w:"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AvailableTime = 25,
+                            CorrectAnswer = 0,
+                            Options = "[\"euro\",\"marka austriacka\",\"szyling\",\"forint\"]",
+                            Text = "Jaka waluta obowiązuje w Austrii?"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AvailableTime = 25,
+                            CorrectAnswer = 0,
+                            Options = "[\"Ocean Spokojny\",\"Ocean Atlantycki\",\"Ocean Indyjski\",\"Ocean Arktyczny\"]",
+                            Text = "Który ocean jest największy?"
                         });
                 });
 
@@ -98,7 +122,7 @@ namespace quiz_app_api.data.Migrations
                         {
                             Id = 1,
                             Status = 0,
-                            UpdatedAt = new DateTime(2024, 3, 17, 18, 23, 12, 158, DateTimeKind.Utc).AddTicks(1049)
+                            UpdatedAt = new DateTime(2024, 3, 22, 20, 36, 14, 301, DateTimeKind.Utc).AddTicks(9044)
                         });
                 });
 

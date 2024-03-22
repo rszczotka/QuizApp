@@ -1,38 +1,53 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data.Entities;
+using CsvHelper;
+using System.Globalization;
+using quiz_app_api.Data.Questions;
 
 namespace quiz_app_api.Data.Seeds;
 
 public class QuestionsSeeder
 {
+	private static readonly string QuestionFile = "Data/Questions/questions.csv";
+
 	public static void Seed(ModelBuilder modelBuilder)
 	{
-		modelBuilder.Entity<QuestionEntity>().HasData(new List<QuestionEntity>
+		var questionsCsv = new List<QuestionCsv>();
+		
+		using(var reader = new StreamReader(QuestionFile))
+		using(var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
 		{
-			new()
-			{
-				Id = 1,
-				Text = "W którym roku wybuchła II Wojna Światowa?",
-				Options = ["1945", "1918", "1939", "1980"],
-				CorrectAnswer = 2,
-				AvailableTime = 60
-			},
-			new()
-			{
-				Id = 2,
-				Text = "Ile lat żyją bobry",
-				Options = ["30", "5", "10", "27"],
-				CorrectAnswer = 0,
-				AvailableTime = 30
-			},
-			new()
-			{
-				Id = 3,
-				Text = "W którym roku doszło do masakry na Placu Niebiańskiego Spokoju?",
-				Options = ["1939", "2006", "1989", "Nie było żadnej masakry"],
-				CorrectAnswer = 3,
-				AvailableTime = 10
-			}
-		});
+			questionsCsv = csv.GetRecords<QuestionCsv>().ToList();
+		}
+
+		var questions = questionsCsv.Select((x, position) => new QuestionEntity
+		{
+			Id = position + 1,
+			Text = x.Text,
+			// the answers are not in a random order yet
+			Options = [x.CorrectAnswer, x.IncorrectAnswer1, x.IncorrectAnswer2, x.IncorrectAnswer3],
+			CorrectAnswer = 0,
+			AvailableTime = x.TimeInSeconds != "" ? int.Parse(x.TimeInSeconds) : 25
+		}).ToList();
+
+		// making order of the answers random
+		/*var random = new Random();
+
+		foreach(var question in questions)
+		{
+			var answers = question.Options.ToList();
+			var correctAnswer = random.Next(0, 4);
+
+			question.CorrectAnswer = correctAnswer;
+			ShuffleAnswers(answers, correctAnswer);
+		}*/
+
+		modelBuilder.Entity<QuestionEntity>().HasData(questions);
+	}
+
+	// TODO: shuffle the answers
+	private static void ShuffleAnswers(List<string> answers, int correctAnswer)
+	{
+		throw new NotImplementedException();
 	}
 }

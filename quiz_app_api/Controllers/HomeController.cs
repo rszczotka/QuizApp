@@ -8,6 +8,5 @@ namespace quiz_app_api.Controllers
 		{
 			return Json(new { ApiWorking = true });
 		}
-
 	}
 }

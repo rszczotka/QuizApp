@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace quiz_app_api.data.Migrations
+namespace quiz_app_api.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -95,15 +95,18 @@ namespace quiz_app_api.data.Migrations
                 columns: new[] { "Id", "AvailableTime", "CorrectAnswer", "Options", "Text" },
                 values: new object[,]
                 {
-                    { 1, 60, 2, "[\"1945\",\"1918\",\"1939\",\"1980\"]", "W którym roku wybuchła II Wojna Światowa?" },
-                    { 2, 30, 0, "[\"30\",\"5\",\"10\",\"27\"]", "Ile lat żyją bobry" },
-                    { 3, 10, 3, "[\"1939\",\"2006\",\"1989\",\"Nie by\\u0142o \\u017Cadnej masakry\"]", "W którym roku doszło do masakry na Placu Niebiańskiego Spokoju?" }
+                    { 1, 25, 0, "[\"\\u017Celaza\",\"magnezu\",\"witaminy D\",\"witaminy B\"]", "Anemię powoduje niedobór:" },
+                    { 2, 25, 0, "[\"w Bieszczadach\",\"w G\\u00F3rach Sto\\u0142owych\",\"w Sudetach\",\"w Tatrach\"]", "W których górach znajduje się Jezioro Solińskie?" },
+                    { 3, 25, 0, "[\"Stefan \\u017Beromski\",\"Adam Mickiewicz\",\"W\\u0142adys\\u0142aw Reymont\",\"Henryk Sienkiewicz\"]", "Kto jest autorem \"Syzyfowych prac\"?" },
+                    { 4, 25, 0, "[\"Poznaniu\",\"Warszawie\",\"Lublinie\",\"Wroc\\u0142awiu\"]", "Uniwersytet im. Adama Mickiewicza mieści się w:" },
+                    { 5, 25, 0, "[\"euro\",\"marka austriacka\",\"szyling\",\"forint\"]", "Jaka waluta obowiązuje w Austrii?" },
+                    { 6, 25, 0, "[\"Ocean Spokojny\",\"Ocean Atlantycki\",\"Ocean Indyjski\",\"Ocean Arktyczny\"]", "Który ocean jest największy?" }
                 });
 
             migrationBuilder.InsertData(
                 table: "SystemStatusEntities",
                 columns: new[] { "Id", "Status", "UpdatedAt" },
-                values: new object[] { 1, 0, new DateTime(2024, 3, 17, 18, 23, 12, 158, DateTimeKind.Utc).AddTicks(1049) });
+                values: new object[] { 1, 0, new DateTime(2024, 3, 22, 20, 36, 14, 301, DateTimeKind.Utc).AddTicks(9044) });
 
             migrationBuilder.InsertData(
                 table: "UserEntities",
