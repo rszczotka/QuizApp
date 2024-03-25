@@ -61,11 +61,11 @@ Informację o sukcesie
 
 ### Co przyjmuje:
 
-API key
+API key administratora
 
 ```json
 {
-    "api_key": "api-key"
+    "api_key": "administrator-api-key"
 }
 ```
 
@@ -95,6 +95,49 @@ Wszystkich użytkowników
         "surname": "Zdun",
         "login": "kamil.zdun",
         "status": 0
+    },
+    ...
+]
+```
+
+</details>
+
+<details><summary>GetUsersInQueue</summary>
+    
+### Url:
+
+`localhost/api/users/GetUsersInQueue/`
+
+### Co przyjmuje:
+
+API key
+
+```json
+{
+    "api_key": "api-key"
+}
+```
+
+### Co zwraca:
+
+Wszystkich użytkowników, których status = 1
+
+```json
+[
+    {
+        "user_id": 0,
+        "name": "John",
+        "surname": "Smith"
+    },
+    {
+        "user_id": 1,
+        "name": "Will",
+        "surname": "Hutcherson"
+    },
+    {
+        "user_id": 2,
+        "name": "Kamil",
+        "surname": "Zdun"
     },
     ...
 ]
