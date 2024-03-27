@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\JsonModels\UserAnswers\Output\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
