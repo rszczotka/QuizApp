@@ -254,7 +254,7 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/answers/CreateUserAnswer/`
+`localhost/api/useranswers/CreateUserAnswer/`
 
 ### Co przyjmuje:
 
@@ -286,7 +286,7 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/answers/GetUserAnswers/`
+`localhost/api/useranswers/GetUserAnswers/`
 
 ### Co przyjmuje:
 
