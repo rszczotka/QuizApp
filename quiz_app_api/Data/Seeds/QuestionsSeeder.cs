@@ -31,23 +31,38 @@ public class QuestionsSeeder
 		}).ToList();
 
 		// making order of the answers random
-		/*var random = new Random();
+		var random = new Random();
 
 		foreach(var question in questions)
 		{
 			var answers = question.Options.ToList();
-			var correctAnswer = random.Next(0, 4);
+			var correctAnswerInex = random.Next(0, 4);
 
-			question.CorrectAnswer = correctAnswer;
-			ShuffleAnswers(answers, correctAnswer);
-		}*/
+			question.CorrectAnswer = correctAnswerInex;
+			ShuffleAnswers(answers, correctAnswerInex);
+
+			question.Options = answers.ToArray();
+		}
 
 		modelBuilder.Entity<QuestionEntity>().HasData(questions);
 	}
 
-	// TODO: shuffle the answers
-	private static void ShuffleAnswers(List<string> answers, int correctAnswer)
+	private static void ShuffleAnswers(List<string> answers, int correctAnswerIndex)
 	{
-		throw new NotImplementedException();
+		var remainingAnswers = answers.ToList();
+
+		answers[correctAnswerIndex] = remainingAnswers[0];
+		remainingAnswers.RemoveAt(0);
+
+		for(int i = 0; i < answers.Count; i++)
+		{
+			if(i == correctAnswerIndex) continue;
+
+			var random = new Random();
+			var randomIndex = random.Next(remainingAnswers.Count);
+
+			answers[i] = remainingAnswers[randomIndex];
+			remainingAnswers.RemoveAt(randomIndex);
+		}
 	}
 }

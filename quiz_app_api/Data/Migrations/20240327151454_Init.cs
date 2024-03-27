@@ -95,18 +95,18 @@ namespace quiz_app_api.Data.Migrations
                 columns: new[] { "Id", "AvailableTime", "CorrectAnswer", "Options", "Text" },
                 values: new object[,]
                 {
-                    { 1, 25, 0, "[\"\\u017Celaza\",\"magnezu\",\"witaminy D\",\"witaminy B\"]", "Anemię powoduje niedobór:" },
-                    { 2, 25, 0, "[\"w Bieszczadach\",\"w G\\u00F3rach Sto\\u0142owych\",\"w Sudetach\",\"w Tatrach\"]", "W których górach znajduje się Jezioro Solińskie?" },
-                    { 3, 25, 0, "[\"Stefan \\u017Beromski\",\"Adam Mickiewicz\",\"W\\u0142adys\\u0142aw Reymont\",\"Henryk Sienkiewicz\"]", "Kto jest autorem \"Syzyfowych prac\"?" },
-                    { 4, 25, 0, "[\"Poznaniu\",\"Warszawie\",\"Lublinie\",\"Wroc\\u0142awiu\"]", "Uniwersytet im. Adama Mickiewicza mieści się w:" },
-                    { 5, 25, 0, "[\"euro\",\"marka austriacka\",\"szyling\",\"forint\"]", "Jaka waluta obowiązuje w Austrii?" },
-                    { 6, 25, 0, "[\"Ocean Spokojny\",\"Ocean Atlantycki\",\"Ocean Indyjski\",\"Ocean Arktyczny\"]", "Który ocean jest największy?" }
+                    { 1, 25, 0, "[\"\\u017Celaza\",\"witaminy D\",\"witaminy B\",\"magnezu\"]", "Anemię powoduje niedobór:" },
+                    { 2, 25, 1, "[\"w Tatrach\",\"w Bieszczadach\",\"w Sudetach\",\"w G\\u00F3rach Sto\\u0142owych\"]", "W których górach znajduje się Jezioro Solińskie?" },
+                    { 3, 25, 1, "[\"Henryk Sienkiewicz\",\"Stefan \\u017Beromski\",\"Adam Mickiewicz\",\"W\\u0142adys\\u0142aw Reymont\"]", "Kto jest autorem \"Syzyfowych prac\"?" },
+                    { 4, 25, 3, "[\"Lublinie\",\"Warszawie\",\"Wroc\\u0142awiu\",\"Poznaniu\"]", "Uniwersytet im. Adama Mickiewicza mieści się w:" },
+                    { 5, 25, 2, "[\"forint\",\"szyling\",\"euro\",\"marka austriacka\"]", "Jaka waluta obowiązuje w Austrii?" },
+                    { 6, 25, 3, "[\"Ocean Indyjski\",\"Ocean Arktyczny\",\"Ocean Atlantycki\",\"Ocean Spokojny\"]", "Który ocean jest największy?" }
                 });
 
             migrationBuilder.InsertData(
                 table: "SystemStatusEntities",
                 columns: new[] { "Id", "Status", "UpdatedAt" },
-                values: new object[] { 1, 0, new DateTime(2024, 3, 22, 20, 36, 14, 301, DateTimeKind.Utc).AddTicks(9044) });
+                values: new object[] { 1, 0, new DateTime(2024, 3, 27, 15, 14, 53, 670, DateTimeKind.Utc).AddTicks(2287) });
 
             migrationBuilder.InsertData(
                 table: "UserEntities",

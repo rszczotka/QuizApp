@@ -54,47 +54,47 @@ namespace quiz_app_api.Data.Migrations
                             Id = 1,
                             AvailableTime = 25,
                             CorrectAnswer = 0,
-                            Options = "[\"\\u017Celaza\",\"magnezu\",\"witaminy D\",\"witaminy B\"]",
+                            Options = "[\"\\u017Celaza\",\"witaminy D\",\"witaminy B\",\"magnezu\"]",
                             Text = "Anemię powoduje niedobór:"
                         },
                         new
                         {
                             Id = 2,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"w Bieszczadach\",\"w G\\u00F3rach Sto\\u0142owych\",\"w Sudetach\",\"w Tatrach\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"w Tatrach\",\"w Bieszczadach\",\"w Sudetach\",\"w G\\u00F3rach Sto\\u0142owych\"]",
                             Text = "W których górach znajduje się Jezioro Solińskie?"
                         },
                         new
                         {
                             Id = 3,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"Stefan \\u017Beromski\",\"Adam Mickiewicz\",\"W\\u0142adys\\u0142aw Reymont\",\"Henryk Sienkiewicz\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"Henryk Sienkiewicz\",\"Stefan \\u017Beromski\",\"Adam Mickiewicz\",\"W\\u0142adys\\u0142aw Reymont\"]",
                             Text = "Kto jest autorem \"Syzyfowych prac\"?"
                         },
                         new
                         {
                             Id = 4,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"Poznaniu\",\"Warszawie\",\"Lublinie\",\"Wroc\\u0142awiu\"]",
+                            CorrectAnswer = 3,
+                            Options = "[\"Lublinie\",\"Warszawie\",\"Wroc\\u0142awiu\",\"Poznaniu\"]",
                             Text = "Uniwersytet im. Adama Mickiewicza mieści się w:"
                         },
                         new
                         {
                             Id = 5,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"euro\",\"marka austriacka\",\"szyling\",\"forint\"]",
+                            CorrectAnswer = 2,
+                            Options = "[\"forint\",\"szyling\",\"euro\",\"marka austriacka\"]",
                             Text = "Jaka waluta obowiązuje w Austrii?"
                         },
                         new
                         {
                             Id = 6,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"Ocean Spokojny\",\"Ocean Atlantycki\",\"Ocean Indyjski\",\"Ocean Arktyczny\"]",
+                            CorrectAnswer = 3,
+                            Options = "[\"Ocean Indyjski\",\"Ocean Arktyczny\",\"Ocean Atlantycki\",\"Ocean Spokojny\"]",
                             Text = "Który ocean jest największy?"
                         });
                 });
@@ -122,7 +122,7 @@ namespace quiz_app_api.Data.Migrations
                         {
                             Id = 1,
                             Status = 0,
-                            UpdatedAt = new DateTime(2024, 3, 22, 20, 36, 14, 301, DateTimeKind.Utc).AddTicks(9044)
+                            UpdatedAt = new DateTime(2024, 3, 27, 15, 14, 53, 670, DateTimeKind.Utc).AddTicks(2287)
                         });
                 });
 

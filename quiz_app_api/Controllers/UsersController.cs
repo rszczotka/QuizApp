@@ -67,7 +67,7 @@ public class UsersController(AppDbContext _context) : Controller
 	[Route("GetAllUsers")]
 	public async Task<ActionResult> GetAllUsers([FromBody] GetAllUsersJson data)
 	{
-		if(data.ApiKey == null || !APIKeyGenerator.ContainsAPIKey(data.ApiKey))
+		if(data.ApiKey == null || AdminTools.IsAdmin(data.ApiKey))
 		{
 			return Json(new List<GetAllUsersReturnJson>());
 		}
@@ -84,6 +84,30 @@ public class UsersController(AppDbContext _context) : Controller
 			.ToListAsync();
 
 		return Json(allUsers);
+	}
+
+	// GET: api/users/GetUsersInQueue/
+	[HttpGet]
+	[Route("GetUsersInQueue")]
+	public async Task<ActionResult> GetUsersInQueue([FromBody] GetUsersInQueueJson data)
+	{
+		if(data.ApiKey == null || !APIKeyGenerator.ContainsAPIKey(data.ApiKey))
+		{
+			return Json(new List<GetAllUsersReturnJson>());
+		}
+
+		// user status = 1 means it is logged in and in queue
+		var usersInQueue = await _context.UserEntities
+			.Where(x => x.Status == 1)
+			.Select(x => new GetUsersInQueueReturnJson
+			{
+				Id = x.Id,
+				Name = x.Name,
+				Surname = x.Surname
+			})
+			.ToListAsync();
+
+		return Json(usersInQueue);
 	}
 
 	// POST: api/users/Login

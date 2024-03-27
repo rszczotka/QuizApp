@@ -84,7 +84,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 	// GET: api/questions/GetNextQuestion/
 	[HttpGet]
 	[Route("GetNextQuestion")]
-	public async Task<ActionResult> GetNextQuestion()
+	public Task<ActionResult> GetNextQuestion()
 	{
 		throw new NotImplementedException();
 	}
@@ -92,7 +92,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 	// PUT: api/questions/UpdateQuestion
 	[HttpPut]
 	[Route("UpdateQuestion")]
-	public async Task<ActionResult> UpdateQuestion()
+	public Task<ActionResult> UpdateQuestion()
 	{
 		throw new NotImplementedException();
 	}

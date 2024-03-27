@@ -2,7 +2,7 @@
 
 namespace quiz_app_api.Data.JsonModels.Users.Output;
 
-public class GetAllUsersReturnJson
+public class GetUsersInQueueReturnJson
 {
 	[JsonPropertyName("id")]
 	public int Id { get; set; }
@@ -10,8 +10,4 @@ public class GetAllUsersReturnJson
 	public string Name { get; set; }
 	[JsonPropertyName("surname")]
 	public string Surname { get; set; }
-	[JsonPropertyName("login")]
-	public string Login { get; set; }
-	[JsonPropertyName("status")]
-	public int Status { get; set; }
 }
