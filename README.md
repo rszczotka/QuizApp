@@ -250,20 +250,21 @@ Informację o sukcesie
 
 > Create
 
-<details><summary>CreateAnswer</summary>
+<details><summary>CreateUserAnswer</summary>
     
 ### Url:
 
-`localhost/api/answers/CreateAnswer/`
+`localhost/api/answers/CreateUserAnswer/`
 
 ### Co przyjmuje:
 
-Pytanie, API key
+Id pytania, wybraną odpowiedź, API key
 
 ```json
 {
-    "api_key": "api-key",
-    "chosen_option": 1
+    "question_id": 1,
+    "chosen_option": 1,
+    "api_key": "api-key"
 } 
 ```
 
@@ -300,26 +301,56 @@ API key (administrator), id użytkownika
 
 ### Co zwraca:
 
-Pytanie
+Pytania
 
 chosen_option może być nullem, tak samo end time
 
 ```json
 [
     {
-        "text": "Pytanie",
+        "question": {
+            "text": "Pytanie",
+            "options": [
+                "Opcja 1",
+                "Opcja 2",
+                "Opcja 3",
+                "Opcja 4"
+            ],
+            "correct_answer": 0,
+            "available_time": 0
+        },
         "chosen_option": 2,
         "start_time": 84237423854,
         "end_time": 84237423860
     },
     {
-        "text": "Pytanie 2",
+        "question": {
+            "text": "Pytanie",
+            "options": [
+                "Opcja 1",
+                "Opcja 2",
+                "Opcja 3",
+                "Opcja 4"
+            ],
+            "correct_answer": 0,
+            "available_time": 0
+        },
         "chosen_option": NULL,
         "start_time": 84237423854,
         "end_time": NULL
     },
     {
-        "text": "Pytanie 3",
+        "question": {
+            "text": "Pytanie",
+            "options": [
+                "Opcja 1",
+                "Opcja 2",
+                "Opcja 3",
+                "Opcja 4"
+            ],
+            "correct_answer": 0,
+            "available_time": 0
+        },
         "chosen_option": 1,
         "start_time": 84237423854,
         "end_time": 84237423860
