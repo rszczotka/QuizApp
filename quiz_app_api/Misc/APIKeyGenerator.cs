@@ -30,6 +30,20 @@ public class APIKeyGenerator
         return apiKey;
     }
 
+    public static string? GetLoginByAPIKey(string apiKey)
+    {
+        if(apiKeys.Count() == 0)
+        {
+            return null;
+        }
+        var res = apiKeys.Where(n => n.Value.Equals(apiKey));
+        if(res.Count() == 0)
+        {
+            return null;
+        }
+        return res.First().Key;
+    }
+
     private static string GetHash(string str)
     {
         using(SHA256 sha256Hash = SHA256.Create())

@@ -115,14 +115,34 @@ public class UsersController(AppDbContext _context) : Controller
 	[Route("Login")]
 	public async Task<ActionResult> Login([FromBody] LoginJson data)
 	{
-		var user = await _context.UserEntities.Where(x => x.Login == data.Login && x.Password == data.Password).FirstOrDefaultAsync();
 
-		if(user == null)
+        var user = await _context.UserEntities.Where(x => x.Login == data.Login && x.Password == data.Password).FirstOrDefaultAsync();
+
+        if (user == null)
 		{
 			return Json(new SuccessJson()
 			{
 				Success = false
 			});
+		}
+
+        if (user.AccountType == 0)
+        {
+            var systemStatus = await _context.SystemStatusEntities.FirstAsync();
+
+            if (systemStatus.Status == 0)
+            {
+                return Json(new SuccessJson()
+                {
+                    Success = false
+                });
+            }
+        }
+
+        if (user.Status == 0)
+		{
+			user.Status = 1;
+			await _context.SaveChangesAsync();
 		}
 
 		var response = new LoginReturnJson

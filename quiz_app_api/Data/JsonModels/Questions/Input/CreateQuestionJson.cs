@@ -8,7 +8,7 @@ public class CreateQuestionJson
     public required string ApiKey { get; set; }
     [JsonPropertyName("question")]
     public required QuestionJson Question { get; set; }
-
+    
     public class QuestionJson
     {
         [JsonPropertyName("text")]

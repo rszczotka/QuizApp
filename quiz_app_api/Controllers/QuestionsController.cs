@@ -84,9 +84,65 @@ public class QuestionsController(AppDbContext _context) : Controller
 	// GET: api/questions/GetNextQuestion/
 	[HttpGet]
 	[Route("GetNextQuestion")]
-	public Task<ActionResult> GetNextQuestion()
+	public async Task<ActionResult> GetNextQuestion([FromBody] GetNextQuestionJson data)
 	{
-		throw new NotImplementedException();
+		var status = new SuccessJson()
+		{
+			Success = false
+		};
+
+        var systemStatus = await _context.SystemStatusEntities.FirstAsync();
+
+		if (systemStatus.Status != 2)
+		{
+			Console.Out.WriteLine(systemStatus.Status);
+			return Json(status);
+		}
+
+        if (data.ApiKey == null)
+		{
+			return Json(status);
+		}
+
+		var result = _context.UserEntities.Where(n => n.Login.Equals(APIKeyGenerator.GetLoginByAPIKey(data.ApiKey)));
+
+		if (result.Count() == 0)
+		{
+            Console.Out.WriteLine("C0");
+            return Json(status);
+		}
+
+		var user = result.First();
+
+		if (user == null)
+		{
+            return Json(status);
+		}
+
+		var questionCount = _context.QuestionEntities.Count();
+
+		if (user.Status < 1)
+		{
+            return Json(status);
+		}
+
+        var question = _context.QuestionEntities.ElementAtOrDefault(user.Status - 1);
+
+		if (question == null)
+		{
+			return Json(status);
+		}
+
+        user.Status++;
+
+        await _context.SaveChangesAsync();
+
+		return Json(new NextQuestionJson()
+		{
+			Text = question.Text,
+			Options = question.Options,
+			AvailableTime = question.AvailableTime
+		});
 	}
 
 	// PUT: api/questions/UpdateQuestion
