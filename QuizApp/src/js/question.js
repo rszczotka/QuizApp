@@ -93,6 +93,7 @@ const sendAnswer = () => {
         .then(response => {
             if (response.ok) {
                 //* if ok, go to next question ;)
+                answers[chosenIndex].classList.remove('chosen');
                 GetQuestionById()
             } else {
                 throw new Error('Network response was not ok');
