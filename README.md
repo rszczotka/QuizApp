@@ -488,6 +488,7 @@ Pytanie
 
 ```json
 {
+    "id": 1,
     "text": "Pytanie",
     "options": [
         "Opcja 1",
