@@ -4,7 +4,8 @@ namespace quiz_app_api.Data.JsonModels.Questions.Output;
 
 public class NextQuestionJson
 {
-
+    [JsonPropertyName("id")]
+    public required int Id { get; set; }
     [JsonPropertyName("text")]
     public required string Text { get; set; }
 

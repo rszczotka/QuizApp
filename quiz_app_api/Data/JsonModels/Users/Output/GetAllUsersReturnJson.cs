@@ -14,4 +14,8 @@ public class GetAllUsersReturnJson
 	public string Login { get; set; }
 	[JsonPropertyName("status")]
 	public int Status { get; set; }
+	[JsonPropertyName("start_time")]
+	public DateTime? StartTime { get; set; }
+	[JsonPropertyName("end_time")]
+	public DateTime? EndTime { get; set;}
 }

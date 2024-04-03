@@ -67,7 +67,7 @@ public class UsersController(AppDbContext _context) : Controller
 	[Route("GetAllUsers")]
 	public async Task<ActionResult> GetAllUsers([FromBody] GetAllUsersJson data)
 	{
-		if(data.ApiKey == null || AdminTools.IsAdmin(data.ApiKey))
+		if(data.ApiKey == null || !AdminTools.IsAdmin(data.ApiKey))
 		{
 			return Json(new List<GetAllUsersReturnJson>());
 		}
@@ -79,7 +79,9 @@ public class UsersController(AppDbContext _context) : Controller
 				Name = x.Name,
 				Surname = x.Surname,
 				Login = x.Login,
-				Status = x.Status
+				Status = x.Status,
+				StartTime = x.StartTime,
+				EndTime = x.EndTime
 			})
 			.ToListAsync();
 

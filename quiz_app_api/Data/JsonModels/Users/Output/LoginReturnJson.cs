@@ -6,7 +6,7 @@ public class LoginReturnJson
 {
     [JsonPropertyName("user_id")]
     public int Id { get; set; }
-    [JsonPropertyName("account_typ")]
+    [JsonPropertyName("account_type")]
     public int AccountType { get; set; }
     [JsonPropertyName("name")]
     public required string Name { get; set; }

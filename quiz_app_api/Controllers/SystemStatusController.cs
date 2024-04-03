@@ -39,9 +39,21 @@ public class SystemStatusController(AppDbContext _context) : Controller
 		// if passed status < 0, then status = 0; if passed status > 3, then status = 3
 		systemStatusEntity.Status = Math.Min(Math.Max(data.Status, 0), 3);
 
-		if(systemStatusEntity.Status == 0)
+		switch(systemStatusEntity.Status)
 		{
-			APIKeyGenerator.FlushApiKeys();
+			case 0:
+				APIKeyGenerator.FlushApiKeys();
+				break;
+			case 2:
+				var usersInQueue = _context.UserEntities.Where(x => x.Status == 1).ToList();
+
+				foreach(var user in usersInQueue)
+				{
+					user.StartTime = DateTime.Now;
+				}
+
+				await _context.SaveChangesAsync();
+				break;
 		}
 
 		_context.Entry(systemStatusEntity).State = EntityState.Modified;

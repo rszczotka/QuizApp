@@ -139,6 +139,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 
 		return Json(new NextQuestionJson()
 		{
+			Id = question.Id,
 			Text = question.Text,
 			Options = question.Options,
 			AvailableTime = question.AvailableTime
