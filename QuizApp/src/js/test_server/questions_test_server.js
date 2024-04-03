@@ -13,14 +13,15 @@ const server = http.createServer((req, res) => {
     if (reqUrl.pathname.startsWith('/api/questions/GetNextQuestion/') && req.method === 'GET') {
         const id = reqUrl.pathname.split('/').pop();
         const question = {
-            text: "Pytanie",
-            options: [
+            "text": "Pytanie",
+            "options": [
                 "Opcja 1",
                 "Opcja 2",
                 "Opcja 3",
                 "Opcja 4"
             ],
-            available_time: 35,
+            "available_time": 35,
+            "id": 0
         };
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(question));

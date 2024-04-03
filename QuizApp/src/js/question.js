@@ -53,6 +53,7 @@ if (typeof api_key === 'undefined') {
     console.log('api_key is undefined');
     api_key = 'test-api-key';
 }
+//!#############################################
 var questionId = 1;
 function GetQuestionById() {
     const questionJSON = fetch(`http://localhost:3000/api/questions/GetNextQuestion/${api_key}`)
@@ -83,6 +84,10 @@ GetQuestionById()
 
 const sendAnswer = () => {
     //send answer (answer index in chosenIndex [or undefined if time is up, unless anything was selected])
+    if (typeof chosenIndex === 'undefined') {
+        chosenIndex = null;
+    }
+
     var chosen_option = chosenIndex;
     const CreateAnswer = fetch(`http://localhost:3000/api/questions/CreateAnswer/${api_key}/${chosen_option}`)
         .then(response => {
