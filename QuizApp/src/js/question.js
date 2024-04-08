@@ -40,23 +40,40 @@ nextButton.addEventListener('click', () => {
     }
 });
 
-const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+function getCookie(name) {
+    let cookieArr = document.cookie.split("; ");
+    for(let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if(name == cookiePair[0]) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
 }
 
 let api_key = getCookie('api_key');
 
-//! REMOVE THIS IF STATEMENT ONCE WE HAVE LOGIN WORKING
-if (typeof api_key === 'undefined') {
-    console.log('api_key is undefined');
-    api_key = 'test-api-key';
-}
-//!#############################################
-var questionId = 1;
-function GetQuestionById() {
-    const questionJSON = fetch(`http://localhost:3000/api/questions/GetNextQuestion/${api_key}`)
+console.log(api_key);
+
+function GetNextQuestion() {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Access-Control-Allow-Origin", "*");
+    myHeaders.append("Origin", "*");
+    myHeaders.append("credentials", "include");
+
+    const data = JSON.stringify({
+        api_key: api_key
+    });
+
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: data,
+        redirect: "follow",
+    };
+
+    fetch(`http://localhost:5000/api/questions/GetNextQuestion`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -71,6 +88,7 @@ function GetQuestionById() {
             });
             initTime = data.available_time;
             time = initTime;
+            // ! implement new time logic
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
@@ -79,7 +97,7 @@ function GetQuestionById() {
             time = initTime;
         });
 }
-GetQuestionById()
+GetNextQuestion()
 
 
 const sendAnswer = () => {
@@ -94,7 +112,7 @@ const sendAnswer = () => {
             if (response.ok) {
                 //* if ok, go to next question ;)
                 answers[chosenIndex].classList.remove('chosen');
-                GetQuestionById()
+                GetNextQuestion()
             } else {
                 throw new Error('Network response was not ok');
             }
