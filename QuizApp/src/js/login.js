@@ -30,7 +30,7 @@ function sendApiRequest() {
       .then((result) => {
         var api_key = JSON.parse(result).api_key;
         if (api_key != undefined) {
-          document.cookie = "api_key=" + api_key + ";";
+          document.cookie = "api_key=" + api_key + "; path=/;";
           document.getElementById("messageBox").innerText = "udało się zalogować";
         } else {
           document.getElementById("messageBox").innerText = "logowanie nieudane";
