@@ -402,9 +402,11 @@ W body
 
 ### Co zwraca:
 
+```txt
 401 - API key nie należy do admina lub admin nie zalogowany
 500 - coś poszło nie tak podczas dodawanie pytania do bazy danych
 201 - sukces
+```
 
 </details>
 
@@ -424,8 +426,11 @@ API key administratora
 
 ### Co zwraca:
 
+```txt
 401 - API key nie należy do admina lub admin nie zalogowany
 200 - tablica wszystkich pytań
+```
+
 ```json
 [
     {
@@ -471,10 +476,13 @@ API key administratora
 
 ### Co zwraca:
 
+```txt
 400 - użytkownik o podanych API key nie istnieje lub nie jest zalogowany
 403 - status systemu jest inny niż 2 (quiz)
 405 - użytkownik odpowiedział już na wszystkie pytania
 200 - następne pytanie
+```
+
 ```json
 {
     "id": 1,
@@ -523,7 +531,9 @@ W body
 
 ### Co zwraca:
 
+```txt
 501 - nie zaimplementowano
+```
 
 </details>
 
@@ -541,9 +551,11 @@ W body
 
 ### Co zwraca:
 
+```txt
 401 - API key nie należy do admina lub admin nie zalogowany
 404 - brak pytania o podanych id
 204 - usunięto pomyślnie
+```
 
 </details>
 
@@ -559,20 +571,21 @@ Nie można stworzyć statusu systemu
     
 ### Url:
 
-`localhost/api/systemstatus/GetSystemStatus/`
+`GET: localhost/api/systemstatus/GetSystemStatus/`
 
 ### Co przyjmuje:
 
-Nic
+-
 
 ### Co zwraca:
 
-Status systemu
+200 - status systemu
 
-```json
-{
-    "status": 0
-}
+```txt
+0 - wyłączony
+1 - kolejka
+2 - quiz
+3 - wyniki
 ```
 
 </details>
@@ -583,44 +596,35 @@ Status systemu
     
 ### Url:
 
-`localhost/api/systemstatus/UpdateSystemStatus/`
+`PUT: localhost/api/systemstatus/UpdateSystemStatus/`
 
 ### Co przyjmuje:
 
-API key (administrator)
+W body
 
 ```json
 {
-    "api_key": "administrator-api-key"
+    "api_key": "administrator-api-key",
+    "system_status": 1
 }
 ```
 
 Cyfrę reprezentującą status systemu:
 
-- 0 - wyłączony
-- 1 - poczekalnia
-- 2 - quiz
-- 3 - wyniki
-
-Jeżeli status systemu wynosi 2, a użytkownik jest w poczekalni,
-to musi zostać przeniesiony na osobną podstronę lub wylogowany.
-Nie może być sytuacji, żeby podczas quizu użytkownik wszedł na niego
-z poczekalni.
-
-```json
-{
-    "system_status": 1
-}
+```txt
+0 - wyłączony
+1 - kolejka
+2 - quiz
+3 - wyniki
 ```
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
+```txt
+400 - złe dane wejściowe
+401 - API key nie należy do admina lub admin nie zalogowany
+500 - błąd podczas zmiany statusu systemu
+204 - sukces
 ```
 
 </details>
