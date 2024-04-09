@@ -254,11 +254,11 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/useranswers/CreateUserAnswer/`
+`POST: localhost/api/useranswers/CreateUserAnswer/`
 
 ### Co przyjmuje:
 
-Id pytania, wybraną odpowiedź, API key
+W body
 
 ```json
 {
@@ -270,12 +270,11 @@ Id pytania, wybraną odpowiedź, API key
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
+```txt
+400 - użytkownik o podanym API key nie istnieje lub nie jest zalogowany
+403 - status systemu jest inny niż 2
+500 - błąd podczas tworzenia odpowiedzi użytkownika
+201 - sukces
 ```
 
 </details>
@@ -286,24 +285,20 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/useranswers/GetUserAnswers/`
+`GET: localhost/api/useranswers/GetUserAnswers/{api-key}/{id}`
 
 ### Co przyjmuje:
 
-API key (administrator), id użytkownika
+`localhost/api/useranswers/GetUserAnswers/{administrator-api-key}/{1}`
 
-```json
-{
-    "api_key": "administrator-api-key",
-    "user_id": 0
-} 
 ```
 
 ### Co zwraca:
 
-Pytania
-
-chosen_option może być nullem, tak samo end time
+```txt
+401 - API key nie należy do admina lub admin nie zalogowany
+200 - sukces
+```
 
 ```json
 [
@@ -354,8 +349,7 @@ chosen_option może być nullem, tak samo end time
         "chosen_option": 1,
         "start_time": 84237423854,
         "end_time": 84237423860
-    },
-    ...
+    }
 ]
 ```
 
@@ -472,12 +466,12 @@ API key administratora
 
 API key administratora
 
-`localhost/api/questions/GetNextQuestion/administrator-api-key`
+`localhost/api/questions/GetNextQuestion/api-key`
 
 ### Co zwraca:
 
 ```txt
-400 - użytkownik o podanych API key nie istnieje lub nie jest zalogowany
+400 - użytkownik o podanym API key nie istnieje lub nie jest zalogowany
 403 - status systemu jest inny niż 2 (quiz)
 405 - użytkownik odpowiedział już na wszystkie pytania
 200 - następne pytanie
