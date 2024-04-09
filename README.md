@@ -22,11 +22,11 @@ Wykonanie: @FilipMadzia @qWojtpl
     
 ### Url:
 
-`localhost/api/users/CreateUser/`
+`POST: localhost/api/users/CreateUser/`
 
 ### Co przyjmuje:
 
-JSON nowego użytkownika i API key (administrator)
+W body
 
 ```json
 {
@@ -41,12 +41,10 @@ JSON nowego użytkownika i API key (administrator)
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
+```txt
+401 - API key nie należy do admina lub admin nie zalogowany
+500 - błąd podczas tworzenia nowego użytkownika
+201 - sukces
 ```
 
 </details>
@@ -57,21 +55,18 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/users/GetAllUsers/`
+`GET: localhost/api/users/GetAllUsers/{adminApiKey}`
 
 ### Co przyjmuje:
 
-API key administratora
-
-```json
-{
-    "api_key": "administrator-api-key"
-}
-```
+`localhost/api/users/GetAllUsers/admin-api-key`
 
 ### Co zwraca:
 
-Wszystkich użytkowników
+```txt
+401 - API key nie należy do admina lub admin nie zalogowany
+200 - sukces i tablicę użytkowników
+```
 
 ```json
 [
@@ -95,8 +90,7 @@ Wszystkich użytkowników
         "surname": "Zdun",
         "login": "kamil.zdun",
         "status": 0
-    },
-    ...
+    }
 ]
 ```
 
@@ -106,21 +100,19 @@ Wszystkich użytkowników
     
 ### Url:
 
-`localhost/api/users/GetUsersInQueue/`
+`GET: localhost/api/users/GetUsersInQueue/{apiKey}`
 
 ### Co przyjmuje:
 
-API key
-
-```json
-{
-    "api_key": "api-key"
-}
+`localhost/api/users/GetUsersInQueue/api-key`
 ```
 
 ### Co zwraca:
 
-Wszystkich użytkowników, których status = 1
+```txt
+400 - użytkownik o podanym API key nie istnieje lub nie jest zalogowany
+200 - sukces i listę użytkowników w kolejce
+```
 
 ```json
 [
@@ -149,20 +141,25 @@ Wszystkich użytkowników, których status = 1
 
 ### Url:
 
-`localhost/api/users/Login/`
+`POST: localhost/api/users/Login/`
 
 ### Co przyjmuje:
 
-Login i hasło użytkownika z użyciem POST
-
 ```js
-login = "john.smith";
-password = "182";
+{
+    "login": "login",
+    "password": "password"
+}
 ```
 
 ### Co zwraca:
 
-Dane użytkownika
+```txt
+400 - nie znaleziono użytkownika o takim loginie i haśle
+403 - status systemu = 0 (nie dotyczy adminów)
+200 - sukces i dane użytkownika
+
+```
 
 ```json
 {
@@ -171,7 +168,6 @@ Dane użytkownika
     "name": "John",
     "surname": "Smith",
     "login": "john.smith",
-    "api_key": "some-api-key",
     "status": 0
 }
 ```
@@ -184,16 +180,16 @@ Dane użytkownika
     
 ### Url:
 
-`localhost/api/users/UpdateUser/`
+`PUT: localhost/api/users/UpdateUser/`
 
 ### Co przyjmuje:
 
-ID użytkownika, dane użytkownika, API key (administrator)
+W body
 
 ```json
 {
     "user_id": 0,
-    "api_key": "administrator-api-key",
+    "api_key": "admin-api-key",
     "user": {
         "name": "new-name",
         "surname": "new-surname",
@@ -205,12 +201,11 @@ ID użytkownika, dane użytkownika, API key (administrator)
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
+```txt
+401 - API key nie należy do admina lub admin nie zalogowany
+400 - nie ma użytkownika o podanym id
+500 - błąd podczas aktualizowania użytkownika
+204 - sukces
 ```
 
 </details>
@@ -221,27 +216,17 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/users/RemoveUser/`
+`DELETE: localhost/api/users/RemoveUser/{adminApiKey}/{userId}`
 
 ### Co przyjmuje:
 
-ID użytkownika, API key (administrator)
-
-```json
-{
-    "user_id": 0,
-    "api_key": "administrator-api-key"
-} 
-```
+`localhost/api/users/RemoveUser/admin-api-key/user-id`
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
+```txt
+401 - API key nie należy do admina lub admin nie zalogowany
+204 - sukces
 ```
 
 </details>
@@ -289,7 +274,7 @@ W body
 
 ### Co przyjmuje:
 
-`localhost/api/useranswers/GetUserAnswers/{administrator-api-key}/{1}`
+`localhost/api/useranswers/GetUserAnswers/administrator-api-key/1`
 
 ```
 
@@ -414,8 +399,6 @@ W body
 
 ### Co przyjmuje:
 
-API key administratora
-
 `localhost/api/questions/GetAllQuestions/administrator-api-key`
 
 ### Co zwraca:
@@ -464,9 +447,7 @@ API key administratora
 
 ### Co przyjmuje:
 
-API key administratora
-
-`localhost/api/questions/GetNextQuestion/api-key`
+`localhost/api/questions/GetNextQuestion/admin-api-key`
 
 ### Co zwraca:
 
@@ -541,7 +522,7 @@ W body
 
 ### Co przyjmuje:
 
-`localhost/api/questions/RemoveQuestion/administrator-api-key/question-id`
+`localhost/api/questions/RemoveQuestion/admin-api-key/question-id`
 
 ### Co zwraca:
 
