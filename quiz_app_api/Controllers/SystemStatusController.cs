@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data;
-using quiz_app_api.Data.JsonModels;
-using quiz_app_api.Data.JsonModels.SystemStatus.Input;
-using quiz_app_api.Data.JsonModels.SystemStatus.Output;
+using quiz_app_api.Data.JsonModels.SystemStatus;
 using quiz_app_api.Misc;
 
 namespace quiz_app_api.Controllers;
@@ -13,31 +11,25 @@ namespace quiz_app_api.Controllers;
 public class SystemStatusController(AppDbContext _context) : Controller
 {
 	// GET: api/systemstatus/GetSystemStatus
-	[HttpGet]
-	[Route("GetSystemStatus")]
-	public async Task<ActionResult> GetSystemStatus()
+	[HttpGet("GetSystemStatus")]
+	public async Task<IActionResult> GetSystemStatus()
 	{
 		var systemStatus = await _context.SystemStatusEntities.FirstAsync();
 		
-		return Json(new GetSystemStatusReturnJson { Status = systemStatus.Status });
+		return StatusCode(200, systemStatus.Status);
 	}
 
 	// PUT: api/systemstatus/UpdateSystemStatus
-	[HttpPut]
-	[Route("UpdateSystemStatus")]
-	public async Task<ActionResult> UpdateSystemStatus([FromBody] UpdateSystemStatus data)
+	[HttpPut("UpdateSystemStatus")]
+	public async Task<IActionResult> UpdateSystemStatus([FromBody] UpdateSystemStatus data)
 	{
-		var status = new SuccessJson();
+		if(!AdminTools.IsAdmin(data.ApiKey))
+			return Unauthorized("Not an admin API key, or admin is not logged in");
+		
 		var systemStatusEntity = await _context.SystemStatusEntities.FirstAsync();
 
-		if(!AdminTools.IsAdmin(data.ApiKey))
-		{
-			status.Success = false;
-			return Json(status);
-		}
-
-		// if passed status < 0, then status = 0; if passed status > 3, then status = 3
-		systemStatusEntity.Status = Math.Min(Math.Max(data.Status, 0), 3);
+		if(systemStatusEntity.Status > 3 || systemStatusEntity.Status < 0)
+			return BadRequest("Podany status systemu jest poza zakresem");
 
 		switch(systemStatusEntity.Status)
 		{
@@ -62,13 +54,11 @@ public class SystemStatusController(AppDbContext _context) : Controller
 		{
 			await _context.SaveChangesAsync();
 		}
-		catch(DbUpdateConcurrencyException)
+		catch(DbUpdateConcurrencyException ex)
 		{
-			status.Success = false;
-			return Json(status);
+			return StatusCode(StatusCodes.Status500InternalServerError, "Wystąpił błąd podczas zmieniania statusu systemu: " + ex.Message);
 		}
 
-		status.Success = true;
-		return Json(status);
+		return NoContent();
 	}
 }
