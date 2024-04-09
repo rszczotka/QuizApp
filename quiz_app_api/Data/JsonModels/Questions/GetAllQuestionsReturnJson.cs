@@ -1,18 +1,17 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace quiz_app_api.Data.JsonModels.Questions.Output;
+namespace quiz_app_api.Data.JsonModels.Questions;
 
-public class NextQuestionJson
+public class GetAllQuestionsReturnJson
 {
     [JsonPropertyName("id")]
     public required int Id { get; set; }
     [JsonPropertyName("text")]
     public required string Text { get; set; }
-
     [JsonPropertyName("options")]
     public required string[] Options { get; set; }
-
+    [JsonPropertyName("correct_answer")]
+    public required int CorrectAnswer { get; set; }
     [JsonPropertyName("available_time")]
-    public required int AvailableTime { get; set; }
-
+    public required int AvailabelTime { get; set; }
 }

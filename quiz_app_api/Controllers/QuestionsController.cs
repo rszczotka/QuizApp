@@ -2,9 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data;
 using quiz_app_api.Data.Entities;
-using quiz_app_api.Data.JsonModels;
-using quiz_app_api.Data.JsonModels.Questions.Input;
-using quiz_app_api.Data.JsonModels.Questions.Output;
+using quiz_app_api.Data.JsonModels.Questions;
 using quiz_app_api.Misc;
 
 namespace quiz_app_api.Controllers;
@@ -14,24 +12,11 @@ namespace quiz_app_api.Controllers;
 public class QuestionsController(AppDbContext _context) : Controller
 {
 	// POST: api/questions/CreateQuestion
-	[HttpPost]
-	[Route("CreateQuestion")]
-	public async Task<ActionResult> CreateQuestion([FromBody] CreateQuestionJson data)
+	[HttpPost("CreateQuestion")]
+	public async Task<IActionResult> CreateQuestion([FromBody] CreateQuestionJson data)
 	{
-        var status = new SuccessJson();
-
-        // checks for any null value
-        if (data == null || data.ApiKey == null || data.Question == null)
-        {
-            status.Success = false;
-            return Json(status);
-        }
-
-        if (!AdminTools.IsAdmin(data.ApiKey))
-        {
-            status.Success = false;
-            return Json(status);
-        }
+        if(!AdminTools.IsAdmin(data.ApiKey))
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
         try
         {
@@ -48,24 +33,18 @@ public class QuestionsController(AppDbContext _context) : Controller
         }
         catch (Exception e)
         {
-            await Console.Out.WriteLineAsync(e.Message);
-            status.Success = false;
-            return Json(status);
+			return StatusCode(500, "Something went wrong while creating new question" + e.Message);
         }
 
-        status.Success = true;
-        return Json(status);
+		return StatusCode(201);
     }
 
 	// GET: api/questions/GetAllQuestions/
-	[HttpGet]
-	[Route("GetAllQuestions")]
-	public async Task<ActionResult> GetAllQuestions([FromBody] GetAllQuestionsJson data)
+	[HttpGet("GetAllQuestions/{adminApiKey}")]
+	public async Task<IActionResult> GetAllQuestions(string adminApiKey)
 	{
-		if(data.ApiKey == null || !AdminTools.IsAdmin(data.ApiKey))
-		{
-			return Json(new List<GetAllQuestionsReturnJson>());
-		}
+		if(!AdminTools.IsAdmin(adminApiKey))
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
 		var allQuestions = await _context.QuestionEntities
 			.Select(x => new GetAllQuestionsReturnJson
@@ -78,114 +57,58 @@ public class QuestionsController(AppDbContext _context) : Controller
 			})
 			.ToListAsync();
 
-		return Json(allQuestions);
+		return StatusCode(200, allQuestions);
 	}
 
 	// GET: api/questions/GetNextQuestion/
-	[HttpGet]
-	[Route("GetNextQuestion")]
-	public async Task<ActionResult> GetNextQuestion([FromBody] GetNextQuestionJson data)
+	[HttpGet("GetNextQuestion/{apiKey}")]
+	public async Task<IActionResult> GetNextQuestion(string apiKey)
 	{
-		var status = new SuccessJson()
+		if(!AdminTools.IsUser(apiKey))
+			return StatusCode(400, "Not a user API key, or user not logged in");
+		if((await _context.SystemStatusEntities.FirstAsync()).Status != 2)
+			return StatusCode(403, "System status is not 2");
+
+		var user = await _context.UserEntities.Where(n => n.Login == APIKeyGenerator.GetLoginByAPIKey(apiKey)).FirstAsync();
+
+		if(user.Status > 1 + await _context.QuestionEntities.CountAsync())
+			return StatusCode(405, "User has answered all questions");
+
+		var nextQuestion = await _context.QuestionEntities.ElementAtAsync(user.Status - 1);
+
+		user.Status++;
+		await _context.SaveChangesAsync();
+
+		return StatusCode(200, new NextQuestionJson
 		{
-			Success = false
-		};
-
-        var systemStatus = await _context.SystemStatusEntities.FirstAsync();
-
-		if (systemStatus.Status != 2)
-		{
-			Console.Out.WriteLine(systemStatus.Status);
-			return Json(status);
-		}
-
-        if (data.ApiKey == null)
-		{
-			return Json(status);
-		}
-
-		var result = _context.UserEntities.Where(n => n.Login.Equals(APIKeyGenerator.GetLoginByAPIKey(data.ApiKey)));
-
-		if (result.Count() == 0)
-		{
-            Console.Out.WriteLine("C0");
-            return Json(status);
-		}
-
-		var user = result.First();
-
-		if (user == null)
-		{
-            return Json(status);
-		}
-
-		var questionCount = _context.QuestionEntities.Count();
-
-		if (user.Status < 1)
-		{
-            return Json(status);
-		}
-
-        var question = _context.QuestionEntities.ElementAtOrDefault(user.Status - 1);
-
-		if (question == null)
-		{
-			return Json(status);
-		}
-
-        user.Status++;
-
-        await _context.SaveChangesAsync();
-
-		return Json(new NextQuestionJson()
-		{
-			Id = question.Id,
-			Text = question.Text,
-			Options = question.Options,
-			AvailableTime = question.AvailableTime
+			Id = nextQuestion.Id,
+			Text = nextQuestion.Text,
+			Options = nextQuestion.Options,
+			AvailableTime = nextQuestion.AvailableTime
 		});
 	}
 
 	// PUT: api/questions/UpdateQuestion
-	[HttpPut]
-	[Route("UpdateQuestion")]
-	public Task<ActionResult> UpdateQuestion()
+	[HttpPut("UpdateQuestion")]
+	public IActionResult UpdateQuestion()
 	{
-		throw new NotImplementedException();
+		return StatusCode(501);
 	}
 	
 	// DELETE: api/questions/RemoveQuestion/
-	[HttpDelete]
-	[Route("RemoveQuestion")]
-	public async Task<ActionResult> DeleteQuestion([FromBody] RemoveQuestionJson data)
+	[HttpDelete("RemoveQuestion/{adminApiKey}/{id}")]
+	public async Task<IActionResult> DeleteQuestion(string adminApiKey, int id)
 	{
-        var status = new SuccessJson();
+		if(!AdminTools.IsAdmin(adminApiKey))
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
-        if (data == null || data.ApiKey == null)
-        {
-            status.Success = false;
-            return Json(status);
-        }
+		var questionEntity = await _context.QuestionEntities.FindAsync(id);
+		if(questionEntity == null)
+			return StatusCode(404, "No question with id: " + id);
 
-		if(!AdminTools.IsAdmin(data.ApiKey))
-		{
-			status.Success = false;
-			return Json(status);
-		}
+		_context.QuestionEntities.Remove(questionEntity);
+		await _context.SaveChangesAsync();
 
-        var questionEntity = await _context.QuestionEntities.FindAsync(data.QuestionId);
-
-        if (questionEntity == null)
-        {
-            status.Success = false;
-            return Json(status);
-        }
-
-        _context.QuestionEntities.Remove(questionEntity);
-        await _context.SaveChangesAsync();
-
-        status.Success = true;
-
-        return Json(status);
-    }
+		return StatusCode(204);
+	}
 }

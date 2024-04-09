@@ -1,4 +1,4 @@
-﻿using quiz_app_api.Data.JsonModels.Questions.Output;
+﻿using quiz_app_api.Data.JsonModels.Questions;
 using System.Text.Json.Serialization;
 
 namespace quiz_app_api.Data.JsonModels.UserAnswers.Output;

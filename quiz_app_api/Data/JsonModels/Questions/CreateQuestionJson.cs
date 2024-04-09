@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace quiz_app_api.Data.JsonModels.Questions.Input;
+namespace quiz_app_api.Data.JsonModels.Questions;
 
 public class CreateQuestionJson
 {
@@ -8,7 +8,7 @@ public class CreateQuestionJson
     public required string ApiKey { get; set; }
     [JsonPropertyName("question")]
     public required QuestionJson Question { get; set; }
-    
+
     public class QuestionJson
     {
         [JsonPropertyName("text")]
@@ -16,9 +16,9 @@ public class CreateQuestionJson
         [JsonPropertyName("options")]
         public required string[] Options { get; set; }
         [JsonPropertyName("correct_answer")]
-        public int CorrectAnswer { get; set; }
+        public required int CorrectAnswer { get; set; }
         [JsonPropertyName("available_time")]
-        public int AvailableTime { get; set; }
+        public required int AvailableTime { get; set; }
     }
 
 }
