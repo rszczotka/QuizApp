@@ -468,7 +468,8 @@ W body
         "Opcja 3",
         "Opcja 4"
     ],
-    "available_time": 0
+    "available_time": 0,
+    "time_from_beginning": 60
 }
 ```
 
