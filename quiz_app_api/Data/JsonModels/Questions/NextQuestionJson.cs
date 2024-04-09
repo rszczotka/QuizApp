@@ -14,5 +14,7 @@ public class NextQuestionJson
 
     [JsonPropertyName("available_time")]
     public required int AvailableTime { get; set; }
+    [JsonPropertyName("time_from_beginning")]
+    public required int TimeFromBeginning { get; set; }
 
 }
