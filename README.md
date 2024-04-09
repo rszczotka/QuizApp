@@ -377,11 +377,11 @@ Nie można usunąć odpowiedzi użytkownika
     
 ### Url:
 
-`localhost/api/questions/CreateQuestion/`
+`POST: localhost/api/questions/CreateQuestion/`
 
 ### Co przyjmuje:
 
-Pytanie, API key (administrator)
+W body
 
 ```json
 {
@@ -402,13 +402,9 @@ Pytanie, API key (administrator)
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
-```
+401 - API key nie należy do admina lub admin nie zalogowany
+500 - coś poszło nie tak podczas dodawanie pytania do bazy danych
+201 - sukces
 
 </details>
 
@@ -418,22 +414,18 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/questions/GetAllQuestions/`
+`GET: localhost/api/questions/GetAllQuestions/{apiKey}`
 
 ### Co przyjmuje:
 
 API key administratora
 
-```json
-{
-    "api_key": "administrator-api-key"
-} 
-```
+`localhost/api/questions/GetAllQuestions/administrator-api-key`
 
 ### Co zwraca:
 
-Wszystkie pytania
-
+401 - API key nie należy do admina lub admin nie zalogowany
+200 - tablica wszystkich pytań
 ```json
 [
     {
@@ -459,8 +451,7 @@ Wszystkie pytania
         ],
         "correct_answer": 0,
         "available_time": 0
-    },
-    ...
+    }
 ]
 ```
 
@@ -470,22 +461,20 @@ Wszystkie pytania
     
 ### Url:
 
-`localhost/api/questions/GetNextQuestion/`
+`GET: localhost/api/questions/GetNextQuestion/{apiKey}`
 
 ### Co przyjmuje:
 
-API key
+API key administratora
 
-```json
-{
-    "api_key": "some-api-key"
-} 
-```
+`localhost/api/questions/GetNextQuestion/administrator-api-key`
 
 ### Co zwraca:
 
-Pytanie
-
+400 - użytkownik o podanych API key nie istnieje lub nie jest zalogowany
+403 - status systemu jest inny niż 2 (quiz)
+405 - użytkownik odpowiedział już na wszystkie pytania
+200 - następne pytanie
 ```json
 {
     "id": 1,
@@ -508,11 +497,11 @@ Pytanie
     
 ### Url:
 
-`localhost/api/questions/UpdateQuestion/`
+`PUT: localhost/api/questions/UpdateQuestion/`
 
 ### Co przyjmuje:
 
-ID pytania, pytanie, API key (administrator)
+W body
 
 ```json
 {
@@ -534,13 +523,7 @@ ID pytania, pytanie, API key (administrator)
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
-```
+501 - nie zaimplementowano
 
 </details>
 
@@ -550,28 +533,17 @@ Informację o sukcesie
     
 ### Url:
 
-`localhost/api/questions/RemoveQuestion/`
+`DELETE: localhost/api/questions/RemoveQuestion/{adminApiKey}/{id}`
 
 ### Co przyjmuje:
 
-ID pytania, API key (administrator)
-
-```json
-{
-    "question_id": 0,
-    "api_key": "administrator-api-key"
-} 
-```
+`localhost/api/questions/RemoveQuestion/administrator-api-key/question-id`
 
 ### Co zwraca:
 
-Informację o sukcesie
-
-```json
-{
-    "success": true
-}
-```
+401 - API key nie należy do admina lub admin nie zalogowany
+404 - brak pytania o podanych id
+204 - usunięto pomyślnie
 
 </details>
 
