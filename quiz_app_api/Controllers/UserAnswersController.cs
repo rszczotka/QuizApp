@@ -36,7 +36,7 @@ public class UserAnswersController(AppDbContext _context) : Controller
 		}
 		catch(Exception ex)
 		{
-			return StatusCode(500, "Something went wrong while creating new user answer");
+			return StatusCode(500, "Something went wrong while creating new user answer: " + ex.Message);
 		}
 
 		return StatusCode(201);
@@ -53,9 +53,9 @@ public class UserAnswersController(AppDbContext _context) : Controller
 
 		var userAnswers = await _context.UserAnswerEntities.Include(x => x.Question).Where(x => x.User == user).ToListAsync();
 
-		return StatusCode(200, userAnswers.Select(x => new GetUserAnswersReturnJson
+		return StatusCode(200, userAnswers.Select(x => new GetUserAnswersJson
 		{
-			Question = new GetAllQuestionsReturnJson
+			Question = new GetAllQuestionsJson
 			{
 				Id = x.Question.Id,
 				Text = x.Question.Text,

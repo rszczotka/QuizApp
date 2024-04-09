@@ -1,13 +1,13 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace quiz_app_api.Data.JsonModels.Users.Output;
+namespace quiz_app_api.Data.JsonModels.Users;
 
 public class LoginReturnJson
 {
     [JsonPropertyName("user_id")]
-    public int Id { get; set; }
+    public required int Id { get; set; }
     [JsonPropertyName("account_type")]
-    public int AccountType { get; set; }
+    public required int AccountType { get; set; }
     [JsonPropertyName("name")]
     public required string Name { get; set; }
     [JsonPropertyName("surname")]
@@ -17,5 +17,5 @@ public class LoginReturnJson
     [JsonPropertyName("api_key")]
     public required string ApiKey { get; set; }
     [JsonPropertyName("status")]
-    public int Status { get; set; }
+    public required int Status { get; set; }
 }

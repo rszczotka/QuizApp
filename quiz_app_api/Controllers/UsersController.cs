@@ -2,9 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data;
 using quiz_app_api.Data.Entities;
-using quiz_app_api.Data.JsonModels;
-using quiz_app_api.Data.JsonModels.Users.Input;
-using quiz_app_api.Data.JsonModels.Users.Output;
+using quiz_app_api.Data.JsonModels.Users;
 using quiz_app_api.Misc;
 
 namespace quiz_app_api.Controllers;
@@ -14,94 +12,71 @@ namespace quiz_app_api.Controllers;
 public class UsersController(AppDbContext _context) : Controller
 {
 	// POST: api/users/CreateUser
-	[HttpPost]
-	[Route("CreateUser")]
-	public async Task<ActionResult> CreateUser([FromBody] CreateUserJson data)
+	[HttpPost("CreateUser")]
+	public async Task<IActionResult> CreateUser([FromBody] CreateUserJson data)
 	{
-		var status = new SuccessJson();
-
-		// checks for any null value
-		if(data == null || data.ApiKey == null || data.User == null)
-		{
-			status.Success = false;
-			return Json(status);
-		}
-
 		if(!AdminTools.IsAdmin(data.ApiKey))
-		{
-			status.Success = false;
-			return Json(status);
-		}
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
 		try
 		{
 			var userEntity = new UserEntity
 			{
-				// id generated automatically
 				AccountType = 0,
 				Name = data.User.Name,
 				Surname = data.User.Surname,
 				// login is name.surname, so if name is Jan and surname is Kowalski, then login is jan.kowalski
 				Login = $"{data.User.Name.ToLower()}.{data.User.Surname.ToLower()}",
 				Password = data.User.Password,
-				// API key is surname + password e.g. kowalski396
 				Status = 0
 			};
 
-            _context.UserEntities.Add(userEntity);
-            await _context.SaveChangesAsync();
+			_context.UserEntities.Add(userEntity);
+			await _context.SaveChangesAsync();
 		}
-		catch(Exception e)
+		catch(Exception ex)
 		{
-			await Console.Out.WriteLineAsync(e.Message);
-			status.Success = false;
-			return Json(status);
+			return StatusCode(500, "Something went wrong while creating new user: " + ex.Message);
 		}
 
-		status.Success = true;
-		return Json(status);
+		return StatusCode(201);
 	}
 
 	// GET: api/users/GetAllUsers/
-	[HttpGet]
-	[Route("GetAllUsers")]
-	public async Task<ActionResult> GetAllUsers([FromBody] GetAllUsersJson data)
+	[HttpGet("GetAllUsers/{adminApiKey}")]
+	public async Task<IActionResult> GetAllUsers(string adminApiKey)
 	{
-		if(data.ApiKey == null || !AdminTools.IsAdmin(data.ApiKey))
-		{
-			return Json(new List<GetAllUsersReturnJson>());
-		}
+		if(!AdminTools.IsAdmin(adminApiKey))
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
 		var allUsers = await _context.UserEntities
-			.Select(x => new GetAllUsersReturnJson
+			.Select(x => new GetAllUsersJson
 			{
 				Id = x.Id,
 				Name = x.Name,
 				Surname = x.Surname,
 				Login = x.Login,
+				Password = x.Password,
 				Status = x.Status,
 				StartTime = x.StartTime,
 				EndTime = x.EndTime
 			})
 			.ToListAsync();
 
-		return Json(allUsers);
+		return StatusCode(200, allUsers);
 	}
 
 	// GET: api/users/GetUsersInQueue/
-	[HttpGet]
-	[Route("GetUsersInQueue")]
-	public async Task<ActionResult> GetUsersInQueue([FromBody] GetUsersInQueueJson data)
+	[HttpGet("GetUsersInQueue/{apiKey}")]
+	public async Task<IActionResult> GetUsersInQueue(string apiKey)
 	{
-		if(data.ApiKey == null || !APIKeyGenerator.ContainsAPIKey(data.ApiKey))
-		{
-			return Json(new List<GetAllUsersReturnJson>());
-		}
-
-		// user status = 1 means it is logged in and in queue
+		if(!AdminTools.IsUser(apiKey))
+			return StatusCode(400, "Not a user API key, or user not logged in");
+		
+		// user status = 1 means it is logged in end therefore in queue
 		var usersInQueue = await _context.UserEntities
 			.Where(x => x.Status == 1)
-			.Select(x => new GetUsersInQueueReturnJson
+			.Select(x => new GetUsersInQueueJson
 			{
 				Id = x.Id,
 				Name = x.Name,
@@ -109,45 +84,27 @@ public class UsersController(AppDbContext _context) : Controller
 			})
 			.ToListAsync();
 
-		return Json(usersInQueue);
+		return StatusCode(200, usersInQueue);
 	}
 
 	// POST: api/users/Login
-	[HttpPost]
-	[Route("Login")]
-	public async Task<ActionResult> Login([FromBody] LoginJson data)
+	[HttpPost("Login")]
+	public async Task<IActionResult> Login([FromBody] LoginJson data)
 	{
+		var user = await _context.UserEntities.Where(x => x.Login == data.Login && x.Password == data.Password).FirstOrDefaultAsync();
 
-        var user = await _context.UserEntities.Where(x => x.Login == data.Login && x.Password == data.Password).FirstOrDefaultAsync();
+		if(user == null)
+			return StatusCode(400, "No user found with login = " +  data.Login + " and password = " + data.Password);
+		if(user.AccountType != 1 && (await _context.SystemStatusEntities.FirstAsync()).Status == 0)
+			return StatusCode(403, "System status is 0 (shut down)");
 
-        if (user == null)
-		{
-			return Json(new SuccessJson()
-			{
-				Success = false
-			});
-		}
-
-        if (user.AccountType == 0)
-        {
-            var systemStatus = await _context.SystemStatusEntities.FirstAsync();
-
-            if (systemStatus.Status == 0)
-            {
-                return Json(new SuccessJson()
-                {
-                    Success = false
-                });
-            }
-        }
-
-        if (user.Status == 0)
+		if(user.Status == 0)
 		{
 			user.Status = 1;
 			await _context.SaveChangesAsync();
 		}
 
-		var response = new LoginReturnJson
+		return StatusCode(200, new LoginReturnJson
 		{
 			Id = user.Id,
 			AccountType = user.AccountType,
@@ -156,24 +113,20 @@ public class UsersController(AppDbContext _context) : Controller
 			Login = user.Login,
 			ApiKey = APIKeyGenerator.GetOrGenerateAPIKey(user.AccountType, user.Login, user.Password),
 			Status = user.Status
-		};
-
-		return Json(response);
+		});
 	}
 
 	// PUT: api/users/UpdateUser
-	[HttpPut]
-	[Route("UpdateUser")]
-	public async Task<ActionResult> UpdateUser([FromBody] UpdateUserJson data)
+	[HttpPut("UpdateUser")]
+	public async Task<IActionResult> UpdateUser([FromBody] UpdateUserJson data)
 	{
-		var status = new SuccessJson();
+		if(!AdminTools.IsAdmin(data.ApiKey))
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
+
 		var userEntity = await _context.UserEntities.Where(x => x.Id == data.Id).FirstOrDefaultAsync();
 
-		if(userEntity == null || !AdminTools.IsAdmin(data.ApiKey))
-		{
-			status.Success = false;
-			return Json(status);
-		}
+		if(userEntity == null)
+			return StatusCode(400, "No user with id: " + data.Id);
 
 		userEntity.Name = data.User.Name;
 		userEntity.Surname = data.User.Surname;
@@ -187,48 +140,29 @@ public class UsersController(AppDbContext _context) : Controller
 		{
 			await _context.SaveChangesAsync();
 		}
-		catch(DbUpdateConcurrencyException)
+		catch(DbUpdateConcurrencyException ex)
 		{
-			status.Success = false;
-			return Json(status);
+			return StatusCode(500, "Something went wrong while updating user: " + ex.Message);
 		}
 
-		status.Success = true;
-		return Json(status);
+		return StatusCode(204);
 	}
 	
 	// DELETE: api/users/RemoveUser/
-	[HttpDelete]
-	[Route("RemoveUser")]
-	public async Task<ActionResult> DeleteUser([FromBody] RemoveUserJson data)
+	[HttpDelete("RemoveUser/{adminApiKey}/{userId}")]
+	public async Task<IActionResult> RemoveUser(string adminApiKey, int userId)
 	{
-		var status = new SuccessJson();
+		if(!AdminTools.IsAdmin(adminApiKey))
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
-		if(data == null || data.ApiKey == null)
-		{
-			status.Success = false;
-			return Json(status);
-		}
-
-		if(!AdminTools.IsAdmin(data.ApiKey))
-		{
-			status.Success = false;
-			return Json(status);
-		}
-
-		var userEntity = await _context.UserEntities.FindAsync(data.UserId);
+		var userEntity = await _context.UserEntities.FindAsync(userId);
 
 		if(userEntity == null)
-		{
-			status.Success = false;
-			return Json(status);
-		}
+			return StatusCode(404, "No user with id: " + userId);
 
 		_context.UserEntities.Remove(userEntity);
 		await _context.SaveChangesAsync();
 
-		status.Success = true;
-
-		return Json(status);
+		return StatusCode(204);
 	}
 }

@@ -31,6 +31,8 @@ public class SystemStatusController(AppDbContext _context) : Controller
 		if(systemStatusEntity.Status > 3 || systemStatusEntity.Status < 0)
 			return StatusCode(400, "Target system status out of range");
 
+		systemStatusEntity.Status = data.Status;
+
 		switch(systemStatusEntity.Status)
 		{
 			case 0:

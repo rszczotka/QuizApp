@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace quiz_app_api.Data.JsonModels.Users.Input;
+namespace quiz_app_api.Data.JsonModels.Users;
 
 public class UpdateUserJson
 {
     [JsonPropertyName("user_id")]
-    public int Id { get; set; }
+    public required int Id { get; set; }
     [JsonPropertyName("api_key")]
     public required string ApiKey { get; set; }
     [JsonPropertyName("user")]
@@ -20,6 +20,6 @@ public class UpdateUserJson
         [JsonPropertyName("password")]
         public required string Password { get; set; }
         [JsonPropertyName("status")]
-        public int Status { get; set; }
+        public required int Status { get; set; }
     }
 }

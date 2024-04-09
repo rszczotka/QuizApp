@@ -47,7 +47,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
 		var allQuestions = await _context.QuestionEntities
-			.Select(x => new GetAllQuestionsReturnJson
+			.Select(x => new GetAllQuestionsJson
 			{
 				Id = x.Id,
 				Text = x.Text,
@@ -67,12 +67,16 @@ public class QuestionsController(AppDbContext _context) : Controller
 		if(!AdminTools.IsUser(apiKey))
 			return StatusCode(400, "Not a user API key, or user not logged in");
 		if((await _context.SystemStatusEntities.FirstAsync()).Status != 2)
-			return StatusCode(403, "System status is not 2");
+			return StatusCode(403, "System status is not 2 (quiz)");
 
 		var user = await _context.UserEntities.Where(n => n.Login == APIKeyGenerator.GetLoginByAPIKey(apiKey)).FirstAsync();
 
-		if(user.Status > 1 + await _context.QuestionEntities.CountAsync())
+		if(user.Status > await _context.QuestionEntities.CountAsync())
+		{
+			user.EndTime = DateTime.Now;
+			await _context.SaveChangesAsync();
 			return StatusCode(405, "User has answered all questions");
+		}
 
 		var nextQuestion = await _context.QuestionEntities.ElementAtAsync(user.Status - 1);
 
@@ -97,7 +101,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 	
 	// DELETE: api/questions/RemoveQuestion/
 	[HttpDelete("RemoveQuestion/{adminApiKey}/{id}")]
-	public async Task<IActionResult> DeleteQuestion(string adminApiKey, int id)
+	public async Task<IActionResult> RemoveQuestion(string adminApiKey, int id)
 	{
 		if(!AdminTools.IsAdmin(adminApiKey))
 			return StatusCode(401, "Not an admin API key, or admin is not logged in");

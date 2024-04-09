@@ -2,7 +2,7 @@
 
 namespace quiz_app_api.Data.JsonModels.Questions;
 
-public class GetAllQuestionsReturnJson
+public class GetAllQuestionsJson
 {
     [JsonPropertyName("id")]
     public required int Id { get; set; }
