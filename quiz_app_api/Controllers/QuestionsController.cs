@@ -16,7 +16,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 	public async Task<IActionResult> CreateQuestion([FromBody] CreateQuestionJson data)
 	{
         if(!AdminTools.IsAdmin(data.ApiKey))
-			return Unauthorized("Not an admin API key, or admin is not logged in");
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
         try
         {
@@ -33,10 +33,10 @@ public class QuestionsController(AppDbContext _context) : Controller
         }
         catch (Exception e)
         {
-			return StatusCode(StatusCodes.Status500InternalServerError, "Something went wrong while creating new question" + e.Message);
+			return StatusCode(500, "Something went wrong while creating new question" + e.Message);
         }
 
-		return Created();
+		return StatusCode(201);
     }
 
 	// GET: api/questions/GetAllQuestions/
@@ -44,7 +44,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 	public async Task<IActionResult> GetAllQuestions(string adminApiKey)
 	{
 		if(!AdminTools.IsAdmin(adminApiKey))
-			return Unauthorized("Not an admin API key, or admin is not logged in");
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
 		var allQuestions = await _context.QuestionEntities
 			.Select(x => new GetAllQuestionsReturnJson
@@ -57,7 +57,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 			})
 			.ToListAsync();
 
-		return Ok(allQuestions);
+		return StatusCode(200, allQuestions);
 	}
 
 	// GET: api/questions/GetNextQuestion/
@@ -65,21 +65,21 @@ public class QuestionsController(AppDbContext _context) : Controller
 	public async Task<IActionResult> GetNextQuestion(string apiKey)
 	{
 		if(!AdminTools.IsUser(apiKey))
-			return BadRequest("Not a user API key, or user not logged in");
+			return StatusCode(400, "Not a user API key, or user not logged in");
 		if((await _context.SystemStatusEntities.FirstAsync()).Status != 2)
-			return Forbid("System status is not 2");
+			return StatusCode(403, "System status is not 2");
 
 		var user = await _context.UserEntities.Where(n => n.Login == APIKeyGenerator.GetLoginByAPIKey(apiKey)).FirstAsync();
 
 		if(user.Status > 1 + await _context.QuestionEntities.CountAsync())
-			return StatusCode(StatusCodes.Status405MethodNotAllowed, "User has answered all questions");
+			return StatusCode(405, "User has answered all questions");
 
 		var nextQuestion = await _context.QuestionEntities.ElementAtAsync(user.Status - 1);
 
 		user.Status++;
 		await _context.SaveChangesAsync();
 
-		return Ok(new NextQuestionJson
+		return StatusCode(200, new NextQuestionJson
 		{
 			Id = nextQuestion.Id,
 			Text = nextQuestion.Text,
@@ -92,7 +92,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 	[HttpPut("UpdateQuestion")]
 	public IActionResult UpdateQuestion()
 	{
-		return StatusCode(StatusCodes.Status501NotImplemented);
+		return StatusCode(501);
 	}
 	
 	// DELETE: api/questions/RemoveQuestion/
@@ -100,15 +100,15 @@ public class QuestionsController(AppDbContext _context) : Controller
 	public async Task<IActionResult> DeleteQuestion(string adminApiKey, int id)
 	{
 		if(!AdminTools.IsAdmin(adminApiKey))
-			return Unauthorized("Not an admin API key, or admin is not logged in");
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
 		var questionEntity = await _context.QuestionEntities.FindAsync(id);
 		if(questionEntity == null)
-			return NotFound("No question with id: " + id);
+			return StatusCode(404, "No question with id: " + id);
 
 		_context.QuestionEntities.Remove(questionEntity);
 		await _context.SaveChangesAsync();
 
-		return NoContent();
+		return StatusCode(204);
 	}
 }

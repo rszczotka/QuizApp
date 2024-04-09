@@ -2,9 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using quiz_app_api.Data;
 using quiz_app_api.Data.Entities;
-using quiz_app_api.Data.JsonModels;
-using quiz_app_api.Data.JsonModels.UserAnswers.Input;
-using quiz_app_api.Data.JsonModels.UserAnswers.Output;
+using quiz_app_api.Data.JsonModels.Questions;
+using quiz_app_api.Data.JsonModels.UserAnswers;
 using quiz_app_api.Misc;
 
 namespace quiz_app_api.Controllers;
@@ -14,16 +13,13 @@ namespace quiz_app_api.Controllers;
 public class UserAnswersController(AppDbContext _context) : Controller
 {
 	// POST: api/useranswers/CreateUserAnswer
-	[HttpPost]
-	[Route("CreateUserAnswer")]
-	public async Task<ActionResult> CreateUserAnswer([FromBody] CreateUserAnswerJson data)
+	[HttpPost("CreateUserAnswer")]
+	public async Task<IActionResult> CreateUserAnswer([FromBody] CreateUserAnswerJson data)
 	{
-		var status = new SuccessJson();
-
-		if(data.ApiKey == null)
-		{
-			return Json(status);
-		}
+		if(!AdminTools.IsUser(data.ApiKey))
+			return StatusCode(400, "Not a user API key, or user not logged in");
+		if((await _context.SystemStatusEntities.FirstAsync()).Status != 2)
+			return StatusCode(403, "System status is not 2");
 
 		try
 		{
@@ -38,31 +34,36 @@ public class UserAnswersController(AppDbContext _context) : Controller
 			_context.UserAnswerEntities.Add(userAnswerEntity);
 			await _context.SaveChangesAsync();
 		}
-		catch(Exception e)
+		catch(Exception ex)
 		{
-			await Console.Out.WriteLineAsync(e.Message);
-			status.Success = false;
-			return Json(status);
+			return StatusCode(500, "Something went wrong while creating new user answer");
 		}
 
-		status.Success = true;
-		return Json(status);
+		return StatusCode(201);
 	}
 
 	// GET: api/useranswers/GetUserAnswers
-	[HttpGet]
-	[Route("GetUserAnswers")]
-	public async Task<ActionResult> GetUserAnswers([FromBody] GetUserAnswersJson data)
+	[HttpGet("GetUserAnswers/{adminApiKey}/{userId}")]
+	public async Task<IActionResult> GetUserAnswers(string adminApiKey, int userId)
 	{
-		if(data.ApiKey == null || !AdminTools.IsAdmin(data.ApiKey))
-		{
-			return Json(new GetUserAnswersReturnJson());
-		}
+		if(!AdminTools.IsAdmin(adminApiKey))
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 
-		var user = await _context.UserEntities.Where(x => x.Id == data.UserId).FirstOrDefaultAsync();
+		var user = await _context.UserEntities.Where(x => x.Id == userId).FirstOrDefaultAsync();
 
 		var userAnswers = await _context.UserAnswerEntities.Include(x => x.Question).Where(x => x.User == user).ToListAsync();
 
-		return Json(userAnswers);
+		return StatusCode(200, userAnswers.Select(x => new GetUserAnswersReturnJson
+		{
+			Question = new GetAllQuestionsReturnJson
+			{
+				Id = x.Question.Id,
+				Text = x.Question.Text,
+				Options = x.Question.Options,
+				CorrectAnswer = x.Question.CorrectAnswer,
+				AvailabelTime = x.Question.AvailableTime
+			},
+			ChosenOption = x.ChosenOption
+		}));
 	}
 }

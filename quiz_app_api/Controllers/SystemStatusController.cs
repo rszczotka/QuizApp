@@ -24,12 +24,12 @@ public class SystemStatusController(AppDbContext _context) : Controller
 	public async Task<IActionResult> UpdateSystemStatus([FromBody] UpdateSystemStatus data)
 	{
 		if(!AdminTools.IsAdmin(data.ApiKey))
-			return Unauthorized("Not an admin API key, or admin is not logged in");
+			return StatusCode(401, "Not an admin API key, or admin is not logged in");
 		
 		var systemStatusEntity = await _context.SystemStatusEntities.FirstAsync();
 
 		if(systemStatusEntity.Status > 3 || systemStatusEntity.Status < 0)
-			return BadRequest("Podany status systemu jest poza zakresem");
+			return StatusCode(400, "Target system status out of range");
 
 		switch(systemStatusEntity.Status)
 		{
@@ -56,9 +56,9 @@ public class SystemStatusController(AppDbContext _context) : Controller
 		}
 		catch(DbUpdateConcurrencyException ex)
 		{
-			return StatusCode(StatusCodes.Status500InternalServerError, "Wystąpił błąd podczas zmieniania statusu systemu: " + ex.Message);
+			return StatusCode(500, "Something went wrong while updating system status: " + ex.Message);
 		}
 
-		return NoContent();
+		return StatusCode(204);
 	}
 }
