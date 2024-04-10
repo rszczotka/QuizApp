@@ -49,7 +49,8 @@ public class SystemStatusController(AppDbContext _context) : Controller
 				await _context.SaveChangesAsync();
 				break;
 			case 3:
-				var usersInQuiz = await _context.UserEntities.Where(x => x.Status > 1).ToListAsync();
+				// users that didn't answer all questions
+				var usersInQuiz = await _context.UserEntities.Where(x => x.Status > 1 && x.EndTime == DateTime.MinValue).ToListAsync();
 
 				foreach(var user in usersInQuiz)
 				{
