@@ -1,73 +1,135 @@
-let leaderboardExample = [
-    {"id": 0, "name": "A0", "time": "B", "points": "C" },
-    {"id": 1, "name": "A1", "time": "B", "points": "C" },
-    {"id": 2, "name": "A2", "time": "B", "points": "C" },
-    {"id": 3, "name": "A3", "time": "B", "points": "C" },
-    {"id": 4, "name": "A4", "time": "B", "points": "C" },
-    {"id": 5, "name": "A5", "time": "B", "points": "C" },
-    {"id": 6, "name": "A6", "time": "B", "points": "C" },
-    {"id": 7, "name": "A7", "time": "B", "points": "C" },
-    {"id": 8, "name": "A8", "time": "B", "points": "C" },
-    {"id": 9, "name": "A9", "time": "B", "points": "C" },
-    {"id": 10, "name": "A10", "time": "B", "points": "C" },
-    {"id": 11, "name": "A11", "time": "B", "points": "C" },
-    {"id": 12, "name": "A12", "time": "B", "points": "C" },
-    {"id": 13, "name": "A13", "time": "B", "points": "C" },
-    {"id": 14, "name": "A14", "time": "B", "points": "C" },
-    {"id": 15, "name": "A15", "time": "B", "points": "C" },
-    {"id": 16, "name": "A16", "time": "B", "points": "C" },
-];
-
-const leaderboard = document.querySelector("#leaderboard");
-
-let leaderboardText = "";
-
-const userId = 12;
-
-leaderboardExample.forEach(e => {
-    if(e.id == userId){
-        leaderboardText+=`
-        <div class="row your-score">
-            <div class="name">${e.name}</div>
-            <div class="points">${e.time}</div>
-            <div class="time">${e.points}</div>
-        </div>
-        `
-    }else{
-        leaderboardText+=`
-        <div class="row">
-            <div class="name">${e.name}</div>
-            <div class="points">${e.time}</div>
-            <div class="time">${e.points}</div>
-        </div>
-        `
+function getCookie(name) {
+    let cookieArr = document.cookie.split("; ");
+    for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if (name == cookiePair[0]) {
+            return decodeURIComponent(cookiePair[1]);
+        }
     }
-});
+    return null;
+}
+let api_key = getCookie('api_key');
+api_key = "4848734398e318adb7babb90de5d7828d8fcf897a823d96965935b5e246e41b4b";
+if (api_key === null) {
+    window.location.href = 'login.html';
+}
 
-leaderboard.innerHTML = leaderboardText;
 
-const yourScore = document.querySelector(".your-score");
+function sendApiRequest() {
+fetch(`http://localhost:5000/api/systemstatus/GetSystemStatus/`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(systemStatusData => {
+        if (systemStatusData === 0) {
+            console.log('Server is down');
+        }
+        else if (systemStatusData === 1) {
+            window.location.href = 'login.html';
+        }
+        else if (systemStatusData === 2) {
+            window.location.href = 'question.html';
+        } else if (systemStatusData === 3) {
+            //api url
+            fetch(`http://localhost:3000/api/useranswers/GetLeaderboard/${api_key}`)
+                .then((response) => response.text())
+                .then((result) => {
+                    var result = JSON.parse(result);
 
-if(yourScore){
-    yourScore.addEventListener("click", () => {
-        yourScore.scrollIntoView({behavior: 'smooth'});
+                    let i = 0;
+                    let leaderboardArr = [];
+                    result.forEach(e => {
+                        let name = `${e.user.name} ${e.user.surname}`;
+
+                        let start_time = Date.parse(e.user.start_time);
+                        let end_time = Date.parse(e.user.end_time);
+                        let time = end_time - start_time;
+                        let timeMin = Math.floor(time / (1000 * 60));
+                        let timeSec = Math.floor(time % 1000);
+                        let timeMs = Math.floor(time % 100);
+                        let timeStr = `${timeMin}min ${timeSec}.${timeMs}s`;
+
+                        let correct_answers = `${e.correct_answers}/20`;
+
+                        leaderboardArr.push({
+                            "id": i,
+                            "name": name,
+                            "time": timeStr,
+                            "points": correct_answers
+                        });
+
+                        i++;
+                    });
+
+                    createView(leaderboardArr);
+                })
+                .catch((error) => console.error(error));
+        } else {
+            console.log('Unknown status');
+        }
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
     });
 }
 
-const goTop = document.querySelector("#go-top");
+sendApiRequest();
 
-goTop.addEventListener("click", () => {
-    document.querySelector("h1").scrollIntoView({behavior: 'smooth'});
-});
-
-const whenShowGoTopButton = 1000;
-
-setInterval(() => {
-    var scroll = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-    if(scroll < whenShowGoTopButton){
-        goTop.style.opacity = scroll / whenShowGoTopButton;
-    }else{
-        goTop.style.opacity = "1";
+const createView = (leaderboardArr, id) => {
+    
+    const leaderboard = document.querySelector("#leaderboard");
+    
+    let leaderboardText = "";
+    
+    const userId = id;
+    
+    leaderboardArr.forEach(e => {
+        if(e.id == userId){
+            leaderboardText+=`
+            <div class="row your-score">
+                <div class="name">${e.name}</div>
+                <div class="points">${e.time}</div>
+                <div class="time">${e.points}</div>
+            </div>
+            `
+        }else{
+            leaderboardText+=`
+            <div class="row">
+                <div class="name">${e.name}</div>
+                <div class="points">${e.time}</div>
+                <div class="time">${e.points}</div>
+            </div>
+            `
+        }
+    });
+    
+    leaderboard.innerHTML = leaderboardText;
+    
+    const yourScore = document.querySelector(".your-score");
+    
+    if(yourScore){
+        yourScore.addEventListener("click", () => {
+            yourScore.scrollIntoView({behavior: 'smooth'});
+        });
     }
-}, 100);
-
+    
+    const goTop = document.querySelector("#go-top");
+    
+    goTop.addEventListener("click", () => {
+        document.querySelector("h1").scrollIntoView({behavior: 'smooth'});
+    });
+    
+    const whenShowGoTopButton = 1000;
+    
+    setInterval(() => {
+        var scroll = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        if(scroll < whenShowGoTopButton){
+            goTop.style.opacity = scroll / whenShowGoTopButton;
+        }else{
+            goTop.style.opacity = "1";
+        }
+    }, 100);
+}
