@@ -105,7 +105,6 @@ W body
 ### Co przyjmuje:
 
 `localhost/api/users/GetUsersInQueue/api-key`
-`
 
 ### Co zwraca:
 
