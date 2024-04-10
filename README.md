@@ -338,15 +338,15 @@ W body
 
 </details>
 
-<details><summary>GetLeaderBoard</summary>
+<details><summary>GetLeaderboard</summary>
     
 ### Url:
 
-`GET: localhost/api/useranswers/GetLeaderBoard/{apiKey}`
+`GET: localhost/api/useranswers/GetLeaderboard/{apiKey}`
 
 ### Co przyjmuje:
 
-`localhost/api/useranswers/GetLeaderBoard/user-api-key`
+`localhost/api/useranswers/GetLeaderboard/user-api-key`
 
 ```
 
