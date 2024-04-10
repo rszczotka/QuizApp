@@ -9,15 +9,17 @@ function getCookie(name) {
     return null;
 }
 let api_key = getCookie('api_key');
+if (api_key === null) {
+    window.location.href = 'login.html';
+}
 setInterval(async () => {
     try {
         const response = await fetch('http://localhost:5000/api/systemstatus/GetSystemStatus');
-        const data = await response.json();
-        console.log(data);
+        const systemStatusData = await response.json();
 
-        if (data === 0) {
+        if (systemStatusData === 0) {
             window.location.href = 'login.html';
-        } else if (data === 1) {
+        } else if (systemStatusData === 1) {
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
             myHeaders.append("Access-Control-Allow-Origin", "*");
@@ -43,9 +45,9 @@ setInterval(async () => {
             const userCounter = document.getElementById('user-counter');
             const kafelekCount = document.getElementsByClassName('kafelek').length;
             userCounter.textContent = kafelekCount + " osób";
-        } else if (data === 2) {
+        } else if (systemStatusData === 2) {
             window.location.href = 'question.html';
-        } else if (data === 3) {
+        } else if (systemStatusData === 3) {
             window.location.href = 'endScreen.html';
         } else {
             console.log('Unknown status');
