@@ -3,6 +3,23 @@ window.onload = function () {
     return false;
   };
 };
+
+function getCookie(name) {
+  let cookieArr = document.cookie.split("; ");
+  for(let i = 0; i < cookieArr.length; i++) {
+      let cookiePair = cookieArr[i].split("=");
+      if(name == cookiePair[0]) {
+          return decodeURIComponent(cookiePair[1]);
+      }
+  }
+  return null;
+}
+let api_key = getCookie('api_key');
+if (api_key !== null) {
+  window.location.href = 'info.html';
+}
+
+
 function sendApiRequest() {
   fetch('http://localhost:5000/api/systemstatus/GetSystemStatus')
     .then(response => {
@@ -15,7 +32,7 @@ function sendApiRequest() {
       if (systemStatusData === 0) {
         console.log('Server is down');
       }
-      else if (systemStatusData === 1) {
+      else {
         var login = document.getElementById("login").value;
         var password = document.getElementById("password").value;
         if (login != undefined && login != null && login != "" && password != undefined && password != null && password) {
@@ -54,13 +71,6 @@ function sendApiRequest() {
         else {
           document.getElementById("messageBox").innerText = "uzupełnij wszystkie pola";
         }
-      }
-      else if (systemStatusData === 2) {
-        window.location.href = 'question.html';
-      } else if (systemStatusData === 3) {
-        window.location.href = 'endScreen.html';
-      } else {
-        console.log('Unknown status');
       }
     })
     .catch(error => {

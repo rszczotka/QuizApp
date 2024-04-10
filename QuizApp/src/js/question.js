@@ -6,19 +6,23 @@ let isNextButtonDisable = true;
 
 const timeDiv = document.querySelector('#time');
 const timeCircle = document.querySelector('#time-circle');
-let initTime = 30;
-let time = initTime;
+
+let initTime = 45;
+
 const howMuchCountdown = 100;
 
-timeDiv.innerHTML = time;
+let timeLeft;
+
 const countdownTime = setInterval(() => {
-    time -= 1 / howMuchCountdown
-    time = Math.floor(time * howMuchCountdown) / howMuchCountdown
-    timeDiv.innerHTML = Math.floor(time + 1);
-    timeCircle.style.strokeDashoffset = 440 - 250 * time / initTime;
-    if (time < 0) {
-        clearInterval(countdownTime);
-        sendAnswer();
+    if (timeLeft !== undefined) {
+        timeLeft -= (1 / howMuchCountdown) / 60;
+        timeLeft = Math.floor(timeLeft * howMuchCountdown * 60) / (howMuchCountdown * 60);
+        timeDiv.innerHTML = Math.floor(timeLeft + 1);
+        timeCircle.style.strokeDashoffset = 440 - 250 * timeLeft / initTime;
+        if (timeLeft < 0) {
+            clearInterval(countdownTime);
+            sendAnswer();
+        }
     }
 }, 10);
 
@@ -42,9 +46,9 @@ nextButton.addEventListener('click', () => {
 
 function getCookie(name) {
     let cookieArr = document.cookie.split("; ");
-    for(let i = 0; i < cookieArr.length; i++) {
+    for (let i = 0; i < cookieArr.length; i++) {
         let cookiePair = cookieArr[i].split("=");
-        if(name == cookiePair[0]) {
+        if (name == cookiePair[0]) {
             return decodeURIComponent(cookiePair[1]);
         }
     }
@@ -52,8 +56,9 @@ function getCookie(name) {
 }
 
 let api_key = getCookie('api_key');
-
-console.log(api_key);
+if (api_key === null) {
+    window.location.href = 'login.html';
+}
 
 function GetNextQuestion() {
     const myHeaders = new Headers();
@@ -62,18 +67,13 @@ function GetNextQuestion() {
     myHeaders.append("Origin", "*");
     myHeaders.append("credentials", "include");
 
-    const data = JSON.stringify({
-        api_key: api_key
-    });
-
     const requestOptions = {
-        method: "POST",
+        method: "GET",
         headers: myHeaders,
-        body: data,
         redirect: "follow",
     };
 
-    fetch(`http://localhost:5000/api/questions/GetNextQuestion`, requestOptions)
+    fetch(`http://localhost:5000/api/questions/GetNextQuestion/${api_key}`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -81,24 +81,22 @@ function GetNextQuestion() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             document.querySelector('#question').innerHTML = data.text;
+            currentQuestionId = data.id;
             data.options.forEach((e, i) => {
                 answers[i].innerHTML = e;
             });
-            initTime = data.available_time;
-            time = initTime;
-            // ! implement new time logic
+
+            timeLeft = 45 - (data.time_from_beginning / 60);
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
             document.querySelector('#question').innerHTML = 'There was a problem fetching the question.';
             initTime = 0;
-            time = initTime;
+            timeLeft = initTime;
         });
 }
 GetNextQuestion()
-
 
 const sendAnswer = () => {
     //send answer (answer index in chosenIndex [or undefined if time is up, unless anything was selected])
@@ -107,17 +105,29 @@ const sendAnswer = () => {
     }
 
     var chosen_option = chosenIndex;
-    const CreateAnswer = fetch(`http://localhost:3000/api/questions/CreateAnswer/${api_key}/${chosen_option}`)
+    console.log(chosen_option);
+    const data = JSON.stringify({
+        "question_id": currentQuestionId,
+        "chosen_option": chosen_option,
+        "api_key": api_key
+    });
+
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: data
+    };
+
+    fetch(`http://localhost:5000/api/useranswers/CreateUserAnswer`, requestOptions)
         .then(response => {
-            if (response.ok) {
+            if (response.status === 201) {
                 //* if ok, go to next question ;)
                 answers[chosenIndex].classList.remove('chosen');
                 GetNextQuestion()
             } else {
                 throw new Error('Network response was not ok');
             }
-
-            return response.json();
+            //TODO handle other status codes
         })
         .catch(error => {
             console.error('There has been a problem with your send operation:', error);
