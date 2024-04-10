@@ -39,7 +39,7 @@ public class SystemStatusController(AppDbContext _context) : Controller
 				APIKeyGenerator.FlushApiKeys();
 				break;
 			case 2:
-				var usersInQueue = _context.UserEntities.Where(x => x.Status == 1).ToList();
+				var usersInQueue = await _context.UserEntities.Where(x => x.Status == 1).ToListAsync();
 
 				foreach(var user in usersInQueue)
 				{
@@ -47,6 +47,17 @@ public class SystemStatusController(AppDbContext _context) : Controller
 				}
 
 				await _context.SaveChangesAsync();
+				break;
+			case 3:
+				var usersInQuiz = await _context.UserEntities.Where(x => x.Status > 1).ToListAsync();
+
+				foreach(var user in usersInQuiz)
+				{
+					user.EndTime = DateTime.Now;
+				}
+
+				await _context.SaveChangesAsync();
+
 				break;
 		}
 

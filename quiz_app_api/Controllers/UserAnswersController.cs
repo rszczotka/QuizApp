@@ -66,4 +66,34 @@ public class UserAnswersController(AppDbContext _context) : Controller
 			ChosenOption = x.ChosenOption
 		}));
 	}
+
+	// GET: api/useranswers/GetLeaderboard
+	[HttpGet("GetLeaderboard/{apiKey}")]
+	public async Task<IActionResult> GetLeaderboard(string apiKey)
+	{
+		if(!AdminTools.IsUser(apiKey))
+			return StatusCode(400, "Not a user API key, or user not logged in");
+		if((await _context.SystemStatusEntities.FirstAsync()).Status != 3)
+			return StatusCode(403, "System status is not 3 (results)");
+
+		var users = await _context.UserEntities.Where(x => x.EndTime != DateTime.MinValue).ToListAsync();
+		var userResults = users.Select(x => new GetLeaderboardJson
+		{
+			User = new GetLeaderboardJson.UserJson
+			{
+				Id = x.Id,
+				Name = x.Name,
+				Surname = x.Surname,
+				StartTime = x.StartTime,
+				EndTime = x.EndTime
+			},
+			CorrectAnswers = _context.UserAnswerEntities.Where(x => x.User.Id == x.Id && x.ChosenOption == x.Question.CorrectAnswer).Count(),
+			WrongAnswers = _context.UserAnswerEntities.Where(x => x.User.Id == x.Id && x.ChosenOption != x.Question.CorrectAnswer).Count()
+		}).ToList();
+
+		return StatusCode(200, userResults
+			.OrderByDescending(x => x.CorrectAnswers)
+			.ThenBy(x => x.User.EndTime)
+			.ToList());
+	}
 }
