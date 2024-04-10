@@ -105,7 +105,7 @@ W body
 ### Co przyjmuje:
 
 `localhost/api/users/GetUsersInQueue/api-key`
-```
+`
 
 ### Co zwraca:
 
@@ -130,8 +130,7 @@ W body
         "user_id": 2,
         "name": "Kamil",
         "surname": "Zdun"
-    },
-    ...
+    }
 ]
 ```
 
