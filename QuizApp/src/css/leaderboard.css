@@ -42,6 +42,7 @@ main {
 }
 
 .your-score{
+    margin-top: 80px;
     bottom: 0;
     position: sticky;
     background-color: rgba(128, 128, 128, 0.801);
