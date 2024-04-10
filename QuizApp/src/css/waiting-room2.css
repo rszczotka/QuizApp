@@ -9,20 +9,32 @@ body {
     margin: 0;
     position: relative;
 }
-
 body::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 60000%; 
     background: radial-gradient(#027570 20%, transparent 0%),
                 radial-gradient(#027570 30%, transparent 0%),
                 radial-gradient(#027570 40%, transparent 0%);
     background-size: 500px 500px, 500px 500px, 400px 400px; 
-    background-position: 20% 20%, 230% 130%, 200% 280%; 
+    background-position: 20% 100%, 230% 210%, 200% 360%; 
     z-index: -1;
+    animation: moveBubbles 10000s linear infinite; 
+}
+
+@keyframes moveBubbles {
+    0% {
+        background-position: 20% 100%, 230% 210%, 200% 360%; 
+    }
+    50% {
+        background-position: 20% 0%, 230% 110%, 200% 260%; 
+    }
+    100% {
+        background-position: 20% 100%, 230% 210%, 200% 360%; 
+    }
 }
 p{
     line-height: 2rem;
