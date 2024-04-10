@@ -274,8 +274,6 @@ W body
 
 `localhost/api/useranswers/GetUserAnswers/administrator-api-key/1`
 
-```
-
 ### Co zwraca:
 
 ```txt
@@ -347,8 +345,6 @@ W body
 ### Co przyjmuje:
 
 `localhost/api/useranswers/GetLeaderboard/user-api-key`
-
-```
 
 ### Co zwraca:
 
