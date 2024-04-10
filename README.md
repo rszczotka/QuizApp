@@ -579,7 +579,7 @@ W body
 ```json
 {
     "api_key": "administrator-api-key",
-    "system_status": 1
+    "status": 1
 }
 ```
 
