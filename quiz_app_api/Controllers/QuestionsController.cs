@@ -89,7 +89,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 			Text = nextQuestion.Text,
 			Options = nextQuestion.Options,
 			AvailableTime = nextQuestion.AvailableTime,
-			TimeFromBeginning = DateTime.Now.Second - user.StartTime.Second
+			TimeFromBeginning = (int)(DateTime.Now - user.StartTime).TotalSeconds
 		});
 	}
 
