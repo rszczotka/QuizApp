@@ -338,6 +338,55 @@ W body
 
 </details>
 
+<details><summary>GetLeaderBoard</summary>
+    
+### Url:
+
+`GET: localhost/api/useranswers/GetLeaderBoard/{apiKey}`
+
+### Co przyjmuje:
+
+`localhost/api/useranswers/GetLeaderBoard/user-api-key`
+
+```
+
+### Co zwraca:
+
+```txt
+400 - użytkownik o podanym API key nie istnieje lub nie jest zalogowany
+403 - status systemu jest inny niż 3 (wyniki)
+200 - sukces i listę użytkowników posortowaną malejąco według ilości poprawnych odpowiedzi oraz rosnącą według czasu zakończenia
+```
+
+```json
+[
+    {
+        "user": {
+            "id": 2,
+            "name": "Kamil",
+            "surname": "Zdun",
+            "start_time": "2024-04-03T21:58:16.7271061",
+            "end_time": "2024-04-10T21:15:55.9540494"
+        },
+        "correct_answers": 4,
+        "wrong_answers": 1
+    },
+    {
+        "user": {
+            "id": 5,
+            "name": "Adam",
+            "surname": "Nowak",
+            "start_time": "2024-04-03T21:58:16.7271061",
+            "end_time": "2024-04-10T21:19:12.9540494"
+        },
+        "correct_answers": 3,
+        "wrong_answers": 2
+    }
+]
+```
+
+</details>
+
 > Update
 
 Nie można zmienić odpowiedzi użytkownika
