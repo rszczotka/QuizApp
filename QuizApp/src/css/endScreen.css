@@ -25,7 +25,7 @@ main{
 }
 
 #main{
-    height: 88vh;
+    height: 75vh;
 }
 
 #checkmark{
@@ -50,8 +50,8 @@ main{
     transform: translate(-50%, -50%);
 }
 
-#logout{
-    margin: 0 25px;
+#show-leaderboard{
+    margin: 35px 25px;
     color: var(--bg);
     text-align: center;
     font-weight: bold;
