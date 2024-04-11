@@ -14,7 +14,7 @@ if (api_key === null) {
 }
 setInterval(async () => {
     try {
-        const response = await fetch('http://localhost:5000/api/systemstatus/GetSystemStatus');
+        const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
         const systemStatusData = await response.json();
 
         if (systemStatusData === 0) {
@@ -32,7 +32,7 @@ setInterval(async () => {
                 redirect: "follow",
             };
 
-            const userResponse = await fetch(`http://localhost:5000/api/users/GetUsersInQueue/${api_key}`, requestOptions);
+            const userResponse = await fetch(`${config.api_url}/api/users/GetUsersInQueue/${api_key}`, requestOptions);
             const userData = await userResponse.json();
             const container = document.querySelector('.kafelki-container');
             container.innerHTML = '';
