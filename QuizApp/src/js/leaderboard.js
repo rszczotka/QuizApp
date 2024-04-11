@@ -9,9 +9,8 @@ function getCookie(name) {
     return null;
 }
 let api_key = getCookie('api_key');
-let user_id = parseInt(getCookie('id'));
+let user_id = parseInt(getCookie('user_id'));
 
-api_key = "4848734398e318adb7babb90de5d7828d8fcf897a823d96965935b5e246e41b4b";
 if (api_key === null) {
     window.location.href = 'login.html';
 }
@@ -36,7 +35,7 @@ fetch(`http://localhost:5000/api/systemstatus/GetSystemStatus/`)
             window.location.href = 'question.html';
         } else if (systemStatusData === 3) {
             //api url
-            fetch(`http://localhost:3000/api/useranswers/GetLeaderboard/${api_key}`)
+            fetch(`http://localhost:5000/api/useranswers/GetLeaderboard/${api_key}`)
                 .then((response) => response.text())
                 .then((result) => {
                     var result = JSON.parse(result);
