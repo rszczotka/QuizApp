@@ -17,7 +17,7 @@ if (api_key === null) {
 
 
 function sendApiRequest() {
-fetch(`http://localhost:5000/api/systemstatus/GetSystemStatus/`)
+fetch(`${config.api_url}/api/systemstatus/GetSystemStatus/`)
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -34,8 +34,7 @@ fetch(`http://localhost:5000/api/systemstatus/GetSystemStatus/`)
         else if (systemStatusData === 2) {
             window.location.href = 'question.html';
         } else if (systemStatusData === 3) {
-            //api url
-            fetch(`http://localhost:5000/api/useranswers/GetLeaderboard/${api_key}`)
+            fetch(`${config.api_url}/api/useranswers/GetLeaderboard/${api_key}`)
                 .then((response) => response.text())
                 .then((result) => {
                     var result = JSON.parse(result);
