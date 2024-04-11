@@ -18,10 +18,13 @@
                 każdego pytania... [NerdFace])</p>
         </div>
     </main>
-    <button><a href="./waiting-room.html">Dalej</a>
-    </button>
+    <button id="next">Dalej</button>
 </body>
 <script>
+    document.querySelector("#next").addEventListener("click", () => {
+        window.location("./waiting-room.html");
+    });
+
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for (let i = 0; i < cookieArr.length; i++) {
