@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,34 @@
 </head>
 <link rel="stylesheet" href="src/css/main.css">
 <link rel="stylesheet" href="src/css/Info.css">
+<script src="./src/js/config.js"></script>
 
 <body>
     <main>
         <h1>INFORMACJE</h1>
         <div>
-           <p>masz 20s na każde pytanie i jakieś inne info (tak w zasadzie to nie, w bazie będzie osobny czas dla każdego pytania... [NerdFace])</p> 
+            <p>masz 20s na każde pytanie i jakieś inne info (tak w zasadzie to nie, w bazie będzie osobny czas dla
+                każdego pytania... [NerdFace])</p>
         </div>
     </main>
-    <button><a href="#">Dalej</a>
+    <button><a href="./waiting-room.html">Dalej</a>
     </button>
 </body>
+<script>
+    function getCookie(name) {
+        let cookieArr = document.cookie.split("; ");
+        for (let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split("=");
+            if (name == cookiePair[0]) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    }
+    let api_key = getCookie('api_key');
+    if (api_key === null) {
+        window.location.href = 'login.html';
+    }
+</script>
+
 </html>
