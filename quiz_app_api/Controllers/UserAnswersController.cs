@@ -23,9 +23,12 @@ public class UserAnswersController(AppDbContext _context) : Controller
 
 		try
 		{
+			var user = await _context.UserEntities.Where(n => n.Login.Equals(APIKeyGenerator.GetLoginByAPIKey(data.ApiKey))).FirstAsync();
+			user.Status++;
+
 			var userAnswerEntity = new UserAnswerEntity
 			{
-				User = _context.UserEntities.Where(n => n.Login.Equals(APIKeyGenerator.GetLoginByAPIKey(data.ApiKey))).First(),
+				User = user,
 				Question = _context.QuestionEntities.Where(x => x.Id == data.QuestionId).First(),
 				ChosenOption = data.ChosenOption,
 				EndTime = DateTime.Now
@@ -76,7 +79,7 @@ public class UserAnswersController(AppDbContext _context) : Controller
 		if((await _context.SystemStatusEntities.FirstAsync()).Status != 3)
 			return StatusCode(403, "System status is not 3 (results)");
 
-		var users = await _context.UserEntities.Where(x => x.EndTime != DateTime.MinValue).ToListAsync();
+		var users = await _context.UserEntities.Where(x => x.EndTime != DateTime.MinValue && x.AccountType == 0).ToListAsync();
 		var userResults = users.Select(x => new GetLeaderboardJson
 		{
 			User = new GetLeaderboardJson.UserJson

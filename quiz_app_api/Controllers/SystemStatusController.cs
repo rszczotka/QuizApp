@@ -25,11 +25,10 @@ public class SystemStatusController(AppDbContext _context) : Controller
 	{
 		if(!AdminTools.IsAdmin(data.ApiKey))
 			return StatusCode(401, "Not an admin API key, or admin is not logged in");
-		
-		var systemStatusEntity = await _context.SystemStatusEntities.FirstAsync();
-
-		if(systemStatusEntity.Status > 3 || systemStatusEntity.Status < 0)
+		if(data.Status > 3 || data.Status < 0)
 			return StatusCode(400, "Target system status out of range");
+
+		var systemStatusEntity = await _context.SystemStatusEntities.FirstAsync();
 
 		systemStatusEntity.Status = data.Status;
 

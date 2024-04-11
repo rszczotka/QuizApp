@@ -75,7 +75,7 @@ public class UsersController(AppDbContext _context) : Controller
 		
 		// user status = 1 means it is logged in end therefore in queue
 		var usersInQueue = await _context.UserEntities
-			.Where(x => x.Status == 1)
+			.Where(x => x.Status == 1 && x.AccountType == 0)
 			.Select(x => new GetUsersInQueueJson
 			{
 				Id = x.Id,

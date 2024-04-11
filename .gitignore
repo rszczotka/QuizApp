@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /quiz_app_api/Data/Questions/questions.csv
+/quiz_app_api/Data/Seeds/UserSeeder.cs

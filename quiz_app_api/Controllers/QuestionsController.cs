@@ -97,10 +97,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 			return StatusCode(405, "User has answered all questions");
 		}
 
-		var nextQuestion = await _context.QuestionEntities.ElementAtAsync(user.Status - 1);
-
-		user.Status++;
-		await _context.SaveChangesAsync();
+		var nextQuestion = await _context.QuestionEntities.ElementAtAsync(user.Status);
 
 		return StatusCode(200, new NextQuestionJson
 		{
