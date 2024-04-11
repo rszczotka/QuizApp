@@ -2,7 +2,7 @@ body {
     background-color: #026863;
     margin: 0;
     position: relative;
-    color:var(--bg);
+    color: var(--bg);
 }
 
 body::before {
@@ -13,32 +13,34 @@ body::before {
     width: 100%;
     height: 100%;
     background: radial-gradient(#027570 20%, transparent 0%),
-                radial-gradient(#027570 30%, transparent 0%),
-                radial-gradient(#027570 40%, transparent 0%);
-    background-size: 500px 500px, 500px 500px, 400px 400px; 
-    background-position: 20% 20%, 230% 130%, 200% 280%; 
+        radial-gradient(#027570 30%, transparent 0%),
+        radial-gradient(#027570 40%, transparent 0%);
+    background-size: 500px 500px, 500px 500px, 400px 400px;
+    background-position: 20% 20%, 230% 130%, 200% 280%;
     z-index: -1;
 }
-main{
+
+main {
     max-width: 500px;
     margin: auto;
 }
 
-#main{
+#main {
     height: 75vh;
 }
 
-#checkmark{
+#checkmark {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#checkmark svg{
+
+#checkmark svg {
     fill: var(--secondary);
 }
 
-#info{
+#info {
     margin: 0;
     text-align: center;
     width: 300px;
@@ -50,14 +52,14 @@ main{
     transform: translate(-50%, -50%);
 }
 
-#show-leaderboard{
+#show-leaderboard {
     margin: 35px 25px;
     color: var(--bg);
     text-align: center;
     font-weight: bold;
     padding: 12px;
     border-radius: 1em;
-    background-color: var(--primary);
+    background-color: #3b3b3b;
     -webkit-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
     -moz-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
     box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
