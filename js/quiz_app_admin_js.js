@@ -7,7 +7,7 @@ var xhr = new XMLHttpRequest();
           console.log(this.responseText);
           var x = this.responseText;
           document.getElementById("system status").innerText =
-            this.responseText;
+            "System status: "+this.responseText;
         }
       });
 
@@ -21,7 +21,7 @@ var xhr = new XMLHttpRequest();
         var data = JSON.stringify({
           api_key:
             admin_key,
-          status: 1,
+          status: value,
         });
         console.log(data);
         var xhr = new XMLHttpRequest();
