@@ -11,8 +11,10 @@ setInterval(async () => {
             window.location.href = 'login.html';
         } else if (systemStatusData === 2) {
             showLeaderboard.innerHTML = "Poczekaj na zakończenie testu";
+            showLeaderboard.style.backgroundColor = "var(--primary)";
         } else if (systemStatusData === 3) {
             showLeaderboard.innerHTML = "Zobacz tabele wyników";
+            showLeaderboard.style.backgroundColor = "#3b3b3b";
 
             showLeaderboard.addEventListener("click", () => {
                 window.open("./leaderboard.html"); 
