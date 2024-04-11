@@ -17,7 +17,6 @@ app.UseCors(x => x
 	.AllowAnyMethod()
 	.AllowAnyHeader()
 	.AllowCredentials()
-	.WithOrigins("localhost:3306")
 	.SetIsOriginAllowed(origin => true));
 
 // Configure the HTTP request pipeline.
