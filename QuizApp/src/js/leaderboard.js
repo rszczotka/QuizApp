@@ -9,6 +9,8 @@ function getCookie(name) {
     return null;
 }
 let api_key = getCookie('api_key');
+let user_id = parseInt(getCookie('id'));
+
 api_key = "4848734398e318adb7babb90de5d7828d8fcf897a823d96965935b5e246e41b4b";
 if (api_key === null) {
     window.location.href = 'login.html';
@@ -43,7 +45,6 @@ fetch(`http://localhost:5000/api/systemstatus/GetSystemStatus/`)
                     let leaderboardArr = [];
                     result.forEach(e => {
                         let name = `${e.user.name} ${e.user.surname}`;
-
                         let start_time = Date.parse(e.user.start_time);
                         let end_time = Date.parse(e.user.end_time);
                         let time = end_time - start_time;
@@ -55,7 +56,7 @@ fetch(`http://localhost:5000/api/systemstatus/GetSystemStatus/`)
                         let correct_answers = `${e.correct_answers}/20`;
 
                         leaderboardArr.push({
-                            "id": i,
+                            "id": e.user.id,
                             "name": name,
                             "time": timeStr,
                             "points": correct_answers
@@ -64,7 +65,7 @@ fetch(`http://localhost:5000/api/systemstatus/GetSystemStatus/`)
                         i++;
                     });
 
-                    createView(leaderboardArr);
+                    createView(leaderboardArr, user_id);
                 })
                 .catch((error) => console.error(error));
         } else {
@@ -86,21 +87,24 @@ const createView = (leaderboardArr, id) => {
     
     const userId = id;
     
+    let i = 0;
     leaderboardArr.forEach(e => {
         if(e.id == userId){
             leaderboardText+=`
             <div class="row your-score">
                 <div class="name">${e.name}</div>
-                <div class="points">${e.time}</div>
-                <div class="time">${e.points}</div>
+                <div class="time">${e.time}</div>
+                <div class="points">${e.points}</div>
+                <div class="place">${++i}.</div>
             </div>
             `
         }else{
             leaderboardText+=`
             <div class="row">
                 <div class="name">${e.name}</div>
-                <div class="points">${e.time}</div>
-                <div class="time">${e.points}</div>
+                <div class="time">${e.time}</div>
+                <div class="points">${e.points}</div>
+                <div class="place">${++i}.</div>
             </div>
             `
         }

@@ -13,28 +13,38 @@ main {
 
 .row{
     position: relative;
-    font-size: 28px;
+    font-size: 18px;
     max-width: 800px;
     margin: 30px auto;
-    min-height: 34px;
+    min-height: 30px;
     padding: 20px;
     background-color: rgba(158, 158, 158, 0.336);
     border-radius: 20px;
 }
 .row div{
     display: inline-block;
+    padding-top: 10px;
 }
 .row .name{
     position: absolute;
-    left: 30px;
+    left: 20px;
 }
 .row .points{
     position: absolute;
-    right: 170px;
+    right: 20px;
 }
 .row .time{
     position: absolute;
-    right: 30px;
+    transform: translateX(50%);
+    font-size: 12px;
+    top: 0;
+    right: 50%;
+}
+.row .place{
+    position: absolute;
+    font-size: 12px;
+    top: 0;
+    left: 13px;
 }
 
 .row:nth-of-type(-n+5){
@@ -49,7 +59,7 @@ main {
     border: rgb(180, 180, 180) 5px solid;
 }
 .your-score::after{
-    top: -60px;
+    top: -48px;
     padding: 11px;
     transform: translateX(-50%);
     background-color: rgba(158, 158, 158, 0.575);
@@ -63,7 +73,7 @@ main {
 #go-top{
     z-index: 1;
     position: fixed;
-    top: 20px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
