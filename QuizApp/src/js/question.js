@@ -64,7 +64,6 @@ function GetNextQuestion() {
         .then(data => {
             console.log('Question fetched successfully');
             document.querySelector('#question').innerHTML = data.text;
-            if (response.status === 200) {
                 console.log('Question fetched successfully');
                 document.querySelector('#question').innerHTML = data.text;
                 currentQuestionId = data.id;
@@ -84,36 +83,6 @@ function GetNextQuestion() {
                         }
                     }
                 }, 1000);
-                
-            } else if (response.status === 400) {
-                window.location.href = 'login.html';
-            } else if (response.status === 403) {
-                fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`)
-                    .then(response => response.json())
-                    .then(systemStatusData => {
-                        if (systemStatusData === 0) {
-                            window.location.href = 'login.html';
-                        } else if (systemStatusData === 1) {
-                            window.location.href = 'waiting-room.html';
-                        } else if (systemStatusData === 2) {
-                            window.location.href = 'question.html';
-                        } else if (systemStatusData === 3) {
-                            window.location.href = 'endScreen.html';
-                        } else {
-                            console.log('Unknown status');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('There has been a problem with your fetch operation:', error);
-                    });
-            }
-            else if (response.status === 405) {
-                window.location.href = 'endScreen.html';
-            }
-            else {
-                throw new Error('Network response was not ok');
-            }
-
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
@@ -154,10 +123,10 @@ const sendAnswer = () => {
     fetch(`${config.api_url}/api/useranswers/CreateUserAnswer`, requestOptions)
         .then(response => {
             if (response.status === 201) {
-                answers[chosenIndex].classList.remove('chosen');
-                chosenIndex = null;
-                isNextButtonDisable = true;
-                nextButton.classList.add('next-disable')
+                // answers[chosenIndex].classList.remove('chosen');
+                // chosenIndex = null;
+                // isNextButtonDisable = true;
+                // nextButton.classList.add('next-disable')
                 GetNextQuestion()
             } else if (response.status === 400) {
                 window.location.href = 'login.html';
