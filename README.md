@@ -75,21 +75,24 @@ W body
         "name": "John",
         "surname": "Smith",
         "login": "john.smith",
-        "status": 0
+        "status": 0,
+        "end_time": "2024-04-03T21:58:16.7271061"
     },
     {
         "user_id": 1,
         "name": "Will",
         "surname": "Hutcherson",
         "login": "will.hutcherson",
-        "status": 0
+        "status": 0,
+        "end_time": "2024-04-03T21:58:16.7271061"
     },
     {
         "user_id": 2,
         "name": "Kamil",
         "surname": "Zdun",
         "login": "kamil.zdun",
-        "status": 0
+        "status": 0,
+        "end_time": "2024-04-03T21:58:16.7271061"    
     }
 ]
 ```
@@ -295,9 +298,7 @@ W body
             "correct_answer": 0,
             "available_time": 0
         },
-        "chosen_option": 2,
-        "start_time": 84237423854,
-        "end_time": 84237423860
+        "chosen_option": 2
     },
     {
         "question": {
@@ -311,9 +312,7 @@ W body
             "correct_answer": 0,
             "available_time": 0
         },
-        "chosen_option": NULL,
-        "start_time": 84237423854,
-        "end_time": NULL
+        "chosen_option": 1
     },
     {
         "question": {
@@ -327,9 +326,7 @@ W body
             "correct_answer": 0,
             "available_time": 0
         },
-        "chosen_option": 1,
-        "start_time": 84237423854,
-        "end_time": 84237423860
+        "chosen_option": 1
     }
 ]
 ```
@@ -351,7 +348,7 @@ W body
 ```txt
 400 - użytkownik o podanym API key nie istnieje lub nie jest zalogowany
 403 - status systemu jest inny niż 3 (wyniki)
-200 - sukces i listę użytkowników posortowaną malejąco według ilości poprawnych odpowiedzi oraz rosnącą według czasu zakończenia
+200 - sukces i listę użytkowników posortowaną malejąco według ilości poprawnych odpowiedzi oraz rosnąco według czasu zakończenia
 ```
 
 ```json
@@ -490,7 +487,7 @@ W body
 
 ### Co przyjmuje:
 
-`localhost/api/questions/GetNextQuestion/admin-api-key`
+`localhost/api/questions/GetNextQuestion/api-key`
 
 ### Co zwraca:
 
@@ -514,6 +511,28 @@ W body
     "available_time": 0,
     "time_from_beginning": 60
 }
+```
+
+</details>
+
+<details><summary>GetNextQuestion</summary>
+    
+### Url:
+
+`GET: localhost/api/questions/GetQuestionCount`
+
+### Co przyjmuje:
+
+`localhost/api/questions/GetQuestionCount`
+
+### Co zwraca:
+
+```txt
+200 - ilośc pytań
+```
+
+```json
+50
 ```
 
 </details>
