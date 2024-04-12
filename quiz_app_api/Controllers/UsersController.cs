@@ -58,7 +58,6 @@ public class UsersController(AppDbContext _context) : Controller
 				Login = x.Login,
 				Password = x.Password,
 				Status = x.Status,
-				StartTime = x.StartTime,
 				EndTime = x.EndTime
 			})
 			.ToListAsync();

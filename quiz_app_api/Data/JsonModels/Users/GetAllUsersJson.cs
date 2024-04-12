@@ -16,8 +16,6 @@ public class GetAllUsersJson
     public required string Password { get; set; }
     [JsonPropertyName("status")]
     public required int Status { get; set; }
-    [JsonPropertyName("start_time")]
-    public required DateTime StartTime { get; set; }
     [JsonPropertyName("end_time")]
     public required DateTime EndTime { get; set; }
 }

@@ -15,6 +15,21 @@ public class SystemStatusController(AppDbContext _context) : Controller
 	public async Task<IActionResult> GetSystemStatus()
 	{
 		var systemStatus = await _context.SystemStatusEntities.FirstAsync();
+
+		if((DateTime.Now - systemStatus.StartTime).TotalSeconds > 45 * 60)
+		{
+			systemStatus.Status = 3;
+
+			var usersInQuiz = await _context.UserEntities.Where(x => x.Status > 1 && x.EndTime == DateTime.MinValue).ToListAsync();
+			var endTime = DateTime.Now;
+
+			foreach(var userInQuiz in usersInQuiz)
+			{
+				userInQuiz.EndTime = endTime;
+			}
+
+			await _context.SaveChangesAsync();
+		}
 		
 		return StatusCode(200, systemStatus.Status);
 	}
@@ -38,14 +53,7 @@ public class SystemStatusController(AppDbContext _context) : Controller
 				APIKeyGenerator.FlushApiKeys();
 				break;
 			case 2:
-				var usersInQueue = await _context.UserEntities.Where(x => x.Status == 1).ToListAsync();
-
-				foreach(var user in usersInQueue)
-				{
-					user.StartTime = DateTime.Now;
-				}
-
-				await _context.SaveChangesAsync();
+				systemStatusEntity.StartTime = DateTime.Now;
 				break;
 			case 3:
 				// users that didn't answer all questions
@@ -57,10 +65,10 @@ public class SystemStatusController(AppDbContext _context) : Controller
 				}
 
 				await _context.SaveChangesAsync();
-
 				break;
 		}
 
+		systemStatusEntity.UpdatedAt = DateTime.Now;
 		_context.Entry(systemStatusEntity).State = EntityState.Modified;
 
 		try

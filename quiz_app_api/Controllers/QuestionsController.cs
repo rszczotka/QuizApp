@@ -71,25 +71,6 @@ public class QuestionsController(AppDbContext _context) : Controller
 
 		var user = await _context.UserEntities.Where(n => n.Login == APIKeyGenerator.GetLoginByAPIKey(apiKey)).FirstAsync();
 
-		if((DateTime.Now - user.StartTime).TotalMinutes > 45)
-		{
-			var systemStatus = await _context.SystemStatusEntities.FirstAsync();
-			systemStatus.Status = 3;
-			user.EndTime = DateTime.Now;
-
-			// users that didn't answer all questions
-			var usersInQuiz = await _context.UserEntities.Where(x => x.Status > 1 && x.EndTime == DateTime.MinValue).ToListAsync();
-
-			foreach(var userInQuiz in usersInQuiz)
-			{
-				userInQuiz.EndTime = DateTime.Now;
-			}
-
-			await _context.SaveChangesAsync();
-
-			return StatusCode(403, "Quiz has ended");
-		}
-
 		if(user.Status > await _context.QuestionEntities.CountAsync())
 		{
 			user.EndTime = DateTime.Now;
@@ -98,6 +79,7 @@ public class QuestionsController(AppDbContext _context) : Controller
 		}
 
 		var nextQuestion = await _context.QuestionEntities.ElementAtAsync(user.Status);
+		var systemStatus = await _context.SystemStatusEntities.FirstAsync();
 
 		return StatusCode(200, new NextQuestionJson
 		{
@@ -105,8 +87,15 @@ public class QuestionsController(AppDbContext _context) : Controller
 			Text = nextQuestion.Text,
 			Options = nextQuestion.Options,
 			AvailableTime = nextQuestion.AvailableTime,
-			TimeFromBeginning = (int)(DateTime.Now - user.StartTime).TotalSeconds
+			TimeFromBeginning = (int)(DateTime.Now - systemStatus.StartTime).TotalSeconds
 		});
+	}
+
+	[HttpGet("GetQuestionCount")]
+	public async Task<IActionResult> GetQuestionCount()
+	{
+		var questionCount = await _context.QuestionEntities.CountAsync();
+		return StatusCode(200, questionCount);
 	}
 
 	// PUT: api/questions/UpdateQuestion

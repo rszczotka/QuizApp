@@ -79,6 +79,7 @@ public class UserAnswersController(AppDbContext _context) : Controller
 		if((await _context.SystemStatusEntities.FirstAsync()).Status != 3)
 			return StatusCode(403, "System status is not 3 (results)");
 
+		var systemStatus = await _context.SystemStatusEntities.FirstAsync();
 		var users = await _context.UserEntities.Where(x => x.EndTime != DateTime.MinValue && x.AccountType == 0).ToListAsync();
 		var userResults = users.Select(x => new GetLeaderboardJson
 		{
@@ -87,11 +88,11 @@ public class UserAnswersController(AppDbContext _context) : Controller
 				Id = x.Id,
 				Name = x.Name,
 				Surname = x.Surname,
-				StartTime = x.StartTime,
+				StartTime = systemStatus.StartTime,
 				EndTime = x.EndTime
 			},
-			CorrectAnswers = _context.UserAnswerEntities.Where(x => x.User.Id == x.Id && x.ChosenOption == x.Question.CorrectAnswer).Count(),
-			WrongAnswers = _context.UserAnswerEntities.Where(x => x.User.Id == x.Id && x.ChosenOption != x.Question.CorrectAnswer).Count()
+			CorrectAnswers = _context.UserAnswerEntities.Where(y => y.User.Id == x.Id && y.ChosenOption == y.Question.CorrectAnswer).Count(),
+			WrongAnswers = _context.UserAnswerEntities.Where(y => y.User.Id == x.Id && y.ChosenOption != y.Question.CorrectAnswer).Count()
 		}).ToList();
 
 		return StatusCode(200, userResults
