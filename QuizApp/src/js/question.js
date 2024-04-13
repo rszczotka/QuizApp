@@ -7,6 +7,8 @@ let isNextButtonDisable = true;
 const timeDiv = document.querySelector('#time');
 const timeCircle = document.querySelector('#time-circle');
 
+const questionNumberDiv = document.querySelector('#question-number');
+
 const countdownTime = setInterval(() => {
     if (timeLeft !== undefined) {
         timeLeft -= 1 / 60;
@@ -73,17 +75,17 @@ function GetNextQuestion() {
             return response.json();
         })
         .then(data => {
-            console.log('Question fetched successfully');
             document.querySelector('#question').innerHTML = data.text;
-                console.log('Question fetched successfully');
-                document.querySelector('#question').innerHTML = data.text;
-                currentQuestionId = data.id;
-                data.options.forEach((e, i) => {
-                    answers[i].innerHTML = e;
-                });
-                timeLeft = config.totalAvailableTime - (data.time_from_beginning / 60);
-                document.querySelector('.question-number').innerHTML = `${data.id}/${config.totalQuestions}`
-                //TODO hide loader
+            currentQuestionId = data.id;
+            data.options.forEach((e, i) => {
+                answers[i].innerHTML = e;
+            });
+            timeLeft = config.totalAvailableTime - (data.time_from_beginning / 60);
+            console.log(data.id, config.totalQuestions);
+            questionNumberDiv.innerHTML = `${data.id}/${config.totalQuestions}`;
+
+            // document.querySelectorAll('.question-number').innerHTML = `${data.id}/${config.totalQuestions}`
+            //TODO hide loader
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
@@ -94,7 +96,7 @@ function GetNextQuestion() {
                 try {
                     const response = fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
                     const systemStatusData = response.json();
-            
+
                     if (systemStatusData === 0) {
                         window.location.href = 'login.html';
                     } else if (systemStatusData === 1) {
@@ -104,7 +106,7 @@ function GetNextQuestion() {
                         window.stop();
                     } else if (systemStatusData === 3) {
                         //TODO show popup that time is over and redirect user to endScreen
-            
+                        window.location.href = 'endScreen.html';
                     } else {
                         console.log('Unknown status');
                     }
