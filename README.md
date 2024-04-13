@@ -373,6 +373,7 @@ W body
             "id": 2,
             "name": "Kamil",
             "surname": "Zdun",
+            "class": "3TP",
             "start_time": "2024-04-03T21:58:16.7271061",
             "end_time": "2024-04-10T21:15:55.9540494"
         },
@@ -384,6 +385,7 @@ W body
             "id": 5,
             "name": "Adam",
             "surname": "Nowak",
+            "class": "3TP",
             "start_time": "2024-04-03T21:58:16.7271061",
             "end_time": "2024-04-10T21:19:12.9540494"
         },

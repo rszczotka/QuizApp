@@ -19,6 +19,8 @@ public class GetLeaderboardJson
 		public required string Name { get; set; }
 		[JsonPropertyName("surname")]
 		public required string Surname { get; set; }
+		[JsonPropertyName("class")]
+		public required string Class { get; set; }
 		[JsonPropertyName("start_time")]
 		public DateTime StartTime { get; set; }
 		[JsonPropertyName("end_time")]

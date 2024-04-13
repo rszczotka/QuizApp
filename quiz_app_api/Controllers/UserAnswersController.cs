@@ -88,6 +88,7 @@ public class UserAnswersController(AppDbContext _context) : Controller
 				Id = x.Id,
 				Name = x.Name,
 				Surname = x.Surname,
+				Class = x.Class,
 				StartTime = systemStatus.StartTime,
 				EndTime = x.EndTime
 			},
