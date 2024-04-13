@@ -7,6 +7,17 @@ let isNextButtonDisable = true;
 const timeDiv = document.querySelector('#time');
 const timeCircle = document.querySelector('#time-circle');
 
+const countdownTime = setInterval(() => {
+    if (timeLeft !== undefined) {
+        timeLeft -= 1 / 60;
+        timeDiv.innerHTML = Math.floor(timeLeft + 1);
+        if (timeLeft < 0) {
+            // clearInterval(countdownTime);
+            // sendAnswer();
+        }
+    }
+}, 100);
+
 answers.forEach((e, i) => {
     e.addEventListener('click', () => {
         if (typeof chosenIndex !== 'undefined') {
@@ -70,26 +81,38 @@ function GetNextQuestion() {
                 data.options.forEach((e, i) => {
                     answers[i].innerHTML = e;
                 });
-
                 timeLeft = config.totalAvailableTime - (data.time_from_beginning / 60);
-
-                const countdownTime = setInterval(() => {
-                    if (timeLeft !== undefined) {
-                        timeLeft -= 1 / 60;
-                        timeDiv.innerHTML = Math.floor(timeLeft + 1);
-                        if (timeLeft < 0) {
-                            clearInterval(countdownTime);
-                            sendAnswer();
-                        }
-                    }
-                }, 1000);
+                document.querySelector('.question-number').innerHTML = `${data.id}/${config.totalQuestions}`
+                //TODO hide loader
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
             if (error.message.includes('400')) {
                 window.location.href = 'login.html';
             } else if (error.message.includes('403')) {
-                // ... handle 403 error ...
+                console.log('System status is not 2');
+                try {
+                    const response = fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
+                    const systemStatusData = response.json();
+            
+                    if (systemStatusData === 0) {
+                        window.location.href = 'login.html';
+                    } else if (systemStatusData === 1) {
+                        window.location.href = 'login.html';
+                    } else if (systemStatusData === 2) {
+                        console.error('System status is 2, but server thinks that it is not!')
+                        window.stop();
+                    } else if (systemStatusData === 3) {
+                        //TODO show popup that time is over and redirect user to endScreen
+            
+                    } else {
+                        console.log('Unknown status');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('Server failed to respond. Please try again later.')
+                    window.location.href = 'login.html';
+                }
             } else if (error.message.includes('405')) {
                 window.location.href = 'endScreen.html';
             } else {
