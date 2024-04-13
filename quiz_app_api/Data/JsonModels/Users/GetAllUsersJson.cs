@@ -10,7 +10,9 @@ public class GetAllUsersJson
     public required string Name { get; set; }
     [JsonPropertyName("surname")]
     public required string Surname { get; set; }
-    [JsonPropertyName("login")]
+	[JsonPropertyName("class")]
+	public required string Class { get; set; }
+	[JsonPropertyName("login")]
     public required string Login { get; set; }
     [JsonPropertyName("password")]
     public required string Password { get; set; }

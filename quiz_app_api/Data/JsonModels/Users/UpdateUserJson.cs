@@ -17,7 +17,9 @@ public class UpdateUserJson
         public required string Name { get; set; }
         [JsonPropertyName("surname")]
         public required string Surname { get; set; }
-        [JsonPropertyName("password")]
+		[JsonPropertyName("class")]
+		public required string Class { get; set; }
+		[JsonPropertyName("password")]
         public required string Password { get; set; }
         [JsonPropertyName("status")]
         public required int Status { get; set; }

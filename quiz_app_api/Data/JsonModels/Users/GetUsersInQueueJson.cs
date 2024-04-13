@@ -10,4 +10,6 @@ public class GetUsersInQueueJson
     public required string Name { get; set; }
     [JsonPropertyName("surname")]
     public required string Surname { get; set; }
+	[JsonPropertyName("class")]
+	public required string Class { get; set; }
 }

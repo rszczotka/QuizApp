@@ -25,7 +25,7 @@ public class UsersController(AppDbContext _context) : Controller
 				AccountType = 0,
 				Name = data.User.Name,
 				Surname = data.User.Surname,
-				// login is name.surname, so if name is Jan and surname is Kowalski, then login is jan.kowalski
+				Class = data.User.Class,
 				Login = $"{data.User.Name.ToLower()}.{data.User.Surname.ToLower()}",
 				Password = data.User.Password,
 				Status = 0
@@ -55,6 +55,7 @@ public class UsersController(AppDbContext _context) : Controller
 				Id = x.Id,
 				Name = x.Name,
 				Surname = x.Surname,
+				Class = x.Class,
 				Login = x.Login,
 				Password = x.Password,
 				Status = x.Status,
@@ -79,7 +80,8 @@ public class UsersController(AppDbContext _context) : Controller
 			{
 				Id = x.Id,
 				Name = x.Name,
-				Surname = x.Surname
+				Surname = x.Surname,
+				Class = x.Class
 			})
 			.ToListAsync();
 
@@ -109,6 +111,7 @@ public class UsersController(AppDbContext _context) : Controller
 			AccountType = user.AccountType,
 			Name = user.Name,
 			Surname = user.Surname,
+			Class = user.Class,
 			Login = user.Login,
 			ApiKey = APIKeyGenerator.GetOrGenerateAPIKey(user.AccountType, user.Login, user.Password),
 			Status = user.Status
@@ -129,6 +132,7 @@ public class UsersController(AppDbContext _context) : Controller
 
 		userEntity.Name = data.User.Name;
 		userEntity.Surname = data.User.Surname;
+		userEntity.Class = data.User.Class;
 		userEntity.Password = data.User.Password;
 		userEntity.Status = data.User.Status;
 		userEntity.Login = $"{data.User.Name.ToLower()}.{data.User.Surname.ToLower()}";

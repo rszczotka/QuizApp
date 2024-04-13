@@ -34,7 +34,8 @@ W body
     "user": {
         "name": "John",
         "surname": "Smith",
-        "password": 123
+        "password": 123,
+        "class": "3TP"
     }
 }
 ```
@@ -74,22 +75,31 @@ W body
         "user_id": 0,
         "name": "John",
         "surname": "Smith",
+        "class": "3TP",
         "login": "john.smith",
-        "status": 0
+        "password": "123",
+        "status": 0,
+        "end_time": 12389012
     },
     {
         "user_id": 1,
-        "name": "Will",
-        "surname": "Hutcherson",
-        "login": "will.hutcherson",
-        "status": 0
+        "name": "William",
+        "surname": "Afternoon",
+        "class": "3TP",
+        "login": "william.afternoon",
+        "password": "123",
+        "status": 0,
+        "end_time": 12389012
     },
     {
         "user_id": 2,
         "name": "Kamil",
         "surname": "Zdun",
+        "class": "3TP",
         "login": "kamil.zdun",
-        "status": 0
+        "password": "123",
+        "status": 0,
+        "end_time": 12389012
     }
 ]
 ```
@@ -118,17 +128,20 @@ W body
     {
         "user_id": 0,
         "name": "John",
-        "surname": "Smith"
+        "surname": "Smith",
+        "class": "3TP
     },
     {
         "user_id": 1,
         "name": "Will",
-        "surname": "Hutcherson"
+        "surname": "Hutcherson",
+        "class": "3TP"
     },
     {
         "user_id": 2,
         "name": "Kamil",
-        "surname": "Zdun"
+        "surname": "Zdun",
+        "class": "3TP"
     }
 ]
 ```
@@ -142,6 +155,8 @@ W body
 `POST: localhost/api/users/Login/`
 
 ### Co przyjmuje:
+
+W body
 
 ```js
 {
@@ -165,7 +180,9 @@ W body
     "account_type": 0,
     "name": "John",
     "surname": "Smith",
+    "class": 3TP",
     "login": "john.smith",
+    "api_key": "some-api-key",
     "status": 0
 }
 ```
@@ -192,6 +209,7 @@ W body
         "name": "new-name",
         "surname": "new-surname",
         "password": "new-password",
+        "class": "new-class",
         "status": 0
     }
 } 

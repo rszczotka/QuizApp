@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\Questions\questions.csv">
+    <None Update="Data\Seeds\Questions\questions.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -12,7 +12,9 @@ public class LoginReturnJson
     public required string Name { get; set; }
     [JsonPropertyName("surname")]
     public required string Surname { get; set; }
-    [JsonPropertyName("login")]
+	[JsonPropertyName("class")]
+	public required string Class { get; set; }
+	[JsonPropertyName("login")]
     public required string Login { get; set; }
     [JsonPropertyName("api_key")]
     public required string ApiKey { get; set; }

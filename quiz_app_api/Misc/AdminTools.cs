@@ -1,6 +1,4 @@
-﻿using quiz_app_api.Data;
-
-namespace quiz_app_api.Misc;
+﻿namespace quiz_app_api.Misc;
 
 public class AdminTools
 {

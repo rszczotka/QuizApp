@@ -8,13 +8,13 @@ namespace quiz_app_api.Data.Seeds;
 
 public class QuestionsSeeder
 {
-	private static readonly string QuestionFile = "Data/Questions/questions.csv";
+	private static readonly string QuestionsFile = "Data/Seeds/Questions/questions.csv";
 
 	public static void Seed(ModelBuilder modelBuilder)
 	{
 		var questionsCsv = new List<QuestionCsv>();
 		
-		using(var reader = new StreamReader(QuestionFile))
+		using(var reader = new StreamReader(QuestionsFile))
 		using(var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
 		{
 			questionsCsv = csv.GetRecords<QuestionCsv>().ToList();
