@@ -47,10 +47,12 @@ function sendApiRequest() {
                 if (response.status === 200) {
                     return response.text();
                 } else if (response.status === 403) {
-                    document.getElementById("messageBox").innerText = "Serwer ma status 0";
+                    // document.querySelector('.messageBox').innerHTML = `Serwer ma status 0`
+                    // document.querySelector('.messageBox').classList.add('show');
                     throw new Error('Server status 0');
                 } else if (response.status === 400) {
-                    document.getElementById("messageBox").innerText = "Nie znaleziono użytkownika o takim loginie i haśle";
+                    // document.querySelector('.messageBox').innerHTML = `Nie znaleziono użytkownika o takim loginie i haśle`
+                    // document.querySelector('.messageBox').classList.add('show');
                     throw new Error('User not found');
                 } else {
                     throw new Error('Network response was not ok');
@@ -62,15 +64,16 @@ function sendApiRequest() {
                 if (api_key != undefined) {
                     document.cookie = "api_key=" + api_key + "; path=/;";
                     document.cookie = "user_id=" + user_id + "; path=/;";
-                    document.getElementById("messageBox").innerText = "udało się zalogować";
+                    
                     window.location.href = "info.html";
                 } else {
-                    document.getElementById("messageBox").innerText = "logowanie nieudane";
+                    // document.querySelector('.messageBox').innerHTML = `logowanie nieudane`
+                    // document.querySelector('.messageBox').classList.add('show');
                 }
             })
             .catch((error) => console.error(error));
     }
     else {
-        document.getElementById("messageBox").innerText = "uzupełnij wszystkie pola";
+        // document.getElementById("messageBox").innerText = "uzupełnij wszystkie pola";
     }
 }
