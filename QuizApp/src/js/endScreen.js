@@ -1,3 +1,8 @@
+let api_key = getCookie('api_key');
+if (api_key === null) {
+    window.location.href = 'login.html';
+}
+
 const showLeaderboard = document.querySelector("#show-leaderboard");
 
 setInterval(async () => {
