@@ -9,16 +9,18 @@ const timeCircle = document.querySelector('#time-circle');
 
 const questionNumberDiv = document.querySelector('#question-number');
 
+let timeLeft = 60;
+
 const countdownTime = setInterval(() => {
     if (timeLeft !== undefined) {
-        timeLeft -= 1 / 60;
+        timeLeft -= 1;
         timeDiv.innerHTML = Math.floor(timeLeft + 1);
-        if (timeLeft < 0) {
+        if (timeLeft <= 0) {
             // clearInterval(countdownTime);
             // sendAnswer();
         }
     }
-}, 100);
+}, 1000); // 1000 milliseconds = 1 second
 
 answers.forEach((e, i) => {
     e.addEventListener('click', () => {
@@ -70,6 +72,7 @@ function GetNextQuestion() {
                 answers[i].innerHTML = e;
             });
             timeLeft = config.totalAvailableTime - (data.time_from_beginning / 60);
+            console.log(timeLeft);
             console.log(data.id, config.totalQuestions);
             questionNumberDiv.innerHTML = `${data.id}/${config.totalQuestions}`;
 
