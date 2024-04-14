@@ -22,7 +22,7 @@ const countdownTime = setInterval(() => {
 
 answers.forEach((e, i) => {
     e.addEventListener('click', () => {
-        if (typeof chosenIndex !== 'undefined') {
+        if (typeof chosenIndex !== 'undefined' && chosenIndex !== null) {
             answers[chosenIndex].classList.remove('chosen');
         }
         e.classList.add('chosen');
@@ -137,10 +137,10 @@ const sendAnswer = () => {
     fetch(`${config.api_url}/api/useranswers/CreateUserAnswer`, requestOptions)
         .then(response => {
             if (response.status === 201) {
-                // answers[chosenIndex].classList.remove('chosen');
-                // chosenIndex = null;
-                // isNextButtonDisable = true;
-                // nextButton.classList.add('next-disable')
+                answers[chosenIndex].classList.remove('chosen');
+                chosenIndex = null;
+                isNextButtonDisable = true;
+                nextButton.classList.add('next-disable');
                 GetNextQuestion()
             } else if (response.status === 400) {
                 window.location.href = 'login.html';
