@@ -12,6 +12,7 @@ public class SystemStatusSeeder
 			{
 				Id = 1,
 				Status = 0,
+				AvailableTime = 45,
 				UpdatedAt = DateTime.UtcNow
 			}
 		);

@@ -4,6 +4,7 @@ public class SystemStatusEntity
 {
     public int Id { get; set; }
     public int Status { get; set; }
+    public int AvailableTime { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime UpdatedAt { get; set; }
 }

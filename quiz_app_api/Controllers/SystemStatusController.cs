@@ -16,7 +16,7 @@ public class SystemStatusController(AppDbContext _context) : Controller
 	{
 		var systemStatus = await _context.SystemStatusEntities.FirstAsync();
 
-		if((DateTime.Now - (systemStatus.StartTime != DateTime.MinValue ? systemStatus.StartTime : DateTime.Now)).TotalSeconds > 45 * 60)
+		if((DateTime.Now - (systemStatus.StartTime != DateTime.MinValue ? systemStatus.StartTime : DateTime.Now)).TotalSeconds > (await _context.SystemStatusEntities.FirstAsync()).AvailableTime * 60)
 		{
 			systemStatus.Status = 3;
 
