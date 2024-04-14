@@ -22,13 +22,17 @@ const countdownTime = setInterval(() => {
   // Keep time non-negative
   time = Math.max(0, time); 
 
-  // Update displayed time (round down to whole minutes)
-  timeDiv.innerHTML = Math.floor(time);
+  // Update displayed time (round down to whole minutes if time is more than 1 minute, else show in seconds)
+  if (time > 1) {
+    timeDiv.innerHTML = Math.floor(time);
+  } else {
+    timeDiv.innerHTML = Math.floor(time * 60);
+  }
 
   // Check if time has run out (less than 1 minute remaining)
-  if (time <= 1) {
+  if (time <= 0) {
     clearInterval(countdownTime);
-    // Your logic for when the timer ends (e.g., sendAnswer())
+    window.location.href = 'endScreen.html';
   }
 }, 10);
 
@@ -84,7 +88,6 @@ function GetNextQuestion() {
             });
             time = config.totalAvailableTime - (data.time_from_beginning / 60);
             console.log(time);
-            console.log(data.id, config.totalQuestions);
             questionNumberDiv.innerHTML = `${data.id}/${config.totalQuestions}`;
 
             // document.querySelectorAll('.question-number').innerHTML = `${data.id}/${config.totalQuestions}`
