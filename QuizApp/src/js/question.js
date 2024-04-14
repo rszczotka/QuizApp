@@ -9,18 +9,29 @@ const timeCircle = document.querySelector('#time-circle');
 
 const questionNumberDiv = document.querySelector('#question-number');
 
-let timeLeft = 60;
+let initTime = 30; // Initial time in minutes
+let time = initTime; // Current time remaining (in minutes)
+const howMuchCountdown = 100; // Number of times to decrement per second (100ms)
+
+timeDiv.innerHTML = time; // Display initial time
 
 const countdownTime = setInterval(() => {
-    if (timeLeft !== undefined) {
-        timeLeft -= 1;
-        timeDiv.innerHTML = Math.floor(timeLeft + 1);
-        if (timeLeft <= 0) {
-            // clearInterval(countdownTime);
-            // sendAnswer();
-        }
-    }
-}, 1000); // 1000 milliseconds = 1 second
+  // Decrement time by 1 minute divided by howMuchCountdown (effectively milliseconds per minute)
+  time -= 1 / (howMuchCountdown * 60); 
+
+  // Keep time non-negative
+  time = Math.max(0, time); 
+
+  // Update displayed time (round down to whole minutes)
+  timeDiv.innerHTML = Math.floor(time);
+
+  // Check if time has run out (less than 1 minute remaining)
+  if (time <= 1) {
+    clearInterval(countdownTime);
+    // Your logic for when the timer ends (e.g., sendAnswer())
+  }
+}, 10);
+
 
 answers.forEach((e, i) => {
     e.addEventListener('click', () => {
@@ -71,8 +82,8 @@ function GetNextQuestion() {
             data.options.forEach((e, i) => {
                 answers[i].innerHTML = e;
             });
-            timeLeft = config.totalAvailableTime - (data.time_from_beginning / 60);
-            console.log(timeLeft);
+            time = config.totalAvailableTime - (data.time_from_beginning / 60);
+            console.log(time);
             console.log(data.id, config.totalQuestions);
             questionNumberDiv.innerHTML = `${data.id}/${config.totalQuestions}`;
 
