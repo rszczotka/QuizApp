@@ -532,15 +532,11 @@ W body
 
 </details>
 
-<details><summary>GetNextQuestion</summary>
+<details><summary>GetQuestionCount</summary>
     
 ### Url:
 
 `GET: localhost/api/questions/GetQuestionCount`
-
-### Co przyjmuje:
-
-`localhost/api/questions/GetQuestionCount`
 
 ### Co zwraca:
 
@@ -627,10 +623,6 @@ Nie można stworzyć statusu systemu
 ### Url:
 
 `GET: localhost/api/systemstatus/GetSystemStatus/`
-
-### Co przyjmuje:
-
--
 
 ### Co zwraca:
 
