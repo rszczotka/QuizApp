@@ -4,8 +4,9 @@ if (api_key === null) {
 }
 
 const showLeaderboard = document.querySelector("#show-leaderboard");
+console.log(config.api_url);
 
-setInterval(async () => {
+let intervalId = setInterval(async () => {
     try {
         const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
         const systemStatusData = await response.json();
@@ -24,7 +25,7 @@ setInterval(async () => {
             showLeaderboard.addEventListener("click", () => {
                 window.open("./leaderboard.html"); 
             });
-
+            clearInterval(intervalId);
         } else {
             console.log('Unknown status');
         }
