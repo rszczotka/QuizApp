@@ -66,6 +66,20 @@ const countdownTime = setInterval(() => {
     }
 }, 10);
 
+// const checkPageFocus = async () => {
+//     if (document.hasFocus()) {
+//         console.log("Page is active");
+//         // You can add more logic here when the page is active
+//     } else {
+//         console.log("Page is not active");
+//         // You can add more logic here when the page is not active
+//         sendAnswer(0);
+//     }
+// };
+// const startInterval = () => {
+//     intervalId = setInterval(checkPageFocus, 2000);
+// };
+
 
 answers.forEach((e, i) => {
     e.addEventListener('click', () => {
@@ -153,14 +167,19 @@ function GetNextQuestion() {
         })
 }
 GetNextQuestion()
+// startInterval();
 
-const sendAnswer = () => {
+
+const sendAnswer = (documentHasFocus = 1) => {
     if (typeof chosenIndex === 'undefined') {
         chosenIndex = null;
     }
 
     var chosen_option = chosenIndex;
     // console.log(chosen_option);
+    // if (documentHasFocus === 0) {
+    //     chosen_option = "NULL";
+    // }
     const data = JSON.stringify({
         "question_id": currentQuestionId,
         "chosen_option": chosen_option,

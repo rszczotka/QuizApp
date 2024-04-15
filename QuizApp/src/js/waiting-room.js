@@ -37,7 +37,7 @@ setInterval(async () => {
             const kafelekCount = document.getElementsByClassName('kafelek').length;
             if(kafelekCount === 1){
                 osWord = " osoba";
-            } else if(kafelekCount < 5){
+            } else if(kafelekCount < 5 && kafelekCount > 1){
                 osWord = " osoby";
             } else {
                 osWord = " osób";

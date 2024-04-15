@@ -1,6 +1,6 @@
 var config = {
     api_url: 'http://192.168.55.110:5000',
-    totalAvailableTime: 5,
+    totalAvailableTime: 15,
     totalQuestions: 20,
 };
 
