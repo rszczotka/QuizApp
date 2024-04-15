@@ -32,7 +32,8 @@ const countdownTime = setInterval(() => {
     // Check if time has run out (less than 1 minute remaining)
     if (time <= 0) {
         clearInterval(countdownTime);
-        setInterval(async () => {
+        
+        const fetchSystemStatus = async () => {
             try {
                 const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
                 const systemStatusData = await response.json();
@@ -55,7 +56,13 @@ const countdownTime = setInterval(() => {
                 alert('Server failed to respond. Please try again later.')
                 window.location.href = 'login.html';
             }
-        }, 5000);
+        };
+
+        // Call the function once immediately
+        fetchSystemStatus();
+
+        // Then start the interval
+        setInterval(fetchSystemStatus, 5000);
     }
 }, 10);
 
