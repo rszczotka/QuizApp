@@ -16,8 +16,6 @@ body::before {
                 radial-gradient(#027570 40%, transparent 0%);
     background-size: 500px 500px, 500px 500px, 400px 400px; 
     background-position: 20% 100%, 230% 210%, 200% 360%; 
-        radial-gradient(#027570 30%, transparent 0%),
-        radial-gradient(#027570 40%, transparent 0%);
     background-size: 500px 500px, 500px 500px, 400px 400px;
     background-position: 20% 20%, 230% 130%, 200% 280%;
     z-index: -1;
