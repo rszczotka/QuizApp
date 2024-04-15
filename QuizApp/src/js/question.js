@@ -9,7 +9,7 @@ const timeCircle = document.querySelector('#time-circle');
 
 const questionNumberDiv = document.querySelector('#question-number');
 
-let initTime = 30; // Initial time in minutes
+let initTime = config.totalAvailableTime; // Initial time in minutes
 let time = initTime; // Current time remaining (in minutes)
 const howMuchCountdown = 100; // Number of times to decrement per second (100ms)
 
