@@ -41,7 +41,7 @@ fetch(`${config.api_url}/api/systemstatus/GetSystemStatus/`)
                         let timeMs = Math.floor(time % 100);
                         let timeStr = `${timeMin}min ${timeSec}.${timeMs}s`;
 
-                        let correct_answers = `${e.correct_answers}/20`;
+                        let correct_answers = `${e.correct_answers}/${config.totalQuestions}`;
 
                         leaderboardArr.push({
                             "id": e.user.id,
