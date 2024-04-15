@@ -97,53 +97,53 @@ function GetNextQuestion() {
     };
 
     fetch(`${config.api_url}/api/questions/GetNextQuestion/${api_key}`, requestOptions)
-    .then(response => {
-        if (response.status === 403) {
-            console.log('System status is not 2');
-            return fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`)
-                .then(response => response.json())
-                .then(systemStatusData => {
-                    if (systemStatusData === 0) {
-                        window.location.href = 'login.html';
-                    } else if (systemStatusData === 1) {
-                        window.location.href = 'login.html';
-                    } else if (systemStatusData === 2) {
-                        console.error('System status is 2, but server thinks that it is not!')
-                        window.stop();
-                    } else if (systemStatusData === 3) {
-                        //TODO show popup that time is over and redirect user to endScreen
-                        alert('Time is over. Redirecting to end screen.'); //! temporary
-                        window.location.href = 'endScreen.html';
-                    } else {
-                        console.log('Unknown status');
-                    }
-                    throw new Error('Server status 0');
-                });
-        } else if (response.status === 405) {
-            //TODO show popup that user responded to all questions and redirect user to endScreen
-            window.location.href = 'endScreen.html';
-        } else if (response.status === 400) {
-            //? User with such API key either does not exist or is not logged in
-            window.location.href = 'login.html';
-        } else if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        } else {
-            return response.json();
-        }
-    })
-    .then(data => {
-        if (data && data.status === 200) {
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else if (response.status === 403) {
+                console.log('System status is not 2');
+                return fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`)
+                    .then(response => response.json())
+                    .then(systemStatusData => {
+                        if (systemStatusData === 0) {
+                            window.location.href = 'login.html';
+                        } else if (systemStatusData === 1) {
+                            window.location.href = 'login.html';
+                        } else if (systemStatusData === 2) {
+                            console.error('System status is 2, but server thinks that it is not!')
+                            window.stop();
+                        } else if (systemStatusData === 3) {
+                            //TODO show popup that time is over and redirect user to endScreen
+                            alert('Time is over. Redirecting to end screen.'); //! temporary
+                            window.location.href = 'endScreen.html';
+                        } else {
+                            console.log('Unknown status');
+                        }
+                        throw new Error('Server status 0');
+                    });
+            } else if (response.status === 405) {
+                //TODO show popup that user responded to all questions and redirect user to endScreen
+                window.location.href = 'endScreen.html';
+            } else if (response.status === 400) {
+                //? User with such API key either does not exist or is not logged in
+                window.location.href = 'login.html';
+            } else if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
             document.querySelector('#question').innerHTML = data.text;
             currentQuestionId = data.id;
             data.options.forEach((e, i) => {
                 answers[i].innerHTML = e;
             });
             time = config.totalAvailableTime - (data.time_from_beginning / 60);
-            console.log(time);
+            // console.log(time);
             questionNumberDiv.innerHTML = `${data.id}/${config.totalQuestions}`;
             //TODO hide loader
-        } 
-    })
+        })
 }
 GetNextQuestion()
 
@@ -153,7 +153,7 @@ const sendAnswer = () => {
     }
 
     var chosen_option = chosenIndex;
-    console.log(chosen_option);
+    // console.log(chosen_option);
     const data = JSON.stringify({
         "question_id": currentQuestionId,
         "chosen_option": chosen_option,

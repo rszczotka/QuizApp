@@ -35,7 +35,14 @@ setInterval(async () => {
             });
             const userCounter = document.getElementById('user-counter');
             const kafelekCount = document.getElementsByClassName('kafelek').length;
-            userCounter.textContent = kafelekCount + " osób";
+            if(kafelekCount === 1){
+                osWord = " osoba";
+            } else if(kafelekCount < 5){
+                osWord = " osoby";
+            } else {
+                osWord = " osób";
+            }
+            userCounter.textContent = kafelekCount + osWord;
         } else if (systemStatusData === 2) {
             window.location.href = 'question.html';
         } else if (systemStatusData === 3) {
@@ -46,7 +53,6 @@ setInterval(async () => {
     } catch (error) {
         clearInterval();
         console.error(error);
-        alert('Server failed to respond. Please try again later.')
         window.location.href = 'login.html';
     }
 }, 5000);
