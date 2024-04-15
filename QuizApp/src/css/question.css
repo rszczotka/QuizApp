@@ -5,7 +5,7 @@ main{
 
 #main{
     margin: 10px;
-    height: 85vh;
+    height: 85dvh;
     min-height: 500px;
     position: relative;
 }
