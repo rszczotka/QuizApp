@@ -96,8 +96,8 @@ public class UsersController(AppDbContext _context) : Controller
 
 		if(user == null)
 			return StatusCode(400, "No user found with login = " +  data.Login + " and password = " + data.Password);
-		if(user.AccountType != 1 && (await _context.SystemStatusEntities.FirstAsync()).Status == 0)
-			return StatusCode(403, "System status is 0 (shut down)");
+		if(user.AccountType != 1 && (await _context.SystemStatusEntities.FirstAsync()).Status != 1)
+			return StatusCode(403, "System status is not 1 (queue)");
 
 		if(user.Status == 0)
 		{

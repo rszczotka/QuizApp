@@ -45,6 +45,20 @@ public class UserAnswersController(AppDbContext _context) : Controller
 		return StatusCode(201);
 	}
 
+	[HttpPost("SkipUserAnswer/{apiKey}")]
+	public async Task<IActionResult> SkipUserAnswer(string apiKey)
+	{
+		if(!AdminTools.IsUser(apiKey))
+			return StatusCode(400, "Not a user API key, or user not logged in");
+
+		var user = await _context.UserEntities.Where(x => x.Login == APIKeyGenerator.GetLoginByAPIKey(apiKey)).FirstAsync();
+		user.Status++;
+
+		await _context.SaveChangesAsync();
+
+		return StatusCode(201);
+	}
+
 	// GET: api/useranswers/GetUserAnswers
 	[HttpGet("GetUserAnswers/{adminApiKey}/{userId}")]
 	public async Task<IActionResult> GetUserAnswers(string adminApiKey, int userId)

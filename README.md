@@ -280,6 +280,21 @@ W body
 
 </details>
 
+<details><summary>SkipUserAnswer</summary>
+    
+### Url:
+
+`POST: localhost/api/useranswers/SkipUserAnswer/apiKey`
+
+### Co zwraca:
+
+```txt
+400 - użytkownik o podanym API key nie istnieje lub nie jest zalogowany
+201 - sukces
+```
+
+</details>
+
 > Read
 
 <details><summary>GetUserAnswers</summary>
