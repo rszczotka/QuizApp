@@ -169,7 +169,7 @@ W body
 
 ```txt
 400 - nie znaleziono użytkownika o takim loginie i haśle
-403 - status systemu = 0 (nie dotyczy adminów)
+403 - status systemu jest inny niż 1 (nie dotyczy adminów)
 200 - sukces i dane użytkownika
 
 ```
@@ -180,7 +180,7 @@ W body
     "account_type": 0,
     "name": "John",
     "surname": "Smith",
-    "class": 3TP",
+    "class": "3TP",
     "login": "john.smith",
     "api_key": "some-api-key",
     "status": 0
