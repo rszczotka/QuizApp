@@ -3,8 +3,6 @@ if (api_key === null) {
     window.location.href = 'login.html';
 }
 
-const showLeaderboard = document.querySelector("#show-leaderboard");
-
 async function fetchSystemStatus() {
     try {
         const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
@@ -15,15 +13,9 @@ async function fetchSystemStatus() {
         } else if (systemStatusData === 1) {
             window.location.href = 'login.html';
         } else if (systemStatusData === 2) {
-            showLeaderboard.innerHTML = "Poczekaj na zakończenie testu";
-            showLeaderboard.style.backgroundColor = "#3b3b3b";
+            //endScrean.html
         } else if (systemStatusData === 3) {
-            showLeaderboard.innerHTML = "Zobacz tabele wyników";
-            showLeaderboard.style.backgroundColor = "var(--primary)";
-
-            showLeaderboard.addEventListener("click", () => {
-                window.open("./leaderboard.html"); 
-            });
+            window.location.href = 'leaderboard.html';
             clearInterval(intervalId);
         } else {
             console.log('Unknown status');
