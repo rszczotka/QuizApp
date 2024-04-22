@@ -13,7 +13,7 @@ async function fetchSystemStatus() {
         } else if (systemStatusData === 1) {
             window.location.href = 'login.html';
         } else if (systemStatusData === 2) {
-            //endScrean.html
+            //endScreen.html
         } else if (systemStatusData === 3) {
             window.location.href = 'leaderboard.html';
             clearInterval(intervalId);
