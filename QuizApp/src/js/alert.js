@@ -22,21 +22,22 @@ const Alert = (msg, type = 0, removeTime = 0, redirect = "") => {
 
     alertClose.addEventListener("click", () => {
         alertWindow.remove();
-        if(!redirect == ""){
+        if (!redirect == "") {
             window.location.href = redirect;
         }
     });
 
-    if(!removeTime == 0){
+    if (!removeTime == 0) {
         setTimeout(() => {
             alertWindow.classList.add('fade-out');
             setTimeout(() => {
+                window.location.href = redirect;
                 alertWindow.remove();
             }, 5000);
         }, removeTime);
     }
 
-    switch(type){
+    switch (type) {
         case 0:
             alertWindow.classList.add("alert-success");
             break;

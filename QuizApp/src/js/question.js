@@ -66,21 +66,6 @@ const countdownTime = setInterval(() => {
     }
 }, 10);
 
-// const checkPageFocus = async () => {
-//     if (document.hasFocus()) {
-//         console.log("Page is active");
-//         // You can add more logic here when the page is active
-//     } else {
-//         console.log("Page is not active");
-//         // You can add more logic here when the page is not active
-//         sendAnswer(0);
-//     }
-// };
-// const startInterval = () => {
-//     intervalId = setInterval(checkPageFocus, 2000);
-// };
-
-
 answers.forEach((e, i) => {
     e.addEventListener('click', () => {
         if (typeof chosenIndex !== 'undefined' && chosenIndex !== null) {
@@ -134,16 +119,13 @@ function GetNextQuestion() {
                             console.error('System status is 2, but server thinks that it is not!')
                             window.stop();
                         } else if (systemStatusData === 3) {
-                            //TODO show popup that time is over and redirect user to endScreen
-                            alert('Time is over. Redirecting to end screen.'); //! temporary
-                            window.location.href = 'endScreen.html';
+                            Alert("Czas na odpowiedź minął! Przekierowywanie na ekran końcowy.", 3, 3000, "endScreen.html")
                         } else {
                             console.log('Unknown status');
                         }
                         throw new Error('Server status 0');
                     });
             } else if (response.status === 405) {
-                //TODO show popup that user responded to all questions and redirect user to endScreen
                 window.location.href = 'endScreen.html';
             } else if (response.status === 400) {
                 //? User with such API key either does not exist or is not logged in
@@ -167,7 +149,6 @@ function GetNextQuestion() {
         })
 }
 GetNextQuestion()
-// startInterval();
 
 
 const sendAnswer = (documentHasFocus = 1) => {
@@ -176,10 +157,6 @@ const sendAnswer = (documentHasFocus = 1) => {
     }
 
     var chosen_option = chosenIndex;
-    // console.log(chosen_option);
-    // if (documentHasFocus === 0) {
-    //     chosen_option = "NULL";
-    // }
     const data = JSON.stringify({
         "question_id": currentQuestionId,
         "chosen_option": chosen_option,
@@ -216,10 +193,12 @@ const sendAnswer = (documentHasFocus = 1) => {
                 } else {
                     console.log('Unknown status');
                 }
-            }
-            else if (response.status === 405) {
+            } else if (response.status === 405) {
                 window.location.href = 'endScreen.html';
+            } else if(response.status === 500){
+                Alert("Błąd podczas tworzenia odpowiedzi użytkownika!", 1)
             }
+
             else {
                 throw new Error('Network response was not ok');
             }

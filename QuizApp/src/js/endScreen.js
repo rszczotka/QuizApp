@@ -4,9 +4,8 @@ if (api_key === null) {
 }
 
 const showLeaderboard = document.querySelector("#show-leaderboard");
-console.log(config.api_url);
 
-let intervalId = setInterval(async () => {
+async function fetchSystemStatus() {
     try {
         const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
         const systemStatusData = await response.json();
@@ -35,4 +34,10 @@ let intervalId = setInterval(async () => {
         alert('Server failed to respond. Please try again later.')
         window.location.href = 'login.html';
     }
-}, 5000);
+}
+
+// Fetch system status once the site loads
+fetchSystemStatus();
+
+// Then start the interval loop
+let intervalId = setInterval(fetchSystemStatus, 5000);

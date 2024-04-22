@@ -18,5 +18,5 @@ const countdownTime = setInterval(() => {
 }, 10);
 
 const goToQuestions = () => {
-    //go to questions
+    window.location.href = 'question.html';
 }

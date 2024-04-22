@@ -44,7 +44,7 @@ setInterval(async () => {
             }
             userCounter.textContent = kafelekCount + osWord;
         } else if (systemStatusData === 2) {
-            window.location.href = 'question.html';
+            window.location.href = 'timer.html';
         } else if (systemStatusData === 3) {
             window.location.href = 'endScreen.html';
         } else {
@@ -55,4 +55,4 @@ setInterval(async () => {
         console.error(error);
         window.location.href = 'login.html';
     }
-}, 5000);
+}, 1000);

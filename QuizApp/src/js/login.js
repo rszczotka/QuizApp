@@ -36,12 +36,10 @@ function sendApiRequest() {
                 if (response.status === 200) {
                     return response.text();
                 } else if (response.status === 403) {
-                    // document.querySelector('.messageBox').innerHTML = `Serwer ma status 0`
-                    // document.querySelector('.messageBox').classList.add('show');
+                    Alert("Serwer ma status 0", 2)
                     throw new Error('Server status 0');
                 } else if (response.status === 400) {
-                    // document.querySelector('.messageBox').innerHTML = `Nie znaleziono użytkownika o takim loginie i haśle`
-                    // document.querySelector('.messageBox').classList.add('show');
+                    Alert("Nie znaleziono użytkownika o takim loginie i haśle, spróbuj ponownie", 1)
                     throw new Error('User not found');
                 } else {
                     throw new Error('Network response was not ok');
@@ -56,13 +54,12 @@ function sendApiRequest() {
                     
                     window.location.href = "info.html";
                 } else {
-                    // document.querySelector('.messageBox').innerHTML = `logowanie nieudane`
-                    // document.querySelector('.messageBox').classList.add('show');
+                    Alert("Serwer nie zwrócił klucza API", 2)
                 }
             })
             .catch((error) => console.error(error));
     }
     else {
-        // document.getElementById("messageBox").innerText = "uzupełnij wszystkie pola";
+        Alert("Uzupełnij wszystkie pola", 3)
     }
 }
