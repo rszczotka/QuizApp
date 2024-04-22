@@ -143,15 +143,17 @@ function GetNextQuestion() {
                 answers[i].innerHTML = e;
             });
             time = config.totalAvailableTime - (data.time_from_beginning / 60);
+            if(time <= 0){
+                Alert("Czas na odpowiedź minął! Przekierowywanie na ekran końcowy.", 3, 3000, "endScreen.html")
+            }
             // console.log(time);
             questionNumberDiv.innerHTML = `${data.id}/${config.totalQuestions}`;
-            //TODO hide loader
         })
 }
 GetNextQuestion()
 
 
-const sendAnswer = (documentHasFocus = 1) => {
+const sendAnswer = () => {
     if (typeof chosenIndex === 'undefined') {
         chosenIndex = null;
     }
