@@ -36,7 +36,7 @@ body::before {
 
 main {
     max-width: 400px;
-    margin: 50px auto;
+    margin: 6dvh auto 0 auto;
     padding: 20px;
     padding-top: 20px;
     align-items: center;
@@ -51,7 +51,7 @@ form {
 #Icon {
     background: var(--bg-secondary);
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 1dvh;
     border-radius: 50%;
     line-height: 7px;
     padding-top: 1px;
