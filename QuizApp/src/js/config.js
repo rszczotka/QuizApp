@@ -1,6 +1,6 @@
 var config = {
-    api_url: 'http://localhost:5000',
-    totalAvailableTime: 15,
+    api_url: 'http://192.168.55.117:5000',
+    totalAvailableTime: 10,
     totalQuestions: 20,
 };
 
