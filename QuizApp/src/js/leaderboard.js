@@ -33,13 +33,14 @@ fetch(`${config.api_url}/api/systemstatus/GetSystemStatus/`)
                     let leaderboardArr = [];
                     result.forEach(e => {
                         let name = `${e.user.name} ${e.user.surname}`;
+
                         let start_time = Date.parse(e.user.start_time);
                         let end_time = Date.parse(e.user.end_time);
                         let time = end_time - start_time;
                         let timeMin = Math.floor(time / (1000 * 60));
-                        let timeSec = Math.floor(time % 1000);
-                        let timeMs = Math.floor(time % 100);
-                        let timeStr = `${timeMin}min ${timeSec}.${timeMs}s`;
+                        let timeSec = Math.floor(time % (1000 * 60) / 1000);
+                        let timeMs = Math.floor(time % 1000);
+                        let timeStr = `${timeMin}min ${timeSec}s ${timeMs}ms`;
 
                         let correct_answers = `${e.correct_answers}/${config.totalQuestions}`;
 

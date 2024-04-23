@@ -43,7 +43,7 @@ main {
 }
 
 form {
-    margin-top: 100px;
+    margin-top: 5vh;
     display: flex;
     flex-direction: column;
 }
@@ -94,7 +94,7 @@ input {
 }
 
 button {
-    margin-top: 80px;
+    margin-top: 10dvh;
     background-color: #ffc34a;
     color: white;
     padding: 10px;
