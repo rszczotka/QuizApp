@@ -33,7 +33,7 @@ main{
     fill: none;
     stroke: var(--primary);
     stroke-dasharray: 440;
-    stroke-dashoffset: 190;
+    stroke-dashoffset: 0;
     stroke-linecap: round;
     fill: none;
 }
