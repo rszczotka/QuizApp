@@ -24,7 +24,17 @@
             <label for="password"><b>Wprowadź swoje hasło</b></label>
             <input type="password" id="password" name="password" placeholder="Twoje hasło">
             <br>
-            <button type="submit" onclick="sendApiRequest()" style="user-select: none;">Start</button>
+            <div id="agreement-div">
+                <input type="checkbox" id="agreement-checkbox" name="agreement">
+                <label for="agreement" id="agreement-label" style="user-select: none;">
+                <b>Wyrażam zgode na regulamin konkursu</b> <span id="agreement-more">WIĘCEJ</span>
+                <span id="details">
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przeprowadzenia konkursu szkolnego "Festiwal Nauki" zgodnie z art. 6 ust. 1 lit. a Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych).
+                    </span>
+                </label>
+            </div>
+            <br>
+            <button id="login-button" type="submit" disabled onclick="sendApiRequest()" style="user-select: none;">Start</button>
         </form>
     </main>
 </body>

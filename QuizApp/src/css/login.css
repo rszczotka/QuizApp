@@ -107,8 +107,9 @@ button {
     font-weight: bold;
 }
 
-button:hover {
-    background-color: #ffba30;
+button:disabled {
+    background-color: #494949;
+    color: #c2c2c2;
 }
 
 .messageBox {
@@ -128,4 +129,22 @@ button:hover {
 
 .messageBox.show {
     opacity: 1;
+}
+
+
+#details{
+    display: none;
+    margin-top: 20px;
+}
+#agreement-more{
+    color: #ffba30;
+}
+#agreement-checkbox{
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 20px;
+}
+#agreement-div{
+    display: flex;
+    align-items: center;
 }

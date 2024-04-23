@@ -4,6 +4,48 @@ window.onload = function () {
     };
 };
 
+
+
+const agreement = document.querySelector("#agreement");
+const agreementCheckbox = document.querySelector("#agreement-checkbox");
+const agreementMore = document.querySelector("#agreement-more");
+
+let isOpenAgreement = false;
+
+agreementMore.addEventListener('click', ()=>{
+    if(!isOpenAgreement){
+        details.style.display = 'block';
+        agreementMore.innerHTML = 'MNIEJ';
+    }else{
+        details.style.display = 'none';
+        agreementMore.innerHTML = 'WIĘCEJ';
+    }
+    isOpenAgreement = !isOpenAgreement;
+});
+
+const inputs = [document.getElementById("login"), document.getElementById("password"), agreementCheckbox];
+
+const checkAllValues = () => {
+    console.log(inputs[2].checked)
+    if(inputs[0].value != '' && inputs[1].value != '' && inputs[2].checked){
+        document.querySelector('#login-button').disabled = false;
+    }else{
+        document.querySelector('#login-button').disabled = true;
+    }
+};
+
+inputs.forEach(e => {
+    if(e.type != 'checkbox'){
+        e.addEventListener('input', () => {
+            checkAllValues();
+        }); 
+    }else{
+        e.addEventListener('click', () => {
+            checkAllValues();
+        });
+    }
+});
+
 let api_key = getCookie('api_key');
 if (api_key !== null) {
     window.location.href = 'info.html';
@@ -58,6 +100,9 @@ function sendApiRequest() {
                 }
             })
             .catch((error) => console.error(error));
+    }
+    else if (!agreementCheckbox.checked){
+        Alert("Zaakceptuj regulamin konkursu", 1)
     }
     else {
         Alert("Uzupełnij wszystkie pola", 3)
