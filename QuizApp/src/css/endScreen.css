@@ -3,9 +3,7 @@ body {
     margin: 0;
     position: relative;
     color: var(--bg);
-       /* jakby coś było nie tak z wyglądem usuńcie height i overflow */
-    height: 100vh;
-    overflow: hidden; 
+    min-height: 100dvh;
 }
 body::before {
     content: "";

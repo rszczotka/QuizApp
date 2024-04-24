@@ -2,9 +2,7 @@ body {
     background-color: #026863;
     margin: 0;
     position: relative;
-       /* jakby coś było nie tak z wyglądem usuńcie height i overflow */
-    height: 100vh;
-    overflow: hidden; 
+    min-height: 100dvh;
 }
 
 body::before {
