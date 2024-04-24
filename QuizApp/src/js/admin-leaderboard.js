@@ -1,21 +1,5 @@
-// setInterval(async () => {
-//     try {
-//         const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
-//         const systemStatusData = await response.json();
-
-//         if (systemStatusData === 3) {
-//             window.location.href = 'endScreenAdmin.html';
-//         } else {
-//             console.log('Unknown status');
-//         }
-//     } catch (error) {
-//         clearInterval();
-//         console.error(error);
-//         window.location.href = 'login.html';
-//     }
-// }, 5000);
-
 const timeDiv = document.querySelector('#time');
+
 const timeCircle = document.querySelector('#time-circle');
 
 let initTime = config.totalAvailableTime; // Initial time in minutes
@@ -35,7 +19,12 @@ const requestOptions = {
     redirect: "follow",
 };
 
-fetch(`${config.api_url}/api/questions/GetNextQuestion/4848734398e318adb7babb90de5d7828d8fcf897a823d96965935b5e246e41b4b`, requestOptions)
+let api_key = getCookie('api_key');
+if (api_key === null) {
+    window.location.href = 'login.html';
+}
+
+fetch(`${config.api_url}/api/questions/GetNextQuestion/${api_key}`, requestOptions)
     .then(response => {
         if (response.status === 200) {
             return response.json();
@@ -79,6 +68,29 @@ const countdownTime = setInterval(() => {
 
     // Keep time non-negative
     time = Math.max(0, time);
+
+
+    if (time > 1) {
+        timeDiv.innerHTML = Math.floor(time);
+    } else {
+        timeDiv.innerHTML = Math.floor(time * 60);
+    }
+
+    if(time > 0){
+        timeCircle.style.strokeDashoffset = Math.floor(((440-190) * (1-time/initTime) + 190)*10)/10;
+    }
+
+    if(time < initTime*.02){
+        timeCircle.style.stroke = "#fe5c5c";
+        timeDiv.style.color = "#fe5c5c";
+    }else if(time < initTime*.05){
+        timeCircle.style.stroke = "#ff7400";
+        timeDiv.style.color = "#ff7400";
+    }else if(time < initTime*.07){
+        timeCircle.style.stroke = "#ffdf00";
+        timeDiv.style.color = "#ffdf00";
+    }
+
 
     // Update displayed time (round down to whole minutes if time is more than 1 minute, else show in seconds)
     if (time > 1) {
