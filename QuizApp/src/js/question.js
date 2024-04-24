@@ -29,17 +29,17 @@ const countdownTime = setInterval(() => {
         timeDiv.innerHTML = Math.floor(time * 60);
     }
 
-    if(time > 0){
-        timeCircle.style.strokeDashoffset = Math.floor(((440-190) * (1-time/initTime) + 190)*10)/10;
+    if (time > 0) {
+        timeCircle.style.strokeDashoffset = Math.floor(((440 - 190) * (1 - time / initTime) + 190) * 10) / 10;
     }
 
-    if(time < initTime*.02){
+    if (time < initTime * .02) {
         timeCircle.style.stroke = "#fe5c5c";
         timeDiv.style.color = "#fe5c5c";
-    }else if(time < initTime*.05){
+    } else if (time < initTime * .05) {
         timeCircle.style.stroke = "#ff7400";
         timeDiv.style.color = "#ff7400";
-    }else if(time < initTime*.07){
+    } else if (time < initTime * .07) {
         timeCircle.style.stroke = "#ffdf00";
         timeDiv.style.color = "#ffdf00";
     }
@@ -47,7 +47,7 @@ const countdownTime = setInterval(() => {
     // Check if time has run out (less than 1 minute remaining)
     if (time <= 0) {
         clearInterval(countdownTime);
-        
+
         const fetchSystemStatus = async () => {
             try {
                 const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
@@ -154,11 +154,15 @@ function GetNextQuestion() {
         .then(data => {
             document.querySelector('#question').innerHTML = data.text;
             currentQuestionId = data.id;
-            data.options.forEach((e, i) => {
-                answers[i].innerHTML = e;
+            let shuffledOptions = [...data.options].sort(() => Math.random() - 0.5);
+
+            shuffledOptions.forEach((option, i) => {
+                let originalIndex = data.options.indexOf(option);
+                answers[i].innerHTML = option;
+                answers[i].id = originalIndex;
             });
             time = config.totalAvailableTime - (data.time_from_beginning / 60);
-            if(time <= 0){
+            if (time <= 0) {
                 Alert("Czas na odpowiedź minął! Przekierowywanie na ekran końcowy.", 3, 3000, "endScreen.html")
             }
             // console.log(time);
@@ -167,13 +171,12 @@ function GetNextQuestion() {
 }
 GetNextQuestion()
 
-
 const sendAnswer = () => {
     if (typeof chosenIndex === 'undefined') {
         chosenIndex = null;
     }
 
-    var chosen_option = chosenIndex;
+    var chosen_option = document.querySelector('.answer.chosen').id;
     const data = JSON.stringify({
         "question_id": currentQuestionId,
         "chosen_option": chosen_option,
@@ -212,7 +215,7 @@ const sendAnswer = () => {
                 }
             } else if (response.status === 405) {
                 window.location.href = 'endScreen.html';
-            } else if(response.status === 500){
+            } else if (response.status === 500) {
                 Alert("Błąd podczas tworzenia odpowiedzi użytkownika!", 1)
             }
 
