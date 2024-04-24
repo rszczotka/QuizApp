@@ -2,7 +2,7 @@ body {
     background-color: #026863;
     margin: 0;
     position: relative;
-    min-height: 100dvh;
+    min-height: 90dvh;
 }
 
 body::before {
