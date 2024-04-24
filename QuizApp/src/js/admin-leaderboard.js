@@ -1,21 +1,5 @@
-// setInterval(async () => {
-//     try {
-//         const response = await fetch(`${config.api_url}/api/systemstatus/GetSystemStatus`);
-//         const systemStatusData = await response.json();
-
-//         if (systemStatusData === 3) {
-//             window.location.href = 'endScreenAdmin.html';
-//         } else {
-//             console.log('Unknown status');
-//         }
-//     } catch (error) {
-//         clearInterval();
-//         console.error(error);
-//         window.location.href = 'login.html';
-//     }
-// }, 5000);
-
 const timeDiv = document.querySelector('#time');
+
 const timeCircle = document.querySelector('#time-circle');
 
 let initTime = config.totalAvailableTime; // Initial time in minutes
@@ -35,7 +19,12 @@ const requestOptions = {
     redirect: "follow",
 };
 
-fetch(`${config.api_url}/api/questions/GetNextQuestion/4848734398e318adb7babb90de5d7828d8fcf897a823d96965935b5e246e41b4b`, requestOptions)
+let api_key = getCookie('api_key');
+if (api_key === null) {
+    window.location.href = 'login.html';
+}
+
+fetch(`${config.api_url}/api/questions/GetNextQuestion/${api_key}`, requestOptions)
     .then(response => {
         if (response.status === 200) {
             return response.json();
