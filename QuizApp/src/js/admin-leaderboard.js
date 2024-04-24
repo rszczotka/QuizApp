@@ -80,6 +80,29 @@ const countdownTime = setInterval(() => {
     // Keep time non-negative
     time = Math.max(0, time);
 
+
+    if (time > 1) {
+        timeDiv.innerHTML = Math.floor(time);
+    } else {
+        timeDiv.innerHTML = Math.floor(time * 60);
+    }
+
+    if(time > 0){
+        timeCircle.style.strokeDashoffset = Math.floor(((440-190) * (1-time/initTime) + 190)*10)/10;
+    }
+
+    if(time < initTime*.02){
+        timeCircle.style.stroke = "#fe5c5c";
+        timeDiv.style.color = "#fe5c5c";
+    }else if(time < initTime*.05){
+        timeCircle.style.stroke = "#ff7400";
+        timeDiv.style.color = "#ff7400";
+    }else if(time < initTime*.07){
+        timeCircle.style.stroke = "#ffdf00";
+        timeDiv.style.color = "#ffdf00";
+    }
+
+
     // Update displayed time (round down to whole minutes if time is more than 1 minute, else show in seconds)
     if (time > 1) {
         timeDiv.innerHTML = Math.floor(time);

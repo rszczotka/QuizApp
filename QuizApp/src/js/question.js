@@ -15,51 +15,6 @@ const howMuchCountdown = 100; // Number of times to decrement per second (100ms)
 
 timeDiv.innerHTML = time; // Display initial time
 
-//------------------------------------------------------------------------------------------------
-// const circleTimer = (percentage) => {
-//     // timeCircle.style.strokeDasharray = `${progress * 2 * Math.PI} ${2 * Math.PI}`;
-//     // timeCircle.style.strokeDashoffset = `${(1 - progress) * 2 * Math.PI}`;
-
-//     percentage = Math.max(0, Math.min(100, percentage));
-
-//   // Calculate stroke dashoffset based on percentage
-//   const dashoffset = 440 * (1 - percentage / 100);
-
-//   // Update the stroke-dashoffset attribute of the time-circle element
-//   const timeCircle = document.getElementById('time-circle');
-//   timeCircle.setAttribute('stroke-dashoffset', dashoffset);
-// }
-
-// function setProgress(percentage) {
-//     // Validate input percentage (0-100)
-//     percentage = Math.max(0, Math.min(100, percentage));
-  
-//     // Calculate stroke dashoffset based on percentage
-//     const dashoffset = 440 * (1 - percentage / 100);
-  
-//     // Update the stroke-dashoffset attribute of the time-circle element
-//     const timeCircle = document.getElementById('time-circle');
-//     timeCircle.setAttribute('stroke-dashoffset', dashoffset);
-// }
-//---------------------------------------------------------------------------------------------------
-  
-
-// // Set the progress to 50% (half of the circle border)
-// setProgress(50);
-
-// // Set the progress to 25% (one-quarter of the circle border)
-// setProgress(25);
-
-// const setCircleProcentages = () => {
-
-// }
-
-// setInterval(() => {
-    //     console.log(timeCircle.style.strokeDasharray)
-    //     timeCircle.style.strokeDasharray = iww--;
-    //     timeCircle.style.strokeDashoffset = 0;
-    // }, 100);
-
 const countdownTime = setInterval(() => {
     // Decrement time by 1 minute divided by howMuchCountdown (effectively milliseconds per minute)
     time -= 1 / (howMuchCountdown * 60);
