@@ -58,7 +58,7 @@ const createView = (leaderboardArr, id) => {
   let i = 0;
   leaderboardArr.forEach((e) => {
     ++i;
-    if(i<20){
+    if(i<=20){
       leaderboardText += `
                             <div class="grid-item">
                                 ${e.name}
