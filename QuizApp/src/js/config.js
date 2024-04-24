@@ -1,7 +1,7 @@
 var config = {
     api_url: 'http://localhost:5000',
-    totalAvailableTime: 10,
-    totalQuestions: 20,
+    totalAvailableTime: 45,
+    totalQuestions: 50,
 };
 
 function getCookie(name) {
