@@ -2,7 +2,6 @@ body {
     background-color: #026863;
     margin: 0;
     position: relative;
-    min-height: 100dvh;
 }
 
 body::before {
@@ -66,7 +65,7 @@ button {
     width: 100%;
     max-width: 300px;
     display: block;
-    margin: 5% auto;
+    margin: 5% auto 0 auto;
     margin-top: 4rem;
 }
 

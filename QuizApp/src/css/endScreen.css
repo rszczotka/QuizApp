@@ -3,7 +3,6 @@ body {
     margin: 0;
     position: relative;
     color: var(--bg);
-    min-height: 100dvh;
 }
 body::before {
     content: "";
