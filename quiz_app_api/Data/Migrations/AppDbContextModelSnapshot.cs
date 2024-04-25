@@ -53,16 +53,16 @@ namespace quiz_app_api.Data.Migrations
                         {
                             Id = 1,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"przesz\\u0142ym z\\u0142o\\u017Conym\",\"przysz\\u0142ym z\\u0142o\\u017Conym\",\"przesz\\u0142ym prostym\",\"przesz\\u0142ym pomocniczym\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"przesz\\u0142ym prostym\",\"przesz\\u0142ym z\\u0142o\\u017Conym\",\"przesz\\u0142ym pomocniczym\",\"przysz\\u0142ym z\\u0142o\\u017Conym\"]",
                             Text = "Czas Perfekt jest czasem:"
                         },
                         new
                         {
                             Id = 2,
                             AvailableTime = 25,
-                            CorrectAnswer = 1,
-                            Options = "[\"przed podmiotem\",\"na drugim miejscu\",\"po czasowniku sein/haben\",\"na ostatnim miejscu\"]",
+                            CorrectAnswer = 3,
+                            Options = "[\"po czasowniku sein/haben\",\"przed podmiotem\",\"na ostatnim miejscu\",\"na drugim miejscu\"]",
                             Text = "Czasownik pomocniczy występuje:"
                         },
                         new
@@ -70,55 +70,55 @@ namespace quiz_app_api.Data.Migrations
                             Id = 3,
                             AvailableTime = 25,
                             CorrectAnswer = 0,
-                            Options = "[\"sein i haben\",\"tylko sein\",\"tylko haben\",\"machen\"]",
+                            Options = "[\"sein i haben\",\"tylko haben\",\"tylko sein\",\"machen\"]",
                             Text = "Czasownikiem pomocniczym jest:"
                         },
                         new
                         {
                             Id = 4,
                             AvailableTime = 25,
-                            CorrectAnswer = 2,
-                            Options = "[\"Dativ (komu? czemu?)\",\"Genitiv (kogo? czego? czyj?)\",\"Akkusativ (kogo? co?)\",\"Nominativ (kto? co?)\"]",
+                            CorrectAnswer = 3,
+                            Options = "[\"Dativ (komu? czemu?)\",\"Genitiv (kogo? czego? czyj?)\",\"Nominativ (kto? co?)\",\"Akkusativ (kogo? co?)\"]",
                             Text = "Jaki przypadek zawsze wymaga haben jako czasownika pomocniczego?"
                         },
                         new
                         {
                             Id = 5,
                             AvailableTime = 25,
-                            CorrectAnswer = 2,
-                            Options = "[\"czasownik bez -en \\u002B t\",\"ge \\u002B czasownik bez -en\",\"ge \\u002B czasownik bez -en \\u002B t\",\"ge \\u002B czasownik\"]",
+                            CorrectAnswer = 0,
+                            Options = "[\"ge \\u002B czasownik bez -en \\u002B t\",\"czasownik bez -en \\u002B t\",\"ge \\u002B czasownik bez -en\",\"ge \\u002B czasownik\"]",
                             Text = "W jaki sposób tworzymy regularne czasowniki Partizip II?"
                         },
                         new
                         {
                             Id = 6,
                             AvailableTime = 25,
-                            CorrectAnswer = 2,
-                            Options = "[\"kiedy czasownik okre\\u015Bla ruch\",\"po czasownikach sein, bleiben i werden\",\"kiedy czasownik jest zwrotny\",\"kiedy nast\\u0119puje zmiana stanu\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"kiedy czasownik okre\\u015Bla ruch\",\"kiedy czasownik jest zwrotny\",\"po czasownikach sein, bleiben i werden\",\"kiedy nast\\u0119puje zmiana stanu\"]",
                             Text = "Kiedy NIE dajemy sein?"
                         },
                         new
                         {
                             Id = 7,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"sich erholen\",\"fliegen\",\"aufwachen\",\"gehen\"]",
+                            CorrectAnswer = 2,
+                            Options = "[\"fliegen\",\"gehen\",\"sich erholen\",\"aufwachen\"]",
                             Text = "Wskaż czasownik łączący się z haben"
                         },
                         new
                         {
                             Id = 8,
                             AvailableTime = 25,
-                            CorrectAnswer = 1,
-                            Options = "[\"denken\",\"sein\",\"machen\",\"kochen\"]",
+                            CorrectAnswer = 0,
+                            Options = "[\"sein\",\"denken\",\"machen\",\"kochen\"]",
                             Text = "Wskaż czasownik łączący się z sein"
                         },
                         new
                         {
                             Id = 9,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"Haben Sie einen Termin beim Doktor Jacha\\u015B vereinbart?\",\"Hast du in Polen gewandert?\",\"Hast du zu Hause geblieben?\",\"Ich bin viel geschlafen\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"Hast du zu Hause geblieben?\",\"Haben Sie einen Termin beim Doktor Jacha\\u015B vereinbart?\",\"Hast du in Polen gewandert?\",\"Ich bin viel geschlafen\"]",
                             Text = "Wskaż poprawne zdanie"
                         },
                         new
@@ -126,31 +126,31 @@ namespace quiz_app_api.Data.Migrations
                             Id = 10,
                             AvailableTime = 25,
                             CorrectAnswer = 1,
-                            Options = "[\"Bist du diese Leute schon getroffen?\",\"Ich habe gestern viele Kekse gebacken\",\"Was bist du am Wochenende gemacht?\",\"Ich bin meinem Vater zum Bahnhof gefahren\"]",
+                            Options = "[\"Was bist du am Wochenende gemacht?\",\"Ich habe gestern viele Kekse gebacken\",\"Ich bin meinem Vater zum Bahnhof gefahren\",\"Bist du diese Leute schon getroffen?\"]",
                             Text = "Wskaż poprawne zdanie"
                         },
                         new
                         {
                             Id = 11,
                             AvailableTime = 25,
-                            CorrectAnswer = 3,
-                            Options = "[\"Du hast am Morgen viel galaufen\",\"Ich habe in der Schule gegangen\",\"Sie ist ihre Hausaufgaben gemacht\",\"Ich habe meinem Bruder zur Schule gefahren\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"Du hast am Morgen viel galaufen\",\"Ich habe meinem Bruder zur Schule gefahren\",\"Ich habe in der Schule gegangen\",\"Sie ist ihre Hausaufgaben gemacht\"]",
                             Text = "Wskaż poprawne zdanie"
                         },
                         new
                         {
                             Id = 12,
                             AvailableTime = 25,
-                            CorrectAnswer = 0,
-                            Options = "[\"Ich bin vor drei Monaten nach Italien geflogen\",\"Ihr habt ins Kino gefahren\",\"Sie sind drei Stunden gearbeitet\",\"Wir sind uns erholt\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"Sie sind drei Stunden gearbeitet\",\"Ich bin vor drei Monaten nach Italien geflogen\",\"Wir sind uns erholt\",\"Ihr habt ins Kino gefahren\"]",
                             Text = "Wskaż poprawne zdanie"
                         },
                         new
                         {
                             Id = 13,
                             AvailableTime = 25,
-                            CorrectAnswer = 3,
-                            Options = "[\"gemachen\",\"machen\",\"gemach\",\"gemacht\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"machen\",\"gemacht\",\"gemach\",\"gemachen\"]",
                             Text = "Wybierz właściwą formę Partizip II czasownika machen"
                         },
                         new
@@ -165,40 +165,40 @@ namespace quiz_app_api.Data.Migrations
                         {
                             Id = 15,
                             AvailableTime = 25,
-                            CorrectAnswer = 2,
-                            Options = "[\"geaufwacht\",\"aufgewachen\",\"aufgewacht\",\"geaufwachen\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"geaufwachen\",\"aufgewacht\",\"aufgewachen\",\"geaufwacht\"]",
                             Text = "Wybierz właściwą formę Partizip II czasownika aufwachen"
                         },
                         new
                         {
                             Id = 16,
                             AvailableTime = 25,
-                            CorrectAnswer = 2,
-                            Options = "[\"geverkaufen\",\"vergekauft\",\"verkauft\",\"verkaufen\"]",
+                            CorrectAnswer = 1,
+                            Options = "[\"verkaufen\",\"verkauft\",\"vergekauft\",\"geverkaufen\"]",
                             Text = "Wybierz właściwą formę Partizip II czasownika verkaufen"
                         },
                         new
                         {
                             Id = 17,
                             AvailableTime = 25,
-                            CorrectAnswer = 1,
-                            Options = "[\"hat getelefoniert\",\"hat telefoniert\",\"ist telefonieren\",\"ist telefoniert\"]",
+                            CorrectAnswer = 3,
+                            Options = "[\"hat getelefoniert\",\"ist telefonieren\",\"ist telefoniert\",\"hat telefoniert\"]",
                             Text = "Wybierz właściwy czasownik pomocniczy i formę Partizip II czasownika telefonieren"
                         },
                         new
                         {
                             Id = 18,
                             AvailableTime = 25,
-                            CorrectAnswer = 1,
-                            Options = "[\"ist gegehen\",\"ist gegangen\",\"hat gegeht\",\"hat gegehen\"]",
+                            CorrectAnswer = 3,
+                            Options = "[\"hat gegehen\",\"hat gegeht\",\"ist gegehen\",\"ist gegangen\"]",
                             Text = "Wybierz właściwy czasownik pomocniczy i formę Partizip II czasownika gehen"
                         },
                         new
                         {
                             Id = 19,
                             AvailableTime = 25,
-                            CorrectAnswer = 2,
-                            Options = "[\"hat geaufstehen\",\"ist geaufstehen\",\"ist aufgestanden\",\"hat aufgestanden\"]",
+                            CorrectAnswer = 3,
+                            Options = "[\"ist geaufstehen\",\"hat aufgestanden\",\"hat geaufstehen\",\"ist aufgestanden\"]",
                             Text = "Wybierz właściwy czasownik pomocniczy i formę Partizip II czasownika aufstehen"
                         },
                         new
@@ -206,7 +206,7 @@ namespace quiz_app_api.Data.Migrations
                             Id = 20,
                             AvailableTime = 25,
                             CorrectAnswer = 3,
-                            Options = "[\"hat eingeschlaft\",\"ist geeinschlafen\",\"hat geeinschlafen\",\"ist eingeschlafen\"]",
+                            Options = "[\"ist geeinschlafen\",\"hat geeinschlafen\",\"hat eingeschlaft\",\"ist eingeschlafen\"]",
                             Text = "Wybierz właściwy czasownik pomocniczy i formę Partizip II czasownika einschlafen"
                         });
                 });
@@ -242,7 +242,7 @@ namespace quiz_app_api.Data.Migrations
                             AvailableTime = 45,
                             StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
-                            UpdatedAt = new DateTime(2024, 4, 14, 19, 57, 0, 449, DateTimeKind.Utc).AddTicks(2502)
+                            UpdatedAt = new DateTime(2024, 4, 25, 19, 46, 52, 701, DateTimeKind.Utc).AddTicks(7420)
                         });
                 });
 
@@ -308,6 +308,9 @@ namespace quiz_app_api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -329,6 +332,7 @@ namespace quiz_app_api.Data.Migrations
                             Login = "admin.admin",
                             Name = "admin",
                             Password = "0",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "admin"
                         },
@@ -340,7 +344,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "seumas.baxill",
                             Name = "Seumas",
-                            Password = "967",
+                            Password = "481",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Baxill"
                         },
@@ -352,7 +357,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "mack.waplinton",
                             Name = "Mack",
-                            Password = "714",
+                            Password = "418",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Waplinton"
                         },
@@ -364,7 +370,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "janetta.mcgraith",
                             Name = "Janetta",
-                            Password = "411",
+                            Password = "442",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "McGraith"
                         },
@@ -376,7 +383,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "martita.bovey",
                             Name = "Martita",
-                            Password = "222",
+                            Password = "425",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Bovey"
                         },
@@ -388,7 +396,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "persis.elias",
                             Name = "Persis",
-                            Password = "769",
+                            Password = "949",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Elias"
                         },
@@ -400,7 +409,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "carine.golightly",
                             Name = "Carine",
-                            Password = "782",
+                            Password = "178",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Golightly"
                         },
@@ -412,7 +422,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ann-marie.josipovitz",
                             Name = "Ann-marie",
-                            Password = "138",
+                            Password = "273",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Josipovitz"
                         },
@@ -424,7 +435,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "liane.glendinning",
                             Name = "Liane",
-                            Password = "864",
+                            Password = "585",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Glendinning"
                         },
@@ -436,7 +448,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "garland.kindell",
                             Name = "Garland",
-                            Password = "628",
+                            Password = "982",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Kindell"
                         },
@@ -448,7 +461,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "cosetta.lassey",
                             Name = "Cosetta",
-                            Password = "934",
+                            Password = "135",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Lassey"
                         },
@@ -460,7 +474,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "thomasine.quelch",
                             Name = "Thomasine",
-                            Password = "813",
+                            Password = "982",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Quelch"
                         },
@@ -472,7 +487,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "maximilian.pidler",
                             Name = "Maximilian",
-                            Password = "622",
+                            Password = "972",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Pidler"
                         },
@@ -484,7 +500,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "leonard.letch",
                             Name = "Leonard",
-                            Password = "133",
+                            Password = "643",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Letch"
                         },
@@ -496,7 +513,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "tiena.matteini",
                             Name = "Tiena",
-                            Password = "332",
+                            Password = "291",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Matteini"
                         },
@@ -508,7 +526,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "krystal.seman",
                             Name = "Krystal",
-                            Password = "582",
+                            Password = "121",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Seman"
                         },
@@ -520,7 +539,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "marcela.peperell",
                             Name = "Marcela",
-                            Password = "823",
+                            Password = "343",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Peperell"
                         },
@@ -532,7 +552,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "gerik.melarkey",
                             Name = "Gerik",
-                            Password = "173",
+                            Password = "281",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Melarkey"
                         },
@@ -544,7 +565,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "rose.tousy",
                             Name = "Rose",
-                            Password = "831",
+                            Password = "949",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Tousy"
                         },
@@ -556,7 +578,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "jordana.dalzell",
                             Name = "Jordana",
-                            Password = "497",
+                            Password = "662",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Dalzell"
                         },
@@ -568,7 +591,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "silvio.hanselman",
                             Name = "Silvio",
-                            Password = "443",
+                            Password = "453",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Hanselman"
                         },
@@ -580,7 +604,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "harriett.twittey",
                             Name = "Harriett",
-                            Password = "483",
+                            Password = "328",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Twittey"
                         },
@@ -592,7 +617,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "burty.jessop",
                             Name = "Burty",
-                            Password = "285",
+                            Password = "364",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Jessop"
                         },
@@ -604,7 +630,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "isiahi.mandrake",
                             Name = "Isiahi",
-                            Password = "188",
+                            Password = "595",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Mandrake"
                         },
@@ -616,7 +643,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "jammal.snare",
                             Name = "Jammal",
-                            Password = "214",
+                            Password = "518",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Snare"
                         },
@@ -628,7 +656,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "crawford.davoren",
                             Name = "Crawford",
-                            Password = "318",
+                            Password = "838",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Davoren"
                         },
@@ -640,7 +669,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "livvie.doche",
                             Name = "Livvie",
-                            Password = "752",
+                            Password = "152",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Doche"
                         },
@@ -652,7 +682,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "elfreda.lafee",
                             Name = "Elfreda",
-                            Password = "968",
+                            Password = "785",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Lafee"
                         },
@@ -664,7 +695,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "hadleigh.fishbourn",
                             Name = "Hadleigh",
-                            Password = "288",
+                            Password = "567",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Fishbourn"
                         },
@@ -676,7 +708,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "deanne.warboys",
                             Name = "Deanne",
-                            Password = "474",
+                            Password = "877",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Warboys"
                         },
@@ -688,7 +721,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ailbert.handasyde",
                             Name = "Ailbert",
-                            Password = "387",
+                            Password = "339",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Handasyde"
                         },
@@ -700,7 +734,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "guenna.o'hengerty",
                             Name = "Guenna",
-                            Password = "576",
+                            Password = "533",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "O'Hengerty"
                         },
@@ -712,7 +747,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "arluene.figurski",
                             Name = "Arluene",
-                            Password = "752",
+                            Password = "454",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Figurski"
                         },
@@ -724,7 +760,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "wendall.guswell",
                             Name = "Wendall",
-                            Password = "646",
+                            Password = "927",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Guswell"
                         },
@@ -736,7 +773,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "raye.schreurs",
                             Name = "Raye",
-                            Password = "973",
+                            Password = "692",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Schreurs"
                         },
@@ -748,7 +786,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "zach.de filippo",
                             Name = "Zach",
-                            Password = "237",
+                            Password = "252",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "De Filippo"
                         },
@@ -760,7 +799,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "karina.hailes",
                             Name = "Karina",
-                            Password = "148",
+                            Password = "971",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Hailes"
                         },
@@ -772,7 +812,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "orly.pleasaunce",
                             Name = "Orly",
-                            Password = "735",
+                            Password = "195",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Pleasaunce"
                         },
@@ -784,7 +825,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "peter.klain",
                             Name = "Peter",
-                            Password = "377",
+                            Password = "683",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Klain"
                         },
@@ -796,7 +838,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "peta.aspland",
                             Name = "Peta",
-                            Password = "235",
+                            Password = "318",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Aspland"
                         },
@@ -808,7 +851,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "norbie.baldree",
                             Name = "Norbie",
-                            Password = "368",
+                            Password = "299",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Baldree"
                         },
@@ -820,7 +864,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ethyl.kneel",
                             Name = "Ethyl",
-                            Password = "982",
+                            Password = "839",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Kneel"
                         },
@@ -832,7 +877,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "lissy.theml",
                             Name = "Lissy",
-                            Password = "242",
+                            Password = "284",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Theml"
                         },
@@ -844,7 +890,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "felipe.dinneen",
                             Name = "Felipe",
-                            Password = "442",
+                            Password = "971",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Dinneen"
                         },
@@ -856,7 +903,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "abra.coad",
                             Name = "Abra",
-                            Password = "826",
+                            Password = "252",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Coad"
                         },
@@ -868,7 +916,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "dill.jales",
                             Name = "Dill",
-                            Password = "627",
+                            Password = "541",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Jales"
                         },
@@ -880,7 +929,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "jackelyn.broadwell",
                             Name = "Jackelyn",
-                            Password = "989",
+                            Password = "826",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Broadwell"
                         },
@@ -892,7 +942,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ines.rome",
                             Name = "Ines",
-                            Password = "455",
+                            Password = "518",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Rome"
                         },
@@ -904,7 +955,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "laryssa.maughan",
                             Name = "Laryssa",
-                            Password = "136",
+                            Password = "371",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Maughan"
                         },
@@ -916,7 +968,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "marcela.loweth",
                             Name = "Marcela",
-                            Password = "271",
+                            Password = "137",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Loweth"
                         },
@@ -928,7 +981,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "abraham.errichelli",
                             Name = "Abraham",
-                            Password = "945",
+                            Password = "193",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Errichelli"
                         },
@@ -940,7 +994,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "cristionna.leyland",
                             Name = "Cristionna",
-                            Password = "628",
+                            Password = "228",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Leyland"
                         },
@@ -952,7 +1007,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "humberto.routham",
                             Name = "Humberto",
-                            Password = "273",
+                            Password = "818",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Routham"
                         },
@@ -964,7 +1020,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "joice.lipp",
                             Name = "Joice",
-                            Password = "582",
+                            Password = "929",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Lipp"
                         },
@@ -976,7 +1033,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "barbe.kennaird",
                             Name = "Barbe",
-                            Password = "738",
+                            Password = "528",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Kennaird"
                         },
@@ -988,7 +1046,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ignaz.erett",
                             Name = "Ignaz",
-                            Password = "278",
+                            Password = "962",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Erett"
                         },
@@ -1000,7 +1059,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "patience.tunmore",
                             Name = "Patience",
-                            Password = "594",
+                            Password = "875",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Tunmore"
                         },
@@ -1012,7 +1072,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "costa.murrigan",
                             Name = "Costa",
-                            Password = "822",
+                            Password = "233",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Murrigan"
                         },
@@ -1024,7 +1085,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "pedro.stetson",
                             Name = "Pedro",
-                            Password = "814",
+                            Password = "424",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Stetson"
                         },
@@ -1036,7 +1098,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "palm.cranmore",
                             Name = "Palm",
-                            Password = "625",
+                            Password = "518",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Cranmore"
                         },
@@ -1048,7 +1111,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "emilio.fergie",
                             Name = "Emilio",
-                            Password = "922",
+                            Password = "347",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Fergie"
                         },
@@ -1060,7 +1124,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ericka.o'heyne",
                             Name = "Ericka",
-                            Password = "953",
+                            Password = "676",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "O'Heyne"
                         },
@@ -1072,7 +1137,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "hazel.mcsarry",
                             Name = "Hazel",
-                            Password = "755",
+                            Password = "423",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Mcsarry"
                         },
@@ -1084,7 +1150,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "mirabella.le fleming",
                             Name = "Mirabella",
-                            Password = "676",
+                            Password = "419",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Le Fleming"
                         },
@@ -1096,7 +1163,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ilyse.kanter",
                             Name = "Ilyse",
-                            Password = "986",
+                            Password = "412",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Kanter"
                         },
@@ -1108,7 +1176,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "mychal.guidone",
                             Name = "Mychal",
-                            Password = "296",
+                            Password = "453",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Guidone"
                         },
@@ -1120,7 +1189,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "rosie.tuckerman",
                             Name = "Rosie",
-                            Password = "969",
+                            Password = "666",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Tuckerman"
                         },
@@ -1132,7 +1202,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "erroll.camlin",
                             Name = "Erroll",
-                            Password = "666",
+                            Password = "548",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Camlin"
                         },
@@ -1144,7 +1215,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "chad.ruprecht",
                             Name = "Chad",
-                            Password = "667",
+                            Password = "361",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Ruprecht"
                         },
@@ -1156,7 +1228,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "taber.zincke",
                             Name = "Taber",
-                            Password = "964",
+                            Password = "112",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Zincke"
                         },
@@ -1168,7 +1241,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "katheryn.d'escoffier",
                             Name = "Katheryn",
-                            Password = "348",
+                            Password = "418",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "d'Escoffier"
                         },
@@ -1180,7 +1254,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "genovera.augustin",
                             Name = "Genovera",
-                            Password = "285",
+                            Password = "958",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Augustin"
                         },
@@ -1192,7 +1267,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "benjy.cowlard",
                             Name = "Benjy",
-                            Password = "345",
+                            Password = "859",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Cowlard"
                         },
@@ -1204,7 +1280,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ralina.garraway",
                             Name = "Ralina",
-                            Password = "329",
+                            Password = "696",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Garraway"
                         },
@@ -1216,7 +1293,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "heather.desforges",
                             Name = "Heather",
-                            Password = "943",
+                            Password = "546",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Desforges"
                         },
@@ -1228,7 +1306,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "tersina.cancott",
                             Name = "Tersina",
-                            Password = "315",
+                            Password = "837",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Cancott"
                         },
@@ -1240,7 +1319,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "loy.martinuzzi",
                             Name = "Loy",
-                            Password = "644",
+                            Password = "778",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Martinuzzi"
                         },
@@ -1252,7 +1332,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "dill.eames",
                             Name = "Dill",
-                            Password = "664",
+                            Password = "792",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Eames"
                         },
@@ -1264,7 +1345,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "dell.hardway",
                             Name = "Dell",
-                            Password = "394",
+                            Password = "399",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Hardway"
                         },
@@ -1276,7 +1358,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "erick.floyd",
                             Name = "Erick",
-                            Password = "532",
+                            Password = "631",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Floyd"
                         },
@@ -1288,7 +1371,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "helenelizabeth.scoffins",
                             Name = "Helenelizabeth",
-                            Password = "558",
+                            Password = "127",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Scoffins"
                         },
@@ -1300,7 +1384,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "felix.pudner",
                             Name = "Felix",
-                            Password = "927",
+                            Password = "443",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Pudner"
                         },
@@ -1312,7 +1397,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "nydia.ritch",
                             Name = "Nydia",
-                            Password = "977",
+                            Password = "315",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Ritch"
                         },
@@ -1324,7 +1410,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "sheffie.bonnick",
                             Name = "Sheffie",
-                            Password = "436",
+                            Password = "868",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Bonnick"
                         },
@@ -1336,7 +1423,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "dominick.evennett",
                             Name = "Dominick",
-                            Password = "721",
+                            Password = "321",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Evennett"
                         },
@@ -1348,7 +1436,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "peirce.kembley",
                             Name = "Peirce",
-                            Password = "273",
+                            Password = "635",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Kembley"
                         },
@@ -1360,7 +1449,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "torrance.gianettini",
                             Name = "Torrance",
-                            Password = "539",
+                            Password = "715",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Gianettini"
                         },
@@ -1372,7 +1462,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "bryce.sutherden",
                             Name = "Bryce",
-                            Password = "373",
+                            Password = "349",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Sutherden"
                         },
@@ -1384,7 +1475,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "alexandra.mckeney",
                             Name = "Alexandra",
-                            Password = "914",
+                            Password = "381",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "McKeney"
                         },
@@ -1396,7 +1488,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "paul.grieger",
                             Name = "Paul",
-                            Password = "746",
+                            Password = "883",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Grieger"
                         },
@@ -1408,7 +1501,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "prudi.torns",
                             Name = "Prudi",
-                            Password = "689",
+                            Password = "496",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Torns"
                         },
@@ -1420,7 +1514,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "madonna.costelow",
                             Name = "Madonna",
-                            Password = "426",
+                            Password = "561",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Costelow"
                         },
@@ -1432,7 +1527,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "brandie.luparti",
                             Name = "Brandie",
-                            Password = "842",
+                            Password = "494",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Luparti"
                         },
@@ -1444,7 +1540,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "ky.epelett",
                             Name = "Ky",
-                            Password = "318",
+                            Password = "459",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Epelett"
                         },
@@ -1456,7 +1553,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "hester.peracco",
                             Name = "Hester",
-                            Password = "374",
+                            Password = "411",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Peracco"
                         },
@@ -1468,7 +1566,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "gill.starbucke",
                             Name = "Gill",
-                            Password = "196",
+                            Password = "347",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Starbucke"
                         },
@@ -1480,7 +1579,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "jerrie.stoter",
                             Name = "Jerrie",
-                            Password = "868",
+                            Password = "869",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Stoter"
                         },
@@ -1492,7 +1592,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "urbanus.fancet",
                             Name = "Urbanus",
-                            Password = "733",
+                            Password = "356",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Fancet"
                         },
@@ -1504,7 +1605,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "michaelina.mcbeith",
                             Name = "Michaelina",
-                            Password = "897",
+                            Password = "519",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "McBeith"
                         },
@@ -1516,7 +1618,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "fedora.sonier",
                             Name = "Fedora",
-                            Password = "621",
+                            Password = "861",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Sonier"
                         },
@@ -1528,7 +1631,8 @@ namespace quiz_app_api.Data.Migrations
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "berenice.sewter",
                             Name = "Berenice",
-                            Password = "797",
+                            Password = "216",
+                            StartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             Surname = "Sewter"
                         });

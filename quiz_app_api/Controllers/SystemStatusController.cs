@@ -51,18 +51,31 @@ public class SystemStatusController(AppDbContext _context) : Controller
 		{
 			case 0:
 				APIKeyGenerator.FlushApiKeys();
+				systemStatusEntity.StartTime = DateTime.MinValue;
+				var loggedInUsers = await _context.UserEntities.Where(x => x.Status != 0).ToListAsync();
+
+				foreach(var user in loggedInUsers)
+					user.Status = 0;
+
+				await _context.SaveChangesAsync();
 				break;
 			case 2:
-				systemStatusEntity.StartTime = DateTime.Now;
+				loggedInUsers = await _context.UserEntities.Where(x => x.Status != 0).ToListAsync();
+				var startTime = DateTime.Now;
+
+				systemStatusEntity.StartTime = startTime;
+
+				foreach(var user in loggedInUsers)
+					user.StartTime = startTime;
+
 				break;
 			case 3:
 				// users that didn't answer all questions
-				var usersInQuiz = await _context.UserEntities.Where(x => x.Status > 1 && x.EndTime == DateTime.MinValue).ToListAsync();
+				var usersInQuiz = await _context.UserEntities.Where(x => x.Status > 0 && x.EndTime == DateTime.MinValue).ToListAsync();
+				var endTime = DateTime.Now;
 
 				foreach(var user in usersInQuiz)
-				{
-					user.EndTime = DateTime.Now;
-				}
+					user.EndTime = endTime;
 
 				await _context.SaveChangesAsync();
 				break;
