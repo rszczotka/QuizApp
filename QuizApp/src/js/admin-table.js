@@ -41,18 +41,6 @@ const createView = (leaderboardArr, id) => {
   const leaderboard = document.querySelector("#leaderboard");
 
   let leaderboardText=`<div class="grid-container">`;
-//    = `<div class="grid-container">
-//                             <div class="grid-header">
-//                                 Imię i nazwisko:
-//                             </div>
-//                             <div class="grid-header">
-//                                 Czas:
-//                             </div>
-//                             <div class="grid-header">
-//                                 Punkty:
-//                             </div>
-//                         `;
-
   const userId = id;
 
   let i = 0;

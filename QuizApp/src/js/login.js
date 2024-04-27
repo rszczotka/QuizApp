@@ -3,7 +3,8 @@ window.onload = function () {
         return false;
     };
 };
-
+document.cookie = "api_key=" + undefined + "; path=/;";
+document.cookie = "user_id=" + undefined + "; path=/;";
 
 
 const agreement = document.querySelector("#agreement");
@@ -12,11 +13,11 @@ const agreementMore = document.querySelector("#agreement-more");
 
 let isOpenAgreement = false;
 
-agreementMore.addEventListener('click', ()=>{
-    if(!isOpenAgreement){
+agreementMore.addEventListener('click', () => {
+    if (!isOpenAgreement) {
         details.style.display = 'block';
         agreementMore.innerHTML = 'MNIEJ';
-    }else{
+    } else {
         details.style.display = 'none';
         agreementMore.innerHTML = 'WIĘCEJ';
     }
@@ -27,19 +28,19 @@ const inputs = [document.getElementById("login"), document.getElementById("passw
 
 const checkAllValues = () => {
     console.log(inputs[2].checked)
-    if(inputs[0].value != '' && inputs[1].value != '' && inputs[2].checked){
+    if (inputs[0].value != '' && inputs[1].value != '' && inputs[2].checked) {
         document.querySelector('#login-button').disabled = false;
-    }else{
+    } else {
         document.querySelector('#login-button').disabled = true;
     }
 };
 
 inputs.forEach(e => {
-    if(e.type != 'checkbox'){
+    if (e.type != 'checkbox') {
         e.addEventListener('input', () => {
             checkAllValues();
-        }); 
-    }else{
+        });
+    } else {
         e.addEventListener('click', () => {
             checkAllValues();
         });
@@ -47,9 +48,9 @@ inputs.forEach(e => {
 });
 
 let api_key = getCookie('api_key');
-if (api_key !== null) {
-    window.location.href = 'info.html';
-}
+// if (api_key !== null) {
+//     window.location.href = 'info.html';
+// }
 
 function sendApiRequest() {
     var login = document.getElementById("login").value;
@@ -93,7 +94,7 @@ function sendApiRequest() {
                 if (api_key != undefined) {
                     document.cookie = "api_key=" + api_key + "; path=/;";
                     document.cookie = "user_id=" + user_id + "; path=/;";
-                    
+
                     window.location.href = "info.html";
                 } else {
                     Alert("Serwer nie zwrócił klucza API", 2)
@@ -101,7 +102,7 @@ function sendApiRequest() {
             })
             .catch((error) => console.error(error));
     }
-    else if (!agreementCheckbox.checked){
+    else if (!agreementCheckbox.checked) {
         Alert("Zaakceptuj regulamin konkursu", 1)
     }
     else {

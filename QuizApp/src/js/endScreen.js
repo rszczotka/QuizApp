@@ -32,4 +32,4 @@ async function fetchSystemStatus() {
 fetchSystemStatus();
 
 // Then start the interval loop
-let intervalId = setInterval(fetchSystemStatus, 5000);
+let intervalId = setInterval(fetchSystemStatus, 10000);
