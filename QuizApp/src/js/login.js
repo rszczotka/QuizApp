@@ -27,7 +27,6 @@ agreementMore.addEventListener('click', () => {
 const inputs = [document.getElementById("login"), document.getElementById("password"), agreementCheckbox];
 
 const checkAllValues = () => {
-    console.log(inputs[2].checked)
     if (inputs[0].value != '' && inputs[1].value != '' && inputs[2].checked) {
         document.querySelector('#login-button').disabled = false;
     } else {
