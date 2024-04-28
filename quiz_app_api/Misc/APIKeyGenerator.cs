@@ -44,6 +44,11 @@ public class APIKeyGenerator
         return res.First().Key;
     }
 
+    public static string? GetAPIKeyByLogin(string login)
+    {
+        return apiKeys.Where(x => x.Key == login).FirstOrDefault().Value;
+    }
+
     private static string GetHash(string str)
     {
         using(SHA256 sha256Hash = SHA256.Create())
