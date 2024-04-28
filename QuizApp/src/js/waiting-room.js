@@ -55,4 +55,4 @@ setInterval(async () => {
         console.error(error);
         window.location.href = 'login.html';
     }
-}, 10000);
+}, 2000);

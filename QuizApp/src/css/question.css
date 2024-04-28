@@ -117,3 +117,16 @@ main{
 .next-disable{
     background-color: #474747 !important;
 }
+.answer-disable {
+    font-weight: bold;
+    background-color: #9b9b9b;
+    margin: 15px;
+    padding: 10px 40px 10px 12px;
+    border-radius: 1em;
+    -webkit-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    box-shadow: 0px 11px 26px -20px rgba(66, 68, 90, 1);
+    position: relative;
+    cursor: not-allowed;
+    pointer-events: none;
+}

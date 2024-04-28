@@ -152,6 +152,10 @@ function GetNextQuestion() {
             }
         })
         .then(data => {
+            var answersButtons = document.querySelectorAll('.answer-disable');
+            answersButtons.forEach(function (button) {
+                button.classList.replace('answer-disable', 'answer');
+            });
             document.querySelector('#question').innerHTML = data.text;
             currentQuestionId = data.id;
             let shuffledOptions = [...data.options].sort(() => Math.random() - 0.5);
@@ -177,6 +181,21 @@ const sendAnswer = () => {
     }
 
     var chosen_option = document.querySelector('.answer.chosen').id;
+
+    answers[chosenIndex].classList.remove('chosen');
+    chosenIndex = null;
+    isNextButtonDisable = true;
+    nextButton.classList.add('next-disable');
+
+
+    var answersButtons = document.querySelectorAll('.answer');
+    answersButtons.forEach(function (button) {
+        button.classList.replace('answer', 'answer-disable');
+    });
+    document.querySelector('#question').innerHTML = "Cierpliwości! Trwa wysyłanie twoich odpowiedzi...";
+
+
+
     const data = JSON.stringify({
         "question_id": currentQuestionId,
         "chosen_option": chosen_option,
@@ -192,10 +211,6 @@ const sendAnswer = () => {
     fetch(`${config.api_url}/api/useranswers/CreateUserAnswer`, requestOptions)
         .then(response => {
             if (response.status === 201) {
-                answers[chosenIndex].classList.remove('chosen');
-                chosenIndex = null;
-                isNextButtonDisable = true;
-                nextButton.classList.add('next-disable');
                 GetNextQuestion()
             } else if (response.status === 400) {
                 window.location.href = 'login.html';
