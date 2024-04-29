@@ -170,6 +170,7 @@ W body
 ```txt
 400 - nie znaleziono użytkownika o takim loginie i haśle
 403 - status systemu jest inny niż 1 (nie dotyczy adminów)
+405 - użytkownik jest już zalogowany
 200 - sukces i dane użytkownika
 
 ```
