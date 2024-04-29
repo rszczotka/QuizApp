@@ -112,9 +112,9 @@ public class UserAnswersController(AppDbContext _context) : Controller
 			WrongAnswers = _context.UserAnswerEntities.Where(y => y.User.Id == x.Id && y.ChosenOption != y.Question.CorrectAnswer).Count()
 		}).ToList();
 
-		return StatusCode(200, userResults
-			.OrderByDescending(x => x.CorrectAnswers)
-			.ThenBy(x => x.User.EndTime)
-			.ToList());
+        return StatusCode(200, userResults
+            .OrderByDescending(x => x.CorrectAnswers)
+            .ThenBy(x => (x.User.EndTime - x.User.StartTime))
+            .ToList());
 	}
 }
