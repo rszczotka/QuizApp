@@ -20,7 +20,7 @@ public class UserAnswersController(AppDbContext _context) : Controller
 			return StatusCode(400, "Not a user API key, or user not logged in");
 		if((await _context.SystemStatusEntities.FirstAsync()).Status != 2)
 			return StatusCode(403, "System status is not 2");
-		if(await _context.UserAnswerEntities.Where(x => x.Question.Id == data.QuestionId).FirstOrDefaultAsync() == null)
+		if(await _context.UserAnswerEntities.Where(x => x.Question.Id == data.QuestionId && x.User.Login == APIKeyGenerator.GetLoginByAPIKey(data.ApiKey)).FirstOrDefaultAsync() != null)
 			return StatusCode(404, "User already answered this question");
 
 		try
