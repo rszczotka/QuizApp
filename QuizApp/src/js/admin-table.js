@@ -1,7 +1,7 @@
 let api_key = getCookie('api_key');
 let user_id = parseInt(getCookie('user_id'));
 function sendApiRequest() {
-  fetch(`${config.api_url}/api/useranswers/GetLeaderboard/${api_key}`)
+  fetch(`${config.api_url}/api/useranswers/GetLeaderboard/4848734398e318adb7babb90de5d7828d8fcf897a823d96965935b5e246e41b4b`)
     .then((response) => response.text())
     .then((result) => {
       var result = JSON.parse(result);

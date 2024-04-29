@@ -3,8 +3,8 @@ window.onload = function () {
         return false;
     };
 };
-document.cookie = "api_key=" + undefined + "; path=/;";
-document.cookie = "user_id=" + undefined + "; path=/;";
+// document.cookie = "api_key=" + undefined + "; path=/;";
+// document.cookie = "user_id=" + undefined + "; path=/;";
 
 
 const agreement = document.querySelector("#agreement");
@@ -78,9 +78,14 @@ function sendApiRequest() {
                 if (response.status === 200) {
                     return response.text();
                 } else if (response.status === 403) {
-                    Alert("Serwer ma status 0", 2)
+                    Alert("Serwer ma status inny niż 1", 2)
                     throw new Error('Server status 0');
-                } else if (response.status === 400) {
+                }
+                else if (response.status === 405) {
+                    Alert("Użytkownik jest już zalogowany", 2)
+                    throw new Error('User already logged in');
+                }
+                else if (response.status === 400) {
                     Alert("Nie znaleziono użytkownika o takim loginie i haśle, spróbuj ponownie", 1)
                     throw new Error('User not found');
                 } else {

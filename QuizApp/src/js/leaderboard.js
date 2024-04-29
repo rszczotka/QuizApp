@@ -90,7 +90,7 @@ const createView = (leaderboardArr, id) => {
         }else{
             leaderboardText+=`
             <div class="row">
-                <div class="name">⠀</div>
+                <div class="name">${e.name}</div>
                 <div class="time">${e.time}</div>
                 <div class="points">${e.points}</div>
                 <div class="place">${++i}.</div>

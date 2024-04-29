@@ -24,7 +24,7 @@ if (api_key === null) {
     window.location.href = 'login.html';
 }
 
-fetch(`${config.api_url}/api/questions/GetNextQuestion/${api_key}`, requestOptions)
+fetch(`${config.api_url}/api/questions/GetNextQuestion/4848734398e318adb7babb90de5d7828d8fcf897a823d96965935b5e246e41b4b`, requestOptions)
     .then(response => {
         if (response.status === 200) {
             return response.json();

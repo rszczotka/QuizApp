@@ -47,7 +47,7 @@ main {
     left: 13px;
 }
 
-.row:nth-of-type(-n+5){
+.row:nth-of-type(-n+20){
     background-color: rgb(32, 192, 32);
 }
 
