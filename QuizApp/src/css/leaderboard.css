@@ -1,0 +1,93 @@
+body {
+    background-color: #026863;
+    margin: 0;
+    color:var(--bg);
+}
+main {
+    text-align: center;
+}
+
+#leaderboard{
+    margin: 15px;
+}
+
+.row{
+    position: relative;
+    font-size: 18px;
+    max-width: 800px;
+    margin: 30px auto;
+    min-height: 30px;
+    padding: 20px;
+    background-color: rgba(158, 158, 158, 0.336);
+    border-radius: 20px;
+}
+.row div{
+    display: inline-block;
+    padding-top: 10px;
+}
+.row .name{
+    position: absolute;
+    left: 20px;
+}
+.row .points{
+    position: absolute;
+    right: 20px;
+}
+.row .time{
+    position: absolute;
+    transform: translateX(50%);
+    font-size: 12px;
+    top: 0;
+    right: 50%;
+}
+.row .place{
+    position: absolute;
+    font-size: 12px;
+    top: 0;
+    left: 13px;
+}
+
+.row:nth-of-type(-n+20){
+    background-color: rgb(32, 192, 32);
+}
+
+.your-score{
+    margin-top: 80px;
+    bottom: 0;
+    position: sticky;
+    background-color: rgba(128, 128, 128, 0.801);
+    border: rgb(180, 180, 180) 5px solid;
+}
+.your-score::after{
+    top: -48px;
+    padding: 11px;
+    transform: translateX(-50%);
+    background-color: rgba(158, 158, 158, 0.575);
+    width: 70%;
+    position: absolute;
+    content: "Twój wynik";
+    border-radius: 15px 15px 0 0;
+}
+
+
+#go-top{
+    z-index: 1;
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 34px solid transparent;
+    border-right: 34px solid transparent;
+    border-bottom: 68px solid rgba(194, 194, 194, 0.925);
+    border-radius: 7px;
+}
+#go-top::after{
+    font-weight: bold;
+    transform: translateX(-50%);
+    position: absolute;
+    width: 200px;
+    top: 70px;
+    content: "Przewiń do góry";
+}

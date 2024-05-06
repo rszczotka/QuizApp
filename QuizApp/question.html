@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pytanie</title>
+
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/question.css">
+    <link rel="shortcut icon" href="src/img/icon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <main>
+        <div id="main">
+            <div id="question-number" style="user-select: none;">⠀</div>
+            <div id="timer">
+                <svg>
+                    <circle cx="40" cy="40" r="40" id="time-circle-bg" class="svg-circle"></circle>
+                    <circle cx="40" cy="40" r="40" id="time-circle" class="svg-circle"></circle>
+                </svg>
+                <div id="time" style="user-select: none;">⠀</div>
+            </div>
+            <div id="question" style="user-select: none;"></div>
+            <div class="answer" style="user-select: none;"></div>
+            <div class="answer" style="user-select: none;"></div>
+            <div class="answer" style="user-select: none;"></div>
+            <div class="answer" style="user-select: none;"></div>
+        </div>
+        <div id="next" class="next-disable" style="user-select: none;">Dalej</div>
+    </main>
+
+    <script src="./src/js/alert.js"></script>
+    <script src="./src/js/config.js"></script>
+    <script src="./src/js/question.js"></script>
+</body>
+
+</html>

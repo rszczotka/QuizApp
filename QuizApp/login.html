@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/login.css">
+    <link rel="shortcut icon" href="src/img/icon.svg" type="image/x-icon">
+</head>
+
+
+<body>
+    <main>
+        <div id="Icon">
+            <p id="IconText1">Festiwal</p>
+            <p id="IconText2">Nauki</p>
+        </div>
+        <form id="form">
+            <label for="login"><b>Wprowadź swój login</b></label>
+            <input type="text" id="login" name="login" placeholder="Twój login">
+            <br>
+            <label for="password"><b>Wprowadź swoje hasło</b></label>
+            <input type="password" id="password" name="password" placeholder="Twoje hasło">
+            <br>
+            <div id="agreement-div">
+                <input type="checkbox" id="agreement-checkbox" name="agreement">
+                <label for="agreement" id="agreement-label" style="user-select: none;">
+                <b>Wyrażam zgode na przetwarzanie moich danych osobowych</b> <span id="agreement-more">WIĘCEJ</span>
+                <span id="details">
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych w celu przeprowadzenia konkursu szkolnego "Festiwal Nauki" zgodnie z art. 6 ust. 1 lit. a Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych).
+                    </span>
+                </label>
+            </div>
+            <br>
+            <button id="login-button" type="submit" disabled onclick="sendApiRequest()" style="user-select: none;">Start</button>
+        </form>
+    </main>
+</body>
+<script src="./src/js/alert.js"></script>
+<script src="./src/js/config.js"></script>
+<script src="./src/js/login.js"></script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informacje</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/Info.css">
+    <link rel="shortcut icon" href="src/img/icon.svg" type="image/x-icon">
+    <script src="./src/js/config.js"></script>
+</head>
+<body>
+    <main>
+        <h1>INFORMACJE</h1>
+        <div style="font-size: large;">
+            <p>Test trwa 45 minut. Pytania są z wiedzy ogólnej, na każde pytanie jest jedna prawidłowa odpowiedź. Pytań jest 50. Opuszczenie testu automatycznie ustawia odpowiedź na nieprawidłową.</p>
+        </div>
+    </main>
+    <button id="next" style="user-select: none;">Dalej</button>
+</body>
+<script>
+    document.querySelector("#next").addEventListener("click", () => {
+        window.location.href = "./waiting-room.html";
+    });
+
+    function getCookie(name) {
+        let cookieArr = document.cookie.split("; ");
+        for (let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split("=");
+            if (name == cookiePair[0]) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    }
+    let api_key = getCookie('api_key');
+    if (api_key === null) {
+        window.location.href = 'login.html';
+    }
+</script>
+
+</html>

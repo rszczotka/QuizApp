@@ -1,0 +1,29 @@
+body{
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--bg);
+}
+
+p{
+    line-height: 2rem;
+}
+.kafelek {
+    width: 45%;
+    margin: 2.5%;
+    box-sizing: border-box;
+    background-color: var(--bg-secondary);
+    border-radius: 15px;
+    height: 2.5rem;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+.kafelki-container {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+  

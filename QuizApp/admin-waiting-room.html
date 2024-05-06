@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poczekalnia</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/waiting-room2.css">
+    <link rel="stylesheet" href="src/css/question.css">
+    <link rel="shortcut icon" href="src/img/icon.svg" type="image/x-icon">
+
+    <style>
+        body::before{
+            animation: moveBubbles 100s linear infinite;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="timer" style="transform: translate(-50%, -50%) scale(4); position: fixed; top: 40%; color: black;">
+        <svg>
+            <circle cx="40" cy="40" r="40" id="time-circle-bg" class="svg-circle"></circle>
+            <circle cx="40" cy="40" r="40" id="time-circle" class="svg-circle"></circle>
+        </svg>
+        <div id="time">⠀</div>
+    </div>
+    <main>
+        <h1>Oczekiwanie na wyniki.</h1>
+        <div class="kafelki-container">
+        </div>
+    </main>
+</body>
+<script src="./src/js/config.js"></script>
+<script src="src/js/admin-leaderboard.js"></script>
+
+</html>
