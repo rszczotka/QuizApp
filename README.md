@@ -26,3 +26,18 @@ The QuizApp is an interactive web application designed to facilitate engaging qu
 - **General Users:** Anyone interested in testing their knowledge or learning new information through quizzes.
 
 The QuizApp aims to make learning an enjoyable and competitive experience, encouraging users to challenge themselves and others.
+
+## Images
+
+<p align="center">
+  <img src="/Images/login.png" width="350">
+  <img src="/Images/waitingRoom.png" width="350"> 
+  
+  <img src="/Images/question.png" width="350"> 
+  <img src="/Images/questionSelected.png" width="350"> 
+  
+  <img src="/Images/savedInfo.png" width="350"> 
+  <img src="/Images/smallLeaderboard.png" width="350"> 
+
+  <img src="/Images/bigLeaderboard.png" width="700"> 
+ </p>
